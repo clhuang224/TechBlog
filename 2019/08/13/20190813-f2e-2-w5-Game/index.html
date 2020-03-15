@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>F2E 2nd 第五關「 90 秒挑戰遊戲」 挑戰筆記 | Lynn&#39;s TechBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本作品大致製作完成，但在縮放視窗時，物件大小有誤；文章短期內不會更新。  這次的挑戰比較特別。我看了這次直播的影片：《HTML5 Canvas 遊戲開發超入門#2》 X 《THE F2E 2nd》，覺得 Mick 老師介紹的 Phaser 遊戲框架很方便有趣，影片介紹也很詳盡，適合跟著做；所以嘗試用 Phaser 來製作這次的內容，也因此選了六角的設計稿。雖然大部分是跟著直播影片做的，但因為直播">
+<meta property="og:type" content="article">
+<meta property="og:title" content="F2E 2nd 第五關「 90 秒挑戰遊戲」 挑戰筆記">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2019/08/13/20190813-f2e-2-w5-Game/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="本作品大致製作完成，但在縮放視窗時，物件大小有誤；文章短期內不會更新。  這次的挑戰比較特別。我看了這次直播的影片：《HTML5 Canvas 遊戲開發超入門#2》 X 《THE F2E 2nd》，覺得 Mick 老師介紹的 Phaser 遊戲框架很方便有趣，影片介紹也很詳盡，適合跟著做；所以嘗試用 Phaser 來製作這次的內容，也因此選了六角的設計稿。雖然大部分是跟著直播影片做的，但因為直播">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-08-13T12:10:23.000Z">
+<meta property="article:modified_time" content="2019-09-09T02:54:01.555Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Phaser">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/TechBlog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/TechBlog/" id="logo">Lynn&#39;s TechBlog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/TechBlog/">Home</a>
+        
+          <a class="main-nav-link" href="/TechBlog/about">About</a>
+        
+          <a class="main-nav-link" href="/TechBlog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://clhuang224.github.io/TechBlog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-f2e-2-w5-Game" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/TechBlog/2019/08/13/20190813-f2e-2-w5-Game/" class="article-date">
+  <time datetime="2019-08-13T12:10:23.000Z" itemprop="datePublished">2019-08-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/TechBlog/categories/%E9%96%8B%E7%99%BC%E6%97%A5%E8%A8%98/">開發日記</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      F2E 2nd 第五關「 90 秒挑戰遊戲」 挑戰筆記
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>本作品大致製作完成，但在縮放視窗時，物件大小有誤；文章短期內不會更新。</p>
+</blockquote>
+<p>這次的挑戰比較特別。<br>我看了這次直播的影片：<a href="https://www.youtube.com/watch?v=iXL4IbShoCQ" target="_blank" rel="noopener">《HTML5 Canvas 遊戲開發超入門#2》 X 《THE F2E 2nd》</a>，覺得 Mick 老師介紹的 Phaser 遊戲框架很方便有趣，影片介紹也很詳盡，適合跟著做；所以嘗試用 Phaser 來製作這次的內容，也因此選了六角的設計稿。<br>雖然大部分是跟著直播影片做的，但因為直播介紹的跟設計稿的內容有點不同，所以我還是依據設計稿將細節調整過。</p>
+<h2 id="作品"><a href="#作品" class="headerlink" title="作品"></a>作品</h2><p><a target="_blank" href="https://clhuang224.github.io/F2E_2nd/#W5">Lynn 的 F2E 2nd 作品列表 / 第五關： 90 秒挑戰遊戲</a></p>
+<a id="more"></a>
+
+<h2 id="設計稿"><a href="#設計稿" class="headerlink" title="設計稿"></a>設計稿</h2><p>採用 <a href="https://challenge.thef2e.com/user/2760?schedule=3808#works-3808" target="_blank" rel="noopener">吳俊儀 Junior</a> 的設計稿。</p>
+<h2 id="基本結構"><a href="#基本結構" class="headerlink" title="基本結構"></a>基本結構</h2><p>首先，在 HTML 中放入一個要產生遊戲內容的區塊，再引用 phaser 和自己的 .js 檔。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"game"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/lib/phaser.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/index.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>再來寫好遊戲的基本設定，宣告遊戲的實體。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">    type: Phaser.AUTO,  <span class="comment">// 官方推薦的圖形呈現方式，如果瀏覽器支援就使用 WebGL，否則會使用 Canvas</span></span><br><span class="line">    width: gameWidth,</span><br><span class="line">    height: gameHeight</span><br><span class="line">    parent: <span class="string">'game'</span>,     <span class="comment">// 遊戲產生的區塊 id</span></span><br><span class="line">    scene: [            <span class="comment">// 場景物件</span></span><br><span class="line">        gameStart,</span><br><span class="line">        gamePlay,</span><br><span class="line">        gameEnd,</span><br><span class="line">    ],</span><br><span class="line">    backgroundColor: <span class="number">0x7EBE8D</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> game = <span class="keyword">new</span> Phaser.Game(config);</span><br></pre></td></tr></table></figure>
+
+<p>從上面可以看到，我將遊戲分為 gameStart 、 gamePlay 和 gameEnd 三個場景，再分別實作。<br>場景物件的結構如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gameStart = &#123;</span><br><span class="line">    key: <span class="string">'gameStart'</span>,</span><br><span class="line">    preload: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 載入時要執行的內容</span></span><br><span class="line">    &#125;,</span><br><span class="line">    create: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 進入場景時要執行的內容</span></span><br><span class="line">    &#125;,</span><br><span class="line">    update: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 更新畫面時要執行的內容</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接著就介紹各場景的實際內容。</p>
+<h2 id="Game-Start"><a href="#Game-Start" class="headerlink" title="Game Start"></a>Game Start</h2><p>如果以 HTML 、 CSS 的方式來思考，遊戲的起始畫面很簡單；就是左邊有一張圖，右邊有一個白色方塊，方塊裡面有標題、副標題和按鈕。<br>但在 Phaser 裡面，這些元素都是不同的物件，要先載入所需的資源，再宣告物件，並指定物件的行為。</p>
+<h3 id="preload"><a href="#preload" class="headerlink" title="preload"></a>preload</h3><p>先載入圖片：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">preload: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.load.image(<span class="string">'img-title'</span>, <span class="string">'./img/img-title.png'</span>);</span><br><span class="line">    <span class="keyword">this</span>.load.image(<span class="string">'text-title'</span>, <span class="string">'./img/txt-title.png'</span>);</span><br><span class="line">    <span class="keyword">this</span>.load.image(<span class="string">'text-subtitle'</span>, <span class="string">'./img/txt-subtitle.png'</span>);</span><br><span class="line">    <span class="keyword">this</span>.load.image(<span class="string">'button'</span>, <span class="string">'./img/btn-press-start.png'</span>);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>待續</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://clhuang224.github.io/TechBlog/2019/08/13/20190813-f2e-2-w5-Game/" data-id="ck7sommi7000orkskh1uphq68" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/TechBlog/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/TechBlog/tags/Phaser/" rel="tag">Phaser</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/TechBlog/2019/11/03/20191103-hex-jsunderground-01/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JS 新手地下城 F1 「九九乘法表」 挑戰筆記
+        
+      </div>
+    </a>
+  
+  
+    <a href="/TechBlog/2019/08/12/20190812-f2e-2-w4-Payment/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">F2E 2nd 第四關「線上支付」 挑戰筆記</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/TechBlog/categories/%E6%8A%80%E8%A1%93%E7%9F%AD%E6%96%87/">技術短文</a></li><li class="category-list-item"><a class="category-list-link" href="/TechBlog/categories/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/">系列文章</a></li><li class="category-list-item"><a class="category-list-link" href="/TechBlog/categories/%E7%B7%9A%E4%B8%8A%E8%AA%B2%E7%A8%8B%E8%A7%80%E7%9C%8B%E7%AD%86%E8%A8%98/">線上課程觀看筆記</a></li><li class="category-list-item"><a class="category-list-link" href="/TechBlog/categories/%E9%96%8B%E7%99%BC%E6%97%A5%E8%A8%98/">開發日記</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/JS-%E6%96%B0%E6%89%8B%E5%9C%B0%E4%B8%8B%E5%9F%8E/" rel="tag">JS 新手地下城</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Leaflet/" rel="tag">Leaflet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Loaders-css/" rel="tag">Loaders.css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Open-Street-Map/" rel="tag">Open Street Map</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Phaser/" rel="tag">Phaser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/RWD/" rel="tag">RWD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Sass/" rel="tag">Sass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Sublime-Text-3/" rel="tag">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/VSCode/" rel="tag">VSCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Vue-js/" rel="tag">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/jQuery/" rel="tag">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/TechBlog/tags/Android/" style="font-size: 12px;">Android</a> <a href="/TechBlog/tags/CSS/" style="font-size: 18px;">CSS</a> <a href="/TechBlog/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/TechBlog/tags/HTML/" style="font-size: 16px;">HTML</a> <a href="/TechBlog/tags/JS-%E6%96%B0%E6%89%8B%E5%9C%B0%E4%B8%8B%E5%9F%8E/" style="font-size: 12px;">JS 新手地下城</a> <a href="/TechBlog/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/TechBlog/tags/Leaflet/" style="font-size: 10px;">Leaflet</a> <a href="/TechBlog/tags/Loaders-css/" style="font-size: 10px;">Loaders.css</a> <a href="/TechBlog/tags/Open-Street-Map/" style="font-size: 10px;">Open Street Map</a> <a href="/TechBlog/tags/Phaser/" style="font-size: 10px;">Phaser</a> <a href="/TechBlog/tags/RWD/" style="font-size: 10px;">RWD</a> <a href="/TechBlog/tags/Sass/" style="font-size: 10px;">Sass</a> <a href="/TechBlog/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/TechBlog/tags/VSCode/" style="font-size: 10px;">VSCode</a> <a href="/TechBlog/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/TechBlog/tags/jQuery/" style="font-size: 12px;">jQuery</a> <a href="/TechBlog/tags/w3HexSchool/" style="font-size: 14px;">w3HexSchool</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2019/01/">一月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/TechBlog/2020/03/07/20200307-css-grid/">CSS Grid</a>
+          </li>
+        
+          <li>
+            <a href="/TechBlog/2020/02/20/20200220-android-createNewProject/">【 Android 開發入門 02 】開啟專案、設定模擬器與裝置</a>
+          </li>
+        
+          <li>
+            <a href="/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/">F2E 2nd 第十關「 口罩地圖」 挑戰筆記</a>
+          </li>
+        
+          <li>
+            <a href="/TechBlog/2020/02/06/20200206-android-intro/">【 Android 開發入門 01 】什麼是 Android</a>
+          </li>
+        
+          <li>
+            <a href="/TechBlog/2020/01/16/20200116-hex-vscode/">六角學院 Visual Studio Code 課程學習筆記</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Lynn<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/TechBlog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/TechBlog/about" class="mobile-nav-link">About</a>
+  
+    <a href="/TechBlog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/TechBlog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/TechBlog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/TechBlog/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

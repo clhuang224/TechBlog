@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>六角學院 RWD 課程學習筆記（更新中） | Lynn&#39;s TechBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文為觀看六角學院「 一變應萬變的響應式網頁設計」的紀錄。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="六角學院 RWD 課程學習筆記（更新中）">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2020/01/15/20200115-hex-rwd/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="本文為觀看六角學院「 一變應萬變的響應式網頁設計」的紀錄。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-01-15T07:47:48.000Z">
+<meta property="article:modified_time" content="2020-03-15T06:21:20.610Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="RWD">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/TechBlog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/TechBlog/" id="logo">Lynn&#39;s TechBlog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/TechBlog/">Home</a>
+        
+          <a class="main-nav-link" href="/TechBlog/about">About</a>
+        
+          <a class="main-nav-link" href="/TechBlog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://clhuang224.github.io/TechBlog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hex-rwd" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/TechBlog/2020/01/15/20200115-hex-rwd/" class="article-date">
+  <time datetime="2020-01-15T07:47:48.000Z" itemprop="datePublished">2020-01-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/TechBlog/categories/%E7%B7%9A%E4%B8%8A%E8%AA%B2%E7%A8%8B%E8%A7%80%E7%9C%8B%E7%AD%86%E8%A8%98/">線上課程觀看筆記</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      六角學院 RWD 課程學習筆記（更新中）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文為觀看六角學院「 <a href="https://courses.hexschool.com/courses/enrolled/670051" target="_blank" rel="noopener">一變應萬變的響應式網頁設計</a>」的紀錄。</p>
+<a id="more"></a>
+
+<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><h3 id="什麼是-RWD"><a href="#什麼是-RWD" class="headerlink" title="什麼是 RWD"></a>什麼是 RWD</h3><p>響應式網頁設計（Response Web Design），2010 年由 Ethan Marcotte 提出的概念。使用 CSS3 Media queries ，使網頁在不同的裝置上對應不同的解析度而有適當的呈現；讓使用者在操作上有較佳的體驗，減少使用者進行縮放、平移和捲動等操作。</p>
+<p>現今的行動裝置流量佔網際網路流量的一半以上，因此以行動裝置為優先的響應式網頁設計就變得很重要。</p>
+<h3 id="Viewport"><a href="#Viewport" class="headerlink" title="Viewport"></a>Viewport</h3><p>要使用響應式網頁設計，必須在 HTML 的 &lt;head&gt; 中加入 &lt;meta name=”viewport”&gt; 。<br>Emmet 的語法為 meta:vp 。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,  initial-scale=1.0"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>裝置的尺寸和解析度不同，網頁呈現的大小就會不同；所以需要設定 width=device-width 。</p>
+<blockquote>
+<p>查詢裝置規格：<a href="https://material.io/resources/devices/" target="_blank" rel="noopener">Device Metrics - Material Design</a></p>
+</blockquote>
+<p>content 可以使用的屬性如下：</p>
+<ul>
+<li>width</li>
+<li>height</li>
+<li>initial-scale</li>
+<li>minimum-scale</li>
+<li>maximum-scale</li>
+<li>user-scalable</li>
+</ul>
+<blockquote>
+<p>相關說明： <a href="https://www.w3.org/TR/css-device-adapt/#viewport-meta" target="_blank" rel="noopener">CSS Device Adaptation Module Level 1</a></p>
+</blockquote>
+<h4 id="關於解析度"><a href="#關於解析度" class="headerlink" title="關於解析度"></a>關於解析度</h4><ul>
+<li>pt ：印刷點點的最小單位，大小是 1/27 英吋。</li>
+<li>pixel ：螢幕硬體的最小單位，也就是螢幕能呈現最細緻的點點。</li>
+<li>dpi ：每一英吋裡的 pt 數；值愈大，印刷的品質就愈精細。</li>
+<li>ppi ：每一英吋裡的 pixel 數，又稱為像素密度；值愈大，螢幕畫質就愈好。</li>
+<li>dp (density- independent pixel) ： 160 dpi 時一個 pixel 的大小</li>
+</ul>
+<p>以下雖然寫的是 dpi ，但實際上卻是指 ppi 。</p>
+<ul>
+<li>ldpi 低密度：120 dpi ，為 240 x 320 px ， 1 dp = 0.75 px</li>
+<li>mdpi 中密度：160 dpi ，為 320 x 480 px ， 1 dp = 1 px</li>
+<li>hdpi 高密度： 240 dpi ，為 480 x 800 px ， 1 dp = 1.5 px</li>
+<li>xhdpi 超高密度： 320 dpi ，為 720 x 1280 px ， 1 dp = 2 px</li>
+<li>xxhdpi 超超高密度： 480 dpi ，為 1080 x 1920 px ， 1 dp = 3 px</li>
+</ul>
+<h3 id="Media-query"><a href="#Media-query" class="headerlink" title="Media query"></a>Media query</h3><p>在 CSS 中使用 @media 來設定各個螢幕尺寸的樣式。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 由大尺寸的螢幕往小尺寸撰寫 */</span></span><br><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line">@media(max-width:1024px)&#123;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>: blue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@media(max-width:768px)&#123;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>: green;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由於同樣權重的 CSS 樣式，會以後面的為優先，所以如果是由大尺寸的螢幕開始撰寫，要使用 max-width ；反之用 min-width 。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 由小尺寸的螢幕往大尺寸撰寫 */</span></span><br><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line">@media(min-width: 375px)&#123;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>: blue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@media(min-width: 768px)&#123;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>: green;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="常見版型佈局設定"><a href="#常見版型佈局設定" class="headerlink" title="常見版型佈局設定"></a>常見版型佈局設定</h2><h3 id="原則或語法"><a href="#原則或語法" class="headerlink" title="原則或語法"></a>原則或語法</h3><ul>
+<li>禁止橫向卷軸<ul>
+<li>設計版面時，盡量不要出現橫向卷軸。這樣使用者還要左右拉動，沒辦法順順的看整個內容。</li>
+</ul>
+</li>
+<li>max-width<ul>
+<li>運用 max-width 的方式，讓視窗大於 max-width 時能固定寬度，小於時又能保持彈性；這樣不會出現橫向卷軸，也可以少寫一個斷點。</li>
+</ul>
+</li>
+<li>%<ul>
+<li>% 以父元素的高度或寬度為基準，可以讓子元素保有彈性。</li>
+</ul>
+</li>
+</ul>
+<h3 id="三欄式流體設計"><a href="#三欄式流體設計" class="headerlink" title="三欄式流體設計"></a>三欄式流體設計</h3><p>在不同 max-width 下，用 % 做出自適應的效果。</p>
+<p class="codepen" data-height="258" data-theme-id="default" data-default-tab="result" data-user="clhuang224" data-slug-hash="QWwVXNQ" style="height: 258px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="RWD 三欄式流體設計">
+  <span>See the Pen <a href="https://codepen.io/clhuang224/pen/QWwVXNQ" target="_blank" rel="noopener">
+  RWD 三欄式流體設計</a> by C.L.Huang (<a href="https://codepen.io/clhuang224" target="_blank" rel="noopener">@clhuang224</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+
+<h3 id="左側-Float-固定、右側流體式設計"><a href="#左側-Float-固定、右側流體式設計" class="headerlink" title="左側 Float 固定、右側流體式設計"></a>左側 Float 固定、右側流體式設計</h3><p>左側欄位用固定寬度及浮動，右側則用 margin 推出空間。<br>在 768 px 的裝置下，則改為上下欄位，欄位中的選項改為橫向，並利用偽元素清除浮動。</p>
+<p class="codepen" data-height="327" data-theme-id="default" data-default-tab="css,result" data-user="clhuang224" data-slug-hash="XWJPLaw" style="height: 327px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="RWD 左側 Float 固定、右側流體式設計">
+  <span>See the Pen <a href="https://codepen.io/clhuang224/pen/XWJPLaw" target="_blank" rel="noopener">
+  RWD 左側 Float 固定、右側流體式設計</a> by Lynn (<a href="https://codepen.io/clhuang224" target="_blank" rel="noopener">@clhuang224</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+
+<h3 id="網頁版型框架設定"><a href="#網頁版型框架設定" class="headerlink" title="網頁版型框架設定"></a>網頁版型框架設定</h3><p>隨寬度改變圖片、取消浮動。</p>
+<p class="codepen" data-height="265" data-theme-id="default" data-default-tab="result" data-user="clhuang224" data-slug-hash="jOEQwzZ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="RWD 網頁版型框架設定">
+  <span>See the Pen <a href="https://codepen.io/clhuang224/pen/jOEQwzZ" target="_blank" rel="noopener">
+  RWD 網頁版型框架設定</a> by Lynn (<a href="https://codepen.io/clhuang224" target="_blank" rel="noopener">@clhuang224</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="UI-設計原則"><a href="#UI-設計原則" class="headerlink" title="UI 設計原則"></a>UI 設計原則</h2><ul>
+<li>網頁版的內容放進手機板時可以酌量刪減</li>
+<li>多欄式佈局可以依據人的視野寬度來考量</li>
+<li>手指的點擊範圍大概是 44 px</li>
+<li>注意 touch 和 hover 的差異</li>
+</ul>
+<h2 id="斷點規劃"><a href="#斷點規劃" class="headerlink" title="斷點規劃"></a>斷點規劃</h2><ul>
+<li>以熱門的斷點為優先</li>
+<li>可以先做幾個斷點，再參考 Google Analytics 來增加熱門裝置的斷點</li>
+<li>考慮 Mobile First 或 Desktop First</li>
+<li>常用斷點<ul>
+<li>iPad ： 768px</li>
+<li>iPad 以下： 767px</li>
+<li>iPhone 6 Plus ： 414px</li>
+<li>iPhone 6 ： 375px</li>
+<li>iPhone 5、SE ： 320px</li>
+</ul>
+</li>
+<li>查詢瀏覽器使用率：<a href="https://gs.statcounter.com/" target="_blank" rel="noopener">StatCounter Global Stats</a></li>
+<li>查詢裝置解析度：<a href="https://material.io/resources/devices/" target="_blank" rel="noopener">Device Metrics - Material Design</a></li>
+<li>可以用專門的 class 來處理背景滿版但內容置中的效果。<p class="codepen" data-height="450" data-theme-id="default" data-default-tab="result" data-user="clhuang224" data-slug-hash="jOPzdvM" style="height: 450px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="RWD 背景滿版、內容置中效果">
+<span>See the Pen <a href="https://codepen.io/clhuang224/pen/jOPzdvM" target="_blank" rel="noopener">
+RWD 背景滿版、內容置中效果</a> by Lynn (<a href="https://codepen.io/clhuang224" target="_blank" rel="noopener">@clhuang224</a>)
+on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+
+</li>
+</ul>
+<h2 id="響應式表格"><a href="#響應式表格" class="headerlink" title="響應式表格"></a>響應式表格</h2><p>當螢幕寬度比表格小時，內容容易擠成一團，或是要移動整個橫向卷軸。<br>可以用不同方式解決。</p>
+<ul>
+<li>隱藏部分資訊<ul>
+<li>手機版隱藏一些不必要的資訊</li>
+<li>&lt;td&gt; 的寬度總和超過 &lt;table&gt; 時不會超出，不滿時會分配剩下的寬度，所以不用特別調整手機版的寬度</li>
+</ul>
+</li>
+<li>獨立橫向卷軸<ul>
+<li>在 &lt;table&gt; 外包上一層元素，並用 overflow-x: auto</li>
+<li>&lt;table&gt; 可用固定寬度</li>
+</ul>
+</li>
+<li>直向排列<ul>
+<li>將 &lt;th&gt; 隱藏，並利用 data 屬性及偽元素產生新的標題區塊</li>
+</ul>
+</li>
+</ul>
+<p class="codepen" data-height="450" data-theme-id="default" data-default-tab="css,result" data-user="clhuang224" data-slug-hash="gOpeEra" style="height: 450px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="RWD 響應式表格">
+  <span>See the Pen <a href="https://codepen.io/clhuang224/pen/gOpeEra" target="_blank" rel="noopener">
+  RWD 響應式表格</a> by Lynn (<a href="https://codepen.io/clhuang224" target="_blank" rel="noopener">@clhuang224</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://clhuang224.github.io/TechBlog/2020/01/15/20200115-hex-rwd/" data-id="ck7sommia000xrkskaweog5dv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/TechBlog/tags/RWD/" rel="tag">RWD</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/TechBlog/2020/01/16/20200116-hex-vscode/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          六角學院 Visual Studio Code 課程學習筆記
+        
+      </div>
+    </a>
+  
+  
+    <a href="/TechBlog/2020/01/15/20200115-hex-sass/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">六角學院 Sass 課程學習筆記（更新中）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/TechBlog/categories/%E6%8A%80%E8%A1%93%E7%9F%AD%E6%96%87/">技術短文</a></li><li class="category-list-item"><a class="category-list-link" href="/TechBlog/categories/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/">系列文章</a></li><li class="category-list-item"><a class="category-list-link" href="/TechBlog/categories/%E7%B7%9A%E4%B8%8A%E8%AA%B2%E7%A8%8B%E8%A7%80%E7%9C%8B%E7%AD%86%E8%A8%98/">線上課程觀看筆記</a></li><li class="category-list-item"><a class="category-list-link" href="/TechBlog/categories/%E9%96%8B%E7%99%BC%E6%97%A5%E8%A8%98/">開發日記</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Chrome/" rel="tag">Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/JS-%E6%96%B0%E6%89%8B%E5%9C%B0%E4%B8%8B%E5%9F%8E/" rel="tag">JS 新手地下城</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Leaflet/" rel="tag">Leaflet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Loaders-css/" rel="tag">Loaders.css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Open-Street-Map/" rel="tag">Open Street Map</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Phaser/" rel="tag">Phaser</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/RWD/" rel="tag">RWD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Sass/" rel="tag">Sass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Sublime-Text-3/" rel="tag">Sublime Text 3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/VSCode/" rel="tag">VSCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/Vue-js/" rel="tag">Vue.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/jQuery/" rel="tag">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/TechBlog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/TechBlog/tags/Android/" style="font-size: 12px;">Android</a> <a href="/TechBlog/tags/CSS/" style="font-size: 18px;">CSS</a> <a href="/TechBlog/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/TechBlog/tags/HTML/" style="font-size: 16px;">HTML</a> <a href="/TechBlog/tags/JS-%E6%96%B0%E6%89%8B%E5%9C%B0%E4%B8%8B%E5%9F%8E/" style="font-size: 12px;">JS 新手地下城</a> <a href="/TechBlog/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/TechBlog/tags/Leaflet/" style="font-size: 10px;">Leaflet</a> <a href="/TechBlog/tags/Loaders-css/" style="font-size: 10px;">Loaders.css</a> <a href="/TechBlog/tags/Open-Street-Map/" style="font-size: 10px;">Open Street Map</a> <a href="/TechBlog/tags/Phaser/" style="font-size: 10px;">Phaser</a> <a href="/TechBlog/tags/RWD/" style="font-size: 10px;">RWD</a> <a href="/TechBlog/tags/Sass/" style="font-size: 10px;">Sass</a> <a href="/TechBlog/tags/Sublime-Text-3/" style="font-size: 10px;">Sublime Text 3</a> <a href="/TechBlog/tags/VSCode/" style="font-size: 10px;">VSCode</a> <a href="/TechBlog/tags/Vue-js/" style="font-size: 10px;">Vue.js</a> <a href="/TechBlog/tags/jQuery/" style="font-size: 12px;">jQuery</a> <a href="/TechBlog/tags/w3HexSchool/" style="font-size: 14px;">w3HexSchool</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/TechBlog/archives/2019/01/">一月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/TechBlog/2020/03/07/20200307-css-grid/">CSS Grid</a>
+          </li>
+        
+          <li>
+            <a href="/TechBlog/2020/02/20/20200220-android-createNewProject/">【 Android 開發入門 02 】開啟專案、設定模擬器與裝置</a>
+          </li>
+        
+          <li>
+            <a href="/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/">F2E 2nd 第十關「 口罩地圖」 挑戰筆記</a>
+          </li>
+        
+          <li>
+            <a href="/TechBlog/2020/02/06/20200206-android-intro/">【 Android 開發入門 01 】什麼是 Android</a>
+          </li>
+        
+          <li>
+            <a href="/TechBlog/2020/01/16/20200116-hex-vscode/">六角學院 Visual Studio Code 課程學習筆記</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Lynn<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/TechBlog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/TechBlog/about" class="mobile-nav-link">About</a>
+  
+    <a href="/TechBlog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/TechBlog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/TechBlog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/TechBlog/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
