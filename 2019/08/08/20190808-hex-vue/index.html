@@ -239,21 +239,28 @@
       
         <p>本文為觀看六角學院「 <a href="https://www.udemy.com/vue-hexschool/" target="_blank" rel="noopener">Vue 出一個電商網站</a>」的紀錄。</p>
 <a id="more"></a>
-
-<h2 id="相關資源"><a href="#相關資源" class="headerlink" title="相關資源"></a>相關資源</h2><ul>
+<h2 id="相關資源"><a class="markdownIt-Anchor" href="#相關資源"></a> 相關資源</h2>
+<ul>
 <li><a href="https://vuejs.org/v2/guide/" target="_blank" rel="noopener">Vue.js 官方文件</a></li>
 </ul>
-<h2 id="建立環境"><a href="#建立環境" class="headerlink" title="建立環境"></a>建立環境</h2><h3 id="Visual-Studio-Code-擴充功能"><a href="#Visual-Studio-Code-擴充功能" class="headerlink" title="Visual Studio Code 擴充功能"></a>Visual Studio Code 擴充功能</h3><h4 id="vue"><a href="#vue" class="headerlink" title="vue"></a><a href="https://marketplace.visualstudio.com/items?itemName=jcbuisson.vue" target="_blank" rel="noopener">vue</a></h4><p>使 .vue 檔有高亮效果。</p>
-<h4 id="Vue-2-Snippets"><a href="#Vue-2-Snippets" class="headerlink" title="Vue 2 Snippets"></a><a href="https://marketplace.visualstudio.com/items?itemName=hollowtree.vue-snippets" target="_blank" rel="noopener">Vue 2 Snippets</a></h4><p>使 .vue 檔中有自動完成片段的功能。</p>
-<h4 id="Preview-on-Web-Server"><a href="#Preview-on-Web-Server" class="headerlink" title="Preview on Web Server"></a><a href="https://marketplace.visualstudio.com/items?itemName=yuichinukiyama.vscode-preview-server" target="_blank" rel="noopener">Preview on Web Server</a></h4><p>按 ctrl + shift + L 讓網頁可以在 Web Server 執行。</p>
-<h3 id="Chrome-擴充功能"><a href="#Chrome-擴充功能" class="headerlink" title="Chrome 擴充功能"></a>Chrome 擴充功能</h3><h4 id="Vue-Devtools"><a href="#Vue-Devtools" class="headerlink" title="Vue Devtools"></a><a href="https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd" target="_blank" rel="noopener">Vue Devtools</a></h4><p>官方推薦的擴充功能，能在 Chrome 開發人員工具中看到 Vue 相關資訊，便於除錯。</p>
-<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a><a href="https://cn.vuejs.org/v2/guide/installation.html" target="_blank" rel="noopener">安裝</a></h3><p>可以引用 Development 或 Production 兩個版本，差異是後者無法使用 Vue Devtools ，也沒有錯誤訊息。</p>
-<h3 id="建立-Vue-應用程式"><a href="#建立-Vue-應用程式" class="headerlink" title="建立 Vue 應用程式"></a>建立 Vue 應用程式</h3><p>首先宣告一個 Vue 物件，選擇要運作的 DOM 元素，然後準備適當的資料：</p>
+<h2 id="建立環境"><a class="markdownIt-Anchor" href="#建立環境"></a> 建立環境</h2>
+<h3 id="visual-studio-code-擴充功能"><a class="markdownIt-Anchor" href="#visual-studio-code-擴充功能"></a> Visual Studio Code 擴充功能</h3>
+<h4 id="vue"><a class="markdownIt-Anchor" href="#vue"></a> <a href="https://marketplace.visualstudio.com/items?itemName=jcbuisson.vue" target="_blank" rel="noopener">vue</a></h4>
+<p>使 .vue 檔有高亮效果。</p>
+<h4 id="vue-2-snippets"><a class="markdownIt-Anchor" href="#vue-2-snippets"></a> <a href="https://marketplace.visualstudio.com/items?itemName=hollowtree.vue-snippets" target="_blank" rel="noopener">Vue 2 Snippets</a></h4>
+<p>使 .vue 檔中有自動完成片段的功能。</p>
+<h4 id="preview-on-web-server"><a class="markdownIt-Anchor" href="#preview-on-web-server"></a> <a href="https://marketplace.visualstudio.com/items?itemName=yuichinukiyama.vscode-preview-server" target="_blank" rel="noopener">Preview on Web Server</a></h4>
+<p>按 ctrl + shift + L 讓網頁可以在 Web Server 執行。</p>
+<h3 id="chrome-擴充功能"><a class="markdownIt-Anchor" href="#chrome-擴充功能"></a> Chrome 擴充功能</h3>
+<h4 id="vue-devtools"><a class="markdownIt-Anchor" href="#vue-devtools"></a> <a href="https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd" target="_blank" rel="noopener">Vue Devtools</a></h4>
+<p>官方推薦的擴充功能，能在 Chrome 開發人員工具中看到 Vue 相關資訊，便於除錯。</p>
+<h3 id="安裝"><a class="markdownIt-Anchor" href="#安裝"></a> <a href="https://cn.vuejs.org/v2/guide/installation.html" target="_blank" rel="noopener">安裝</a></h3>
+<p>可以引用 Development 或 Production 兩個版本，差異是後者無法使用 Vue Devtools ，也沒有錯誤訊息。</p>
+<h3 id="建立-vue-應用程式"><a class="markdownIt-Anchor" href="#建立-vue-應用程式"></a> 建立 Vue 應用程式</h3>
+<p>首先宣告一個 Vue 物件，選擇要運作的 DOM 元素，然後準備適當的資料：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data:&#123;</span><br><span class="line">        text: <span class="string">'Hello World!'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
 <p>將資料呈現在 HTML 中：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    &#123;&#123;text&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <ul>
 <li>通常一頁只有一個 Vue 應用程式。</li>
@@ -261,7 +268,8 @@
 <li>Vue 應用程式不能為巢狀；綁定的 DOM 元素如果在另一個 Vue 物件所綁定的對象之內，則無效。</li>
 </ul>
 </blockquote>
-<h2 id="基本架構"><a href="#基本架構" class="headerlink" title="基本架構"></a>基本架構</h2><p>Vue.js 是以資料改變畫面（MVVM）。</p>
+<h2 id="基本架構"><a class="markdownIt-Anchor" href="#基本架構"></a> 基本架構</h2>
+<p>Vue.js 是以資料改變畫面（MVVM）。</p>
 <ul>
 <li>data ：資料</li>
 <li>methods ： function ，可以改變 data 的資料。</li>
@@ -270,35 +278,43 @@
 <blockquote>
 <p>資料量多時，用 computed 會一直在計算；用 methods 就可以控制效能。</p>
 </blockquote>
-<h3 id="常見指令"><a href="#常見指令" class="headerlink" title="常見指令"></a>常見指令</h3><ul>
-<li>v-text<ul>
+<h3 id="常見指令"><a class="markdownIt-Anchor" href="#常見指令"></a> 常見指令</h3>
+<ul>
+<li>v-text
+<ul>
 <li>類似 .textContent</li>
 </ul>
 </li>
-<li>v-html<ul>
+<li>v-html
+<ul>
 <li>類似 .innerHtml</li>
 </ul>
 </li>
-<li>v-bind: / :<ul>
+<li>v-bind: / :
+<ul>
 <li>Vue.js 中，要在屬性的地方綁定資料的話，要將指令加在屬性前，而非在屬性內寫大括號。</li>
 <li>事實上綁定的 DOM 元素與性質（Property）。</li>
 <li>屬性（attribute）指的是 HTML 文件中，用來指定特定性質的字串，性質（Property）則是 DOM 元素所擁有的 Member 。</li>
-<li>可以應用在 class 的部分：v-bind:class=”{‘className’ : 判斷式}”</li>
+<li>可以應用在 class 的部分：v-bind:class=&quot;{‘className’ : 判斷式}&quot;</li>
 </ul>
 </li>
-<li>v-model<ul>
+<li>v-model
+<ul>
 <li>綁定輸入類的元素和資料，可以讓使用者改變資料</li>
 </ul>
 </li>
-<li>v-for<ul>
+<li>v-for
+<ul>
 <li>用迴圈重複產生元素</li>
 </ul>
 </li>
-<li>v-if<ul>
+<li>v-if
+<ul>
 <li>用判斷式決定元素是否顯示</li>
 </ul>
 </li>
-<li>v-on / @<ul>
+<li>v-on / @
+<ul>
 <li>綁定事件</li>
 <li>事件修飾符 .prevent 可以達到 event.preventDefault() 的效果。</li>
 <li>按鍵修飾符 .enter 寫成 v-on:keyup.enter 可以綁定按 Enter 時觸發的 function 。</li>
@@ -310,8 +326,8 @@
   Vue.js 指令</a> by C.L.Huang (<a href="https://codepen.io/clhuang224" target="_blank" rel="noopener">@clhuang224</a>)
   on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
 </p>
-
-<h3 id="表單應用"><a href="#表單應用" class="headerlink" title="表單應用"></a>表單應用</h3><p>可以注意的細節：</p>
+<h3 id="表單應用"><a class="markdownIt-Anchor" href="#表單應用"></a> 表單應用</h3>
+<p>可以注意的細節：</p>
 <ul>
 <li>checkbox 與陣列綁定</li>
 <li>&lt;select&gt; 中不可選擇的項目可用 disabled</li>
@@ -321,39 +337,45 @@
   Vue.js 表單應用</a> by C.L.Huang (<a href="https://codepen.io/clhuang224" target="_blank" rel="noopener">@clhuang224</a>)
   on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
 </p>
-
-<h3 id="元件化"><a href="#元件化" class="headerlink" title="元件化"></a>元件化</h3><p>可以在 Vue 中定義元件，並在 Vue 實體中取用。<br>不同的元件擁有各自獨立的資料內容。</p>
+<h3 id="元件化"><a class="markdownIt-Anchor" href="#元件化"></a> 元件化</h3>
+<p>可以在 Vue 中定義元件，並在 Vue 實體中取用。<br />
+不同的元件擁有各自獨立的資料內容。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定義元件名稱及內容</span></span><br><span class="line">Vue.component(<span class="string">'counter-component'</span>,&#123;</span><br><span class="line">    <span class="comment">// 元件中的 data 是以 function 回傳物件的格式</span></span><br><span class="line">   data: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">          <span class="comment">// 元件中的變數</span></span><br><span class="line">        counter: <span class="number">0</span>,</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="comment">// 元件的 HTML 樣板</span></span><br><span class="line">   template: <span class="string">`</span></span><br><span class="line"><span class="string">      &lt;button class="counter" @click="counter+=1"&gt;&#123;&#123;counter&#125;&#125;&lt;/button&gt;</span></span><br><span class="line"><span class="string">   `</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
 <p class="codepen" data-height="229" data-theme-id="default" data-default-tab="result" data-user="clhuang224" data-slug-hash="wvvRwYx" style="height: 229px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Vue.js 元件化">
   <span>See the Pen <a href="https://codepen.io/clhuang224/pen/wvvRwYx" target="_blank" rel="noopener">
   Vue.js 元件化</a> by C.L.Huang (<a href="https://codepen.io/clhuang224" target="_blank" rel="noopener">@clhuang224</a>)
   on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
 </p>
-
-<h3 id="實作-Todolist"><a href="#實作-Todolist" class="headerlink" title="實作 Todolist"></a>實作 Todolist</h3><ul>
-<li>綁定資料<ul>
-<li>新增事項：&lt;input type=”text”&gt; ←→ newInput</li>
-<li>勾選事項：&lt;input type=”checkbox”&gt; ←→ item.done</li>
-<li>編輯事項：&lt;input type=”text”&gt; ←→ editingInput</li>
+<h3 id="實作-todolist"><a class="markdownIt-Anchor" href="#實作-todolist"></a> 實作 Todolist</h3>
+<ul>
+<li>綁定資料
+<ul>
+<li>新增事項：&lt;input type=“text”&gt; ←→ newInput</li>
+<li>勾選事項：&lt;input type=“checkbox”&gt; ←→ item.done</li>
+<li>編輯事項：&lt;input type=“text”&gt; ←→ editingInput</li>
 </ul>
 </li>
-<li>綁定事件<ul>
-<li>新增事項<ul>
+<li>綁定事件
+<ul>
+<li>新增事項
+<ul>
 <li>&lt;button&gt; ←→ addItem()</li>
 <li>&lt;input&gt; ←→ addItem()</li>
 </ul>
 </li>
-<li>編輯事項<ul>
+<li>編輯事項
+<ul>
 <li>&lt;button&gt; ←→ editItem(target)</li>
 <li>&lt;input&gt; ←→ addItem(target)</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>綁定樣式<ul>
-<li>勾選事項<ul>
-<li>&lt;label :class=”{‘line-through’: item.done}”&gt;</li>
+<li>綁定樣式
+<ul>
+<li>勾選事項
+<ul>
+<li>&lt;label :class=&quot;{‘line-through’: item.done}&quot;&gt;</li>
 </ul>
 </li>
 </ul>
@@ -364,133 +386,157 @@
   Vue.js Todolist</a> by C.L.Huang (<a href="https://codepen.io/clhuang224" target="_blank" rel="noopener">@clhuang224</a>)
   on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
 </p>
-
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-
-<h2 id="Vue-CLI"><a href="#Vue-CLI" class="headerlink" title="Vue CLI"></a><a href="https://cli.vuejs.org/zh/" target="_blank" rel="noopener">Vue CLI</a></h2><ul>
+<h2 id="vue-cli"><a class="markdownIt-Anchor" href="#vue-cli"></a> <a href="https://cli.vuejs.org/zh/" target="_blank" rel="noopener">Vue CLI</a></h2>
+<ul>
 <li>基於 Webpack 所建置的開發工具</li>
 <li>便於使用第三方套件，可運行編譯工具</li>
 <li>不便於開發非 SPA 的網頁</li>
 <li>提供 GUI 介面</li>
 </ul>
-<h3 id="安裝-1"><a href="#安裝-1" class="headerlink" title="安裝"></a>安裝</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @vue/cli</span><br></pre></td></tr></table></figure>
-
-<h3 id="開啟專案"><a href="#開啟專案" class="headerlink" title="開啟專案"></a>開啟專案</h3><p>下指令之後會出現一些設定的選項，可以順便把基本的內容都一起安裝在專案中。</p>
+<h3 id="安裝-2"><a class="markdownIt-Anchor" href="#安裝-2"></a> 安裝</h3>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @vue/cli</span><br></pre></td></tr></table></figure>
+<h3 id="開啟專案"><a class="markdownIt-Anchor" href="#開啟專案"></a> 開啟專案</h3>
+<p>下指令之後會出現一些設定的選項，可以順便把基本的內容都一起安裝在專案中。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue create [projectName]</span><br></pre></td></tr></table></figure>
-
-<h3 id="資料夾結構"><a href="#資料夾結構" class="headerlink" title="資料夾結構"></a>資料夾結構</h3><ul>
-<li>/src<ul>
+<h3 id="資料夾結構"><a class="markdownIt-Anchor" href="#資料夾結構"></a> 資料夾結構</h3>
+<ul>
+<li>/src
+<ul>
 <li>開發用的檔案，會被編譯</li>
 </ul>
 </li>
-<li>/src/main.js<ul>
+<li>/src/main.js
+<ul>
 <li>Webpack 專案中，程式的進入點</li>
 </ul>
 </li>
-<li>/src/assets<ul>
+<li>/src/assets
+<ul>
 <li>開發所用到的圖片等資源</li>
 <li>特定尺寸以下的圖檔會被編譯成 base 64</li>
 </ul>
 </li>
-<li>/node_modules<ul>
+<li>/node_modules
+<ul>
 <li>套件的資料夾，通常在 gitignore 中</li>
 </ul>
 </li>
-<li>/dist<ul>
+<li>/dist
+<ul>
 <li>npm run build 後所產生的交付用檔案</li>
 <li>需要在 HTML server 下才能運行</li>
 </ul>
 </li>
-<li>/dist/static<ul>
+<li>/dist/static
+<ul>
 <li>不會被編譯的檔案</li>
 </ul>
 </li>
 </ul>
-<h3 id="Config"><a href="#Config" class="headerlink" title="Config"></a><a href="https://cli.vuejs.org/config/" target="_blank" rel="noopener">Config</a></h3><h4 id="Global-CLI-config"><a href="#Global-CLI-config" class="headerlink" title="Global CLI config"></a>Global CLI config</h4><p>可以使用 vue config 來修改 CLI 的全域設定 。</p>
-<h4 id="Vue-config-js"><a href="#Vue-config-js" class="headerlink" title="Vue.config.js"></a>Vue.config.js</h4><p>Vue.config.js 可以新增在專案根目錄中，也可以在 package.json 中用 vue 為 key 來設定。<br>內容必須為下方的格式。</p>
+<h3 id="config"><a class="markdownIt-Anchor" href="#config"></a> <a href="https://cli.vuejs.org/config/" target="_blank" rel="noopener">Config</a></h3>
+<h4 id="global-cli-config"><a class="markdownIt-Anchor" href="#global-cli-config"></a> Global CLI config</h4>
+<p>可以使用 vue config 來修改 CLI 的全域設定 。</p>
+<h4 id="vueconfigjs"><a class="markdownIt-Anchor" href="#vueconfigjs"></a> Vue.config.js</h4>
+<p>Vue.config.js 可以新增在專案根目錄中，也可以在 package.json 中用 vue 為 key 來設定。<br />
+內容必須為下方的格式。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  publicPath: <span class="string">'/'</span>,</span><br><span class="line">  <span class="comment">// etc.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>常見的 key ：</p>
 <ul>
-<li>publicPath<ul>
+<li>publicPath
+<ul>
 <li>部屬時的 Base URL ，預設為域名的根路徑</li>
 </ul>
 </li>
-<li>outputDir<ul>
+<li>outputDir
+<ul>
 <li>部屬的路徑，預設為 /dist</li>
 </ul>
 </li>
 </ul>
-<h3 id="環境變量與模式"><a href="#環境變量與模式" class="headerlink" title="環境變量與模式"></a><a href="https://cli.vuejs.org/zh/guide/mode-and-env.htm" target="_blank" rel="noopener">環境變量與模式</a></h3><p>當開發與發佈所使用的特定參數不同，或是有一些敏感資訊希望被 git 忽略時，可以使用環境變數。<br>在 src 資料夾中可以加入環境變數設定的檔案，不同的檔名有不同的用途。</p>
+<h3 id="環境變量與模式"><a class="markdownIt-Anchor" href="#環境變量與模式"></a> <a href="https://cli.vuejs.org/zh/guide/mode-and-env.htm" target="_blank" rel="noopener">環境變量與模式</a></h3>
+<p>當開發與發佈所使用的特定參數不同，或是有一些敏感資訊希望被 git 忽略時，可以使用環境變數。<br />
+在 src 資料夾中可以加入環境變數設定的檔案，不同的檔名有不同的用途。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.env                <span class="comment"># 在所有的環境中被載入</span></span><br><span class="line">.env.local          <span class="comment"># 在所有的環境中被載入，但會被 git 忽略</span></span><br><span class="line">.env.[mode]         <span class="comment"># 在指定的模式中被載入</span></span><br><span class="line">.env.[mode].<span class="built_in">local</span>   <span class="comment"># 在指定的模式中被載入，但會被 git 忽略</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># .env.[mode] 優先於 .env</span></span><br></pre></td></tr></table></figure>
-
 <p>mode 可分為：</p>
 <ul>
-<li>development<ul>
+<li>development
+<ul>
 <li>用於 vue-cli-service serve</li>
 </ul>
 </li>
-<li>production<ul>
+<li>production
+<ul>
 <li>用於 vue-cli-service build 和 vue-cli-service test:e2e</li>
 </ul>
 </li>
-<li>test<ul>
+<li>test
+<ul>
 <li>用於 vue-cli-service test:unit</li>
 </ul>
 </li>
 </ul>
 <p>如果想要指定特定指令所使用的環境變量，可以自訂腳本。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"dev-build"</span>: <span class="string">"vue-cli-service build --mode development"</span></span><br></pre></td></tr></table></figure>
-
 <p>變數的類型有三種：</p>
 <ul>
-<li>NODE_ENV<ul>
+<li>NODE_ENV
+<ul>
 <li>表示這份環境變數檔案的類型</li>
 <li>值為 “development” 、 “production” 或 “test”</li>
 <li>如果檔名已經是 .env.[mode] ，以檔名優先</li>
 </ul>
 </li>
-<li>BASE_URL<ul>
+<li>BASE_URL
+<ul>
 <li>部屬的路徑</li>
 <li>對應 vue.config.js 的 publicPath</li>
 </ul>
 </li>
-<li>VUE_APP_*<ul>
+<li>VUE_APP_*
+<ul>
 <li>其他所有的環境變數都要有 VUE_APP_ 前綴</li>
 <li>使用 process.env.VUE_APP_* 呼叫</li>
 </ul>
 </li>
 </ul>
-<h3 id="常用套件"><a href="#常用套件" class="headerlink" title="常用套件"></a>常用套件</h3><ul>
-<li><a href="https://github.com/imcvampire/vue-axios" target="_blank" rel="noopener">Vue Axios</a><ul>
+<h3 id="常用套件"><a class="markdownIt-Anchor" href="#常用套件"></a> 常用套件</h3>
+<ul>
+<li><a href="https://github.com/imcvampire/vue-axios" target="_blank" rel="noopener">Vue Axios</a>
+<ul>
 <li>axios 是一個 AJAX 的套件，封裝了 AJAX 的功能，讓其易於使用。</li>
 </ul>
 </li>
 </ul>
-<h3 id="Vue-Router"><a href="#Vue-Router" class="headerlink" title="Vue Router"></a><a href="https://router.vuejs.org/zh/" target="_blank" rel="noopener">Vue Router</a></h3><p>是 Vue.js 官方的路由管理器，可以進行動態路由配置。</p>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>如果在開啟專案時已經有選擇 router ，會自動產生，但若沒有就可以自行配置。<br>首先安裝 Vue Router 。</p>
+<h3 id="vue-router"><a class="markdownIt-Anchor" href="#vue-router"></a> <a href="https://router.vuejs.org/zh/" target="_blank" rel="noopener">Vue Router</a></h3>
+<p>是 Vue.js 官方的路由管理器，可以進行動態路由配置。</p>
+<h4 id="配置"><a class="markdownIt-Anchor" href="#配置"></a> 配置</h4>
+<p>如果在開啟專案時已經有選擇 router ，會自動產生，但若沒有就可以自行配置。<br />
+首先安裝 Vue Router 。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在 NPM 5.0 前，要加上 --save 才會在 package.json 新增相關內容，之後的版本不加也 OK</span></span><br><span class="line">npm install vue-router</span><br></pre></td></tr></table></figure>
-
 <p>接著在 /src 底下新增 router/index.js ，內容如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 官方模組，沒有 ./ 的情況下預設是引用 node_modules 裡的內容</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"><span class="keyword">import</span> VueRouter <span class="keyword">from</span> <span class="string">'vue-router'</span>;</span><br><span class="line"><span class="comment">// 自訂模組</span></span><br><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">'../views/Home.vue'</span>;</span><br><span class="line"><span class="keyword">import</span> Signin <span class="keyword">from</span> <span class="string">'../views/Signin.vue'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 Vue Router</span></span><br><span class="line">Vue.use(VouRouter);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 設定路由</span></span><br><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">'/'</span>,</span><br><span class="line">    name: <span class="string">'Home'</span>,</span><br><span class="line">    component: Home,</span><br><span class="line">    <span class="comment">// 路由可以有巢狀的設定</span></span><br><span class="line">    children:[</span><br><span class="line">      &#123;</span><br><span class="line">        path: <span class="string">'/signin'</span>,</span><br><span class="line">        component: Signin,</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 宣告 VueRouter 實體</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// export 為 ES6 匯出物件給外部使用的語法， default 可以讓外部自由命名</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router;</span><br></pre></td></tr></table></figure>
-
 <p>再到 /src/main.js （程式的進入點）產生 Vue 實體的地方，指定 router 。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App.vue'</span>;</span><br><span class="line"><span class="comment">// 預設會引用到 './router/index.js'</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">'./router'</span>;</span><br><span class="line"></span><br><span class="line">Vue.config.productionTip = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="comment">// 指定 router</span></span><br><span class="line">  router,</span><br><span class="line">  render: <span class="function">(<span class="params">h</span>) =&gt;</span> h(App),</span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>);</span><br></pre></td></tr></table></figure>
-
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>在 HTML 的部分可以使用一些 router 的標籤。</p>
+<h4 id="使用"><a class="markdownIt-Anchor" href="#使用"></a> 使用</h4>
+<p>在 HTML 的部分可以使用一些 router 的標籤。</p>
 <ul>
-<li>&lt;router-view&gt;<ul>
-<li>預設會依照當前的路徑及路由的設定來顯示不同的元件。<ul>
+<li>&lt;router-view&gt;
+<ul>
+<li>預設會依照當前的路徑及路由的設定來顯示不同的元件。
+<ul>
 <li>依照上面的路由設定來說，如果 Home 元件中有 &lt;router-view&gt; ，網址又為 /signin ，那 &lt;router-view&gt; 所在的區塊就會顯示 Signin 元件。</li>
 </ul>
 </li>
-<li>如果有 name 屬性，則會顯示對應的元件，例如 &lt;router-view name=”Signin”&gt;</li>
+<li>如果有 name 屬性，則會顯示對應的元件，例如 &lt;router-view name=“Signin”&gt;</li>
 </ul>
 </li>
-<li>&lt;router-link&gt;<ul>
-<li>能切換路由到指定的路徑或元件，例如：<ul>
-<li>&lt;router-link to=”/signin”&gt;</router-link></li>
-<li>&lt;router-link :to=”{name: ‘Home’}”&gt;</router-link></li>
+<li>&lt;router-link&gt;
+<ul>
+<li>能切換路由到指定的路徑或元件，例如：
+<ul>
+<li>&lt;router-link to=&quot;/signin&quot;&gt;</router-link></li>
+<li>&lt;router-link :to=&quot;{name: ‘Home’}&quot;&gt;</router-link></li>
 </ul>
 </li>
 <li>預設會被渲染成 &lt;a&gt; ，可以用 tag 屬性指定其他標籤</li>
@@ -498,37 +544,39 @@
 </ul>
 </li>
 </ul>
-<h4 id="動態路由配置"><a href="#動態路由配置" class="headerlink" title="動態路由配置"></a>動態路由配置</h4><p>在設定路由的路徑時，可以用 : 指定參數名稱。</p>
+<h4 id="動態路由配置"><a class="markdownIt-Anchor" href="#動態路由配置"></a> 動態路由配置</h4>
+<p>在設定路由的路徑時，可以用 : 指定參數名稱。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">'/product/:id'</span>,</span><br><span class="line">    name: <span class="string">'Product'</span>,</span><br><span class="line">    component: Product,</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
-
 <p>在元件中取用參數的方式如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$route.param.id</span><br></pre></td></tr></table></figure>
-
 <p>搭配 XHTMLHttpRequest 或 Axios 可以取得網址上的參數並發出相應的 Request 。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Vue.axios.get(<span class="string">`https://example.com/?id=<span class="subst">$&#123;<span class="keyword">this</span>.$route.param.id&#125;</span>`</span>)</span><br><span class="line">         .then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// handle success</span></span><br><span class="line">            <span class="built_in">console</span>.log(response);</span><br><span class="line">          &#125;)</span><br><span class="line">          .catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// handle error</span></span><br><span class="line">            <span class="built_in">console</span>.log(error);</span><br><span class="line">          &#125;)</span><br><span class="line">          .then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="comment">// always executed</span></span><br><span class="line">          &#125;);</span><br></pre></td></tr></table></figure>
-
-<h4 id="Router-Construction-Options"><a href="#Router-Construction-Options" class="headerlink" title="Router Construction Options"></a><a href="https://router.vuejs.org/zh/api/#router-%E6%9E%84%E5%BB%BA%E9%80%89%E9%A1%B9" target="_blank" rel="noopener">Router Construction Options</a></h4><p>除了上述內容以外， Vue Router 還有許多可以設定的選項。</p>
+<h4 id="router-construction-options"><a class="markdownIt-Anchor" href="#router-construction-options"></a> <a href="https://router.vuejs.org/zh/api/#router-%E6%9E%84%E5%BB%BA%E9%80%89%E9%A1%B9" target="_blank" rel="noopener">Router Construction Options</a></h4>
+<p>除了上述內容以外， Vue Router 還有許多可以設定的選項。</p>
 <ul>
 <li>mode ：網址的格式，建議用預設； history 需要搭配後端</li>
 <li>base ： Base URL</li>
 <li>linkActiveClass ：指定 router-link 為當下路徑時所加上的 class 名稱，為模糊比對</li>
 <li>linkExactActiveClass ：同上，路徑必須完全相符</li>
 </ul>
-<h4 id="Programmatic-Navigation"><a href="#Programmatic-Navigation" class="headerlink" title="Programmatic Navigation"></a><a href="https://router.vuejs.org/zh/guide/essentials/navigation.html" target="_blank" rel="noopener">Programmatic Navigation</a></h4><p>除了使用 &lt;router-link&gt; 來切換路由，也可以用 JavaScript 來切換。</p>
+<h4 id="programmatic-navigation"><a class="markdownIt-Anchor" href="#programmatic-navigation"></a> <a href="https://router.vuejs.org/zh/guide/essentials/navigation.html" target="_blank" rel="noopener">Programmatic Navigation</a></h4>
+<p>除了使用 &lt;router-link&gt; 來切換路由，也可以用 JavaScript 來切換。</p>
 <blockquote>
 <p>用法類似於 <a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API" target="_blank" rel="noopener">History API</a> 。</p>
 </blockquote>
-<h5 id="router-push-location-onComplete-onAbort"><a href="#router-push-location-onComplete-onAbort" class="headerlink" title="router.push(location, onComplete?, onAbort?)"></a>router.push(location, onComplete?, onAbort?)</h5><ul>
+<h5 id="routerpushlocation-oncomplete-onabort"><a class="markdownIt-Anchor" href="#routerpushlocation-oncomplete-onabort"></a> router.push(location, onComplete?, onAbort?)</h5>
+<ul>
 <li>location ：目標路由</li>
 <li>onComplete ：切換成功時觸發的 function</li>
 <li>onAbort ：切換失敗時觸發的 function</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用字串表示路徑</span></span><br><span class="line"><span class="keyword">this</span>.$router.push(<span class="string">'home'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用物件指定路徑</span></span><br><span class="line"><span class="keyword">this</span>.$router.push(&#123; <span class="attr">path</span>: <span class="string">'home'</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用物件指定元件名稱，並用 params 帶上參數</span></span><br><span class="line"><span class="keyword">this</span>.$router.push(&#123; <span class="attr">name</span>: <span class="string">'user'</span>, <span class="attr">params</span>: &#123; <span class="attr">userId</span>: <span class="string">'123'</span> &#125;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用物件指定路徑，並用 query 帶上參數 （在指定路徑的情況下使用 params 是無效的）</span></span><br><span class="line"><span class="keyword">this</span>.$router.push(&#123; <span class="attr">path</span>: <span class="string">'register'</span>, <span class="attr">query</span>: &#123; <span class="attr">plan</span>: <span class="string">'private'</span> &#125;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用物件指定路徑，字串內含參數</span></span><br><span class="line"><span class="keyword">this</span>.$router.push(&#123; <span class="attr">path</span>: <span class="string">`/user/<span class="subst">$&#123;userId&#125;</span>`</span> &#125;)</span><br></pre></td></tr></table></figure>
-
-<h5 id="router-replace-location-onComplete-onAbort"><a href="#router-replace-location-onComplete-onAbort" class="headerlink" title="router.replace(location, onComplete?, onAbort?)"></a>router.replace(location, onComplete?, onAbort?)</h5><p>跟 push 差不多，但是在瀏覽紀錄上會直接蓋掉當下這個瀏覽紀錄。<br>router-link 的用法是 &lt;router-link to=”/“ replace&gt; 。</p>
-<h5 id="router-go-n"><a href="#router-go-n" class="headerlink" title="router.go(n)"></a>router.go(n)</h5><p>可以切換到瀏覽紀錄的某一頁。</p>
+<h5 id="routerreplacelocation-oncomplete-onabort"><a class="markdownIt-Anchor" href="#routerreplacelocation-oncomplete-onabort"></a> router.replace(location, onComplete?, onAbort?)</h5>
+<p>跟 push 差不多，但是在瀏覽紀錄上會直接蓋掉當下這個瀏覽紀錄。<br />
+router-link 的用法是 &lt;router-link to=&quot;/&quot; replace&gt; 。</p>
+<h5 id="routergon"><a class="markdownIt-Anchor" href="#routergon"></a> router.go(n)</h5>
+<p>可以切換到瀏覽紀錄的某一頁。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 切換到上一頁</span></span><br><span class="line"><span class="keyword">this</span>.$router.go(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重刷當前頁面</span></span><br><span class="line"><span class="keyword">this</span>.$router.go(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>待續</p>
 </blockquote>
@@ -624,7 +672,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#相關資源"><span class="nav-number">1.</span> <span class="nav-text">相關資源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立環境"><span class="nav-number">2.</span> <span class="nav-text">建立環境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual-Studio-Code-擴充功能"><span class="nav-number">2.1.</span> <span class="nav-text">Visual Studio Code 擴充功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vue"><span class="nav-number">2.1.1.</span> <span class="nav-text">vue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vue-2-Snippets"><span class="nav-number">2.1.2.</span> <span class="nav-text">Vue 2 Snippets</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Preview-on-Web-Server"><span class="nav-number">2.1.3.</span> <span class="nav-text">Preview on Web Server</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chrome-擴充功能"><span class="nav-number">2.2.</span> <span class="nav-text">Chrome 擴充功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Vue-Devtools"><span class="nav-number">2.2.1.</span> <span class="nav-text">Vue Devtools</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝"><span class="nav-number">2.3.</span> <span class="nav-text">安裝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立-Vue-應用程式"><span class="nav-number">2.4.</span> <span class="nav-text">建立 Vue 應用程式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本架構"><span class="nav-number">3.</span> <span class="nav-text">基本架構</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常見指令"><span class="nav-number">3.1.</span> <span class="nav-text">常見指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表單應用"><span class="nav-number">3.2.</span> <span class="nav-text">表單應用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元件化"><span class="nav-number">3.3.</span> <span class="nav-text">元件化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#實作-Todolist"><span class="nav-number">3.4.</span> <span class="nav-text">實作 Todolist</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-CLI"><span class="nav-number">4.</span> <span class="nav-text">Vue CLI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝-1"><span class="nav-number">4.1.</span> <span class="nav-text">安裝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#開啟專案"><span class="nav-number">4.2.</span> <span class="nav-text">開啟專案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#資料夾結構"><span class="nav-number">4.3.</span> <span class="nav-text">資料夾結構</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Config"><span class="nav-number">4.4.</span> <span class="nav-text">Config</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Global-CLI-config"><span class="nav-number">4.4.1.</span> <span class="nav-text">Global CLI config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vue-config-js"><span class="nav-number">4.4.2.</span> <span class="nav-text">Vue.config.js</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#環境變量與模式"><span class="nav-number">4.5.</span> <span class="nav-text">環境變量與模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用套件"><span class="nav-number">4.6.</span> <span class="nav-text">常用套件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-Router"><span class="nav-number">4.7.</span> <span class="nav-text">Vue Router</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置"><span class="nav-number">4.7.1.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用"><span class="nav-number">4.7.2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#動態路由配置"><span class="nav-number">4.7.3.</span> <span class="nav-text">動態路由配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Router-Construction-Options"><span class="nav-number">4.7.4.</span> <span class="nav-text">Router Construction Options</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Programmatic-Navigation"><span class="nav-number">4.7.5.</span> <span class="nav-text">Programmatic Navigation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#router-push-location-onComplete-onAbort"><span class="nav-number">4.7.5.1.</span> <span class="nav-text">router.push(location, onComplete?, onAbort?)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#router-replace-location-onComplete-onAbort"><span class="nav-number">4.7.5.2.</span> <span class="nav-text">router.replace(location, onComplete?, onAbort?)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#router-go-n"><span class="nav-number">4.7.5.3.</span> <span class="nav-text">router.go(n)</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#相關資源"><span class="nav-number">1.</span> <span class="nav-text"> 相關資源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立環境"><span class="nav-number">2.</span> <span class="nav-text"> 建立環境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#visual-studio-code-擴充功能"><span class="nav-number">2.1.</span> <span class="nav-text"> Visual Studio Code 擴充功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vue"><span class="nav-number">2.1.1.</span> <span class="nav-text"> vue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vue-2-snippets"><span class="nav-number">2.1.2.</span> <span class="nav-text"> Vue 2 Snippets</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#preview-on-web-server"><span class="nav-number">2.1.3.</span> <span class="nav-text"> Preview on Web Server</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chrome-擴充功能"><span class="nav-number">2.2.</span> <span class="nav-text"> Chrome 擴充功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vue-devtools"><span class="nav-number">2.2.1.</span> <span class="nav-text"> Vue Devtools</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝"><span class="nav-number">2.3.</span> <span class="nav-text"> 安裝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立-vue-應用程式"><span class="nav-number">2.4.</span> <span class="nav-text"> 建立 Vue 應用程式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本架構"><span class="nav-number">3.</span> <span class="nav-text"> 基本架構</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常見指令"><span class="nav-number">3.1.</span> <span class="nav-text"> 常見指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表單應用"><span class="nav-number">3.2.</span> <span class="nav-text"> 表單應用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元件化"><span class="nav-number">3.3.</span> <span class="nav-text"> 元件化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#實作-todolist"><span class="nav-number">3.4.</span> <span class="nav-text"> 實作 Todolist</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-cli"><span class="nav-number">4.</span> <span class="nav-text"> Vue CLI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝-2"><span class="nav-number">4.1.</span> <span class="nav-text"> 安裝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#開啟專案"><span class="nav-number">4.2.</span> <span class="nav-text"> 開啟專案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#資料夾結構"><span class="nav-number">4.3.</span> <span class="nav-text"> 資料夾結構</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#config"><span class="nav-number">4.4.</span> <span class="nav-text"> Config</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#global-cli-config"><span class="nav-number">4.4.1.</span> <span class="nav-text"> Global CLI config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vueconfigjs"><span class="nav-number">4.4.2.</span> <span class="nav-text"> Vue.config.js</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#環境變量與模式"><span class="nav-number">4.5.</span> <span class="nav-text"> 環境變量與模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用套件"><span class="nav-number">4.6.</span> <span class="nav-text"> 常用套件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vue-router"><span class="nav-number">4.7.</span> <span class="nav-text"> Vue Router</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置"><span class="nav-number">4.7.1.</span> <span class="nav-text"> 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用"><span class="nav-number">4.7.2.</span> <span class="nav-text"> 使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#動態路由配置"><span class="nav-number">4.7.3.</span> <span class="nav-text"> 動態路由配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#router-construction-options"><span class="nav-number">4.7.4.</span> <span class="nav-text"> Router Construction Options</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#programmatic-navigation"><span class="nav-number">4.7.5.</span> <span class="nav-text"> Programmatic Navigation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#routerpushlocation-oncomplete-onabort"><span class="nav-number">4.7.5.1.</span> <span class="nav-text"> router.push(location, onComplete?, onAbort?)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#routerreplacelocation-oncomplete-onabort"><span class="nav-number">4.7.5.2.</span> <span class="nav-text"> router.replace(location, onComplete?, onAbort?)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#routergon"><span class="nav-number">4.7.5.3.</span> <span class="nav-text"> router.go(n)</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -640,7 +688,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/TechBlog/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -653,7 +701,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/TechBlog/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

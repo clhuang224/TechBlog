@@ -238,8 +238,9 @@
       
         <p>本文為觀看六角學院「 <a href="https://courses.hexschool.com/courses/enrolled/670032" target="_blank" rel="noopener">Sass 實戰全攻略 - 成為前 1% 的 CSS 頂尖好手</a>」的紀錄。</p>
 <a id="more"></a>
-
-<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><h3 id="什麼是-Sass"><a href="#什麼是-Sass" class="headerlink" title="什麼是 Sass"></a>什麼是 Sass</h3><p>Sass（Syntactically Awesome Stylesheets）是一種 CSS 語言。 SassScript 是一個在 Sass 檔案中使用的小型 Scripting Language。</p>
+<h2 id="簡介"><a class="markdownIt-Anchor" href="#簡介"></a> 簡介</h2>
+<h3 id="什麼是-sass"><a class="markdownIt-Anchor" href="#什麼是-sass"></a> 什麼是 Sass</h3>
+<p>Sass（Syntactically Awesome Stylesheets）是一種 CSS 語言。 SassScript 是一個在 Sass 檔案中使用的小型 Scripting Language。</p>
 <p>Sass包括兩套語法：</p>
 <ul>
 <li>.sass：用縮排來區分 block</li>
@@ -247,20 +248,20 @@
 </ul>
 <p>以下面的 CSS 來說：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.square</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">30px</span> auto;</span><br><span class="line">  <span class="attribute">background-color</span>: blue;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.square</span> <span class="selector-class">.circle</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: auto;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">300%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.square</span> <span class="selector-class">.circle</span> <span class="selector-class">.line</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: auto;</span><br><span class="line">  <span class="attribute">background-color</span>: yellow;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>寫成 SCSS 會是像這樣：</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.square</span>&#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">30px</span> auto;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="selector-class">.circle</span>&#123;</span><br><span class="line">        <span class="attribute">margin</span>: auto;</span><br><span class="line">        <span class="attribute">background-color</span>: red;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">        <span class="attribute">border-radius</span>: <span class="number">300%</span>;</span><br><span class="line">        <span class="selector-class">.line</span>&#123;</span><br><span class="line">            <span class="attribute">margin</span>: auto;</span><br><span class="line">            <span class="attribute">background-color</span>: yellow;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">            <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>寫成 SASS 則是這樣：<br>（沒有大括號也沒有分號、冒號後面一定要有空白鍵。）</p>
+<p>寫成 SASS 則是這樣：<br />
+（沒有大括號也沒有分號、冒號後面一定要有空白鍵。）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.square</span><br><span class="line">    margin: 30px auto</span><br><span class="line">    background-color: blue</span><br><span class="line">    width: 300px</span><br><span class="line">    height: 300px</span><br><span class="line">    .circle</span><br><span class="line">        margin: auto</span><br><span class="line">        background-color: red</span><br><span class="line">        width: 200px</span><br><span class="line">        height: 200px</span><br><span class="line">        border-radius: 300%</span><br><span class="line">        .line</span><br><span class="line">            margin: auto</span><br><span class="line">            background-color: yellow</span><br><span class="line">            width: 10px</span><br><span class="line">            height: 300px</span><br></pre></td></tr></table></figure>
-
 <p>Sass 直譯器會把 SassScript 直譯為 CSS 檔案，也可以針對 .sass 或 .scss 檔案的改動及時更新 CSS 檔案。</p>
 <p>Sass 的官方直譯器是開源的並且用 Ruby 寫成，但是也有用 PHP 、 C 語言、 Java 等實作的版本（ C 語言為 llibSass ， Java 版本為 JSass ）。</p>
 <p>Sass 包含以下功能：</p>
 <ul>
-<li>Variables<ul>
+<li>Variables
+<ul>
 <li>變數以 $ 為開頭，以 : 賦值</li>
-<li>型別<ul>
+<li>型別
+<ul>
 <li>數值（可包含單位）</li>
 <li>字串</li>
 <li>顏色</li>
@@ -270,44 +271,54 @@
 </ul>
 </li>
 <li>Nesting</li>
-<li>Mixins<ul>
+<li>Mixins
+<ul>
 <li>類似 function</li>
 <li>迴圈</li>
 </ul>
 </li>
 <li>Selector inheritance</li>
 </ul>
-<h3 id="安裝編譯器"><a href="#安裝編譯器" class="headerlink" title="安裝編譯器"></a>安裝編譯器</h3><p>可以到 <a href="https://sass-lang.com/" target="_blank" rel="noopener">Sass 官網</a> 找到編譯器的應用程式，例如 <a href="https://prepros.io/" target="_blank" rel="noopener">Prepos</a> 。<br>或是使用編輯器的擴充套件，例如 VS Code 的 <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.live-sass" target="_blank" rel="noopener">Live Sass Compiler</a> 。</p>
-<h2 id="基礎語法"><a href="#基礎語法" class="headerlink" title="基礎語法"></a>基礎語法</h2><h3 id="Parent-Selector"><a href="#Parent-Selector" class="headerlink" title="Parent Selector"></a><a href="https://sass-lang.com/documentation/style-rules/placeholder-selectors" target="_blank" rel="noopener">Parent Selector</a></h3><p>SCSS 中可以用 &amp; 選擇父元素，將 :hover 、 ::before 等寫在 block 中。</p>
+<h3 id="安裝編譯器"><a class="markdownIt-Anchor" href="#安裝編譯器"></a> 安裝編譯器</h3>
+<p>可以到 <a href="https://sass-lang.com/" target="_blank" rel="noopener">Sass 官網</a> 找到編譯器的應用程式，例如 <a href="https://prepros.io/" target="_blank" rel="noopener">Prepos</a> 。<br />
+或是使用編輯器的擴充套件，例如 VS Code 的 <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.live-sass" target="_blank" rel="noopener">Live Sass Compiler</a> 。</p>
+<h2 id="基礎語法"><a class="markdownIt-Anchor" href="#基礎語法"></a> 基礎語法</h2>
+<h3 id="parent-selector"><a class="markdownIt-Anchor" href="#parent-selector"></a> <a href="https://sass-lang.com/documentation/style-rules/placeholder-selectors" target="_blank" rel="noopener">Parent Selector</a></h3>
+<p>SCSS 中可以用 &amp; 選擇父元素，將 :hover 、 ::before 等寫在 block 中。</p>
 <p class="codepen" data-height="265" data-theme-id="default" data-default-tab="css,result" data-user="clhuang224" data-slug-hash="ZEGBEbq" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="SCSS Parent selector">
   <span>See the Pen <a href="https://codepen.io/clhuang224/pen/ZEGBEbq" target="_blank" rel="noopener">
   SCSS Parent selector</a> by Lynn (<a href="https://codepen.io/clhuang224" target="_blank" rel="noopener">@clhuang224</a>)
   on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
 </p>
-
-<h3 id="Variable"><a href="#Variable" class="headerlink" title="Variable"></a><a href="https://sass-lang.com/documentation/variables" target="_blank" rel="noopener">Variable</a></h3><p>變數以 $ 開頭，可以賦予數值、字串、顏色、布林值及空值，也可以計算。<br>使用變數可以提高可讀性，易於大幅修改。</p>
+<h3 id="variable"><a class="markdownIt-Anchor" href="#variable"></a> <a href="https://sass-lang.com/documentation/variables" target="_blank" rel="noopener">Variable</a></h3>
+<p>變數以 $ 開頭，可以賦予數值、字串、顏色、布林值及空值，也可以計算。<br />
+使用變數可以提高可讀性，易於大幅修改。</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$font-size-large</span>: <span class="number">24px</span>;</span><br><span class="line"><span class="variable">$font-size-middle</span>: <span class="variable">$font-size-large</span> * <span class="number">0.8</span>;</span><br><span class="line"><span class="variable">$max-width</span>: <span class="number">1000px</span>;</span><br><span class="line"><span class="variable">$square-color</span>: <span class="number">#0f0</span>;</span><br><span class="line"><span class="variable">$circle-color</span>: <span class="number">#f00</span>;</span><br><span class="line"><span class="selector-class">.square</span>&#123;</span><br><span class="line">    <span class="attribute">margin</span>: auto;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="variable">$square-color</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="variable">$font-size-large</span>;</span><br><span class="line">    <span class="selector-class">.circle</span>&#123;</span><br><span class="line">        <span class="attribute">background-color</span>: <span class="variable">$circle-color</span>;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="variable">$font-size-middle</span>;</span><br><span class="line">        <span class="attribute">width</span>: <span class="variable">$max-width</span> / <span class="number">2</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>命名方式可以參考 <a href="https://github.com/twbs/bootstrap/blob/master/scss/_variables.scss" target="_blank" rel="noopener">twbs/bootstrap/scss/_variables.scss</a> 。<br>配色觀念可以參考：</p>
+<p>命名方式可以參考 <a href="https://github.com/twbs/bootstrap/blob/master/scss/_variables.scss" target="_blank" rel="noopener">twbs/bootstrap/scss/_variables.scss</a> 。<br />
+配色觀念可以參考：</p>
 <ul>
 <li><a href="https://wcc723.github.io/design/2018/10/21/color/" target="_blank" rel="noopener">鐵人賽：網頁設計色彩配置概念</a></li>
 <li><a href="https://www.shutterstock.com/zh-Hant/blog/complete-guide-color-in-design" target="_blank" rel="noopener">設計配色完整攻略：色彩意義、色彩理論、色彩心理學讓您一次擁有！</a></li>
 </ul>
 </blockquote>
-<h3 id="Build-in-Modules"><a href="#Build-in-Modules" class="headerlink" title="Build-in Modules"></a><a href="https://sass-lang.com/documentation/modules" target="_blank" rel="noopener">Build-in Modules</a></h3><p>Sass 有一些內建的模組，例如：</p>
+<h3 id="build-in-modules"><a class="markdownIt-Anchor" href="#build-in-modules"></a> <a href="https://sass-lang.com/documentation/modules" target="_blank" rel="noopener">Build-in Modules</a></h3>
+<p>Sass 有一些內建的模組，例如：</p>
 <ul>
-<li>sass:color<ul>
+<li>sass:color
+<ul>
 <li>darken()</li>
 <li>lighten()</li>
 </ul>
 </li>
-<li>sass:math<ul>
+<li>sass:math
+<ul>
 <li>math.round()</li>
 </ul>
 </li>
 </ul>
-<h3 id="import"><a href="#import" class="headerlink" title="@import"></a>@import</h3><blockquote>
+<h3 id="import"><a class="markdownIt-Anchor" href="#import"></a> @import</h3>
+<blockquote>
 <p>待續</p>
 </blockquote>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
@@ -402,7 +413,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#簡介"><span class="nav-number">1.</span> <span class="nav-text">簡介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什麼是-Sass"><span class="nav-number">1.1.</span> <span class="nav-text">什麼是 Sass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝編譯器"><span class="nav-number">1.2.</span> <span class="nav-text">安裝編譯器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基礎語法"><span class="nav-number">2.</span> <span class="nav-text">基礎語法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Parent-Selector"><span class="nav-number">2.1.</span> <span class="nav-text">Parent Selector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Variable"><span class="nav-number">2.2.</span> <span class="nav-text">Variable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-in-Modules"><span class="nav-number">2.3.</span> <span class="nav-text">Build-in Modules</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import"><span class="nav-number">2.4.</span> <span class="nav-text">@import</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#簡介"><span class="nav-number">1.</span> <span class="nav-text"> 簡介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什麼是-sass"><span class="nav-number">1.1.</span> <span class="nav-text"> 什麼是 Sass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝編譯器"><span class="nav-number">1.2.</span> <span class="nav-text"> 安裝編譯器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基礎語法"><span class="nav-number">2.</span> <span class="nav-text"> 基礎語法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#parent-selector"><span class="nav-number">2.1.</span> <span class="nav-text"> Parent Selector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#variable"><span class="nav-number">2.2.</span> <span class="nav-text"> Variable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#build-in-modules"><span class="nav-number">2.3.</span> <span class="nav-text"> Build-in Modules</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import"><span class="nav-number">2.4.</span> <span class="nav-text"> @import</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -418,7 +429,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/TechBlog/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -431,7 +442,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/TechBlog/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
