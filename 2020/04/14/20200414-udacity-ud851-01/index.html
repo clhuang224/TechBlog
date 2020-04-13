@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/04/14/20200414-udacity-ud851-01/01.png">
 <meta property="article:published_time" content="2020-04-13T16:02:40.000Z">
-<meta property="article:modified_time" content="2020-04-13T16:13:14.667Z">
+<meta property="article:modified_time" content="2020-04-13T16:23:35.031Z">
 <meta property="article:author" content="Lynn">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="w3HexSchool">
@@ -196,7 +196,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-04-14 00:02:40 / 修改時間：00:13:14" itemprop="dateCreated datePublished" datetime="2020-04-14T00:02:40+08:00">2020-04-14</time>
+              <time title="創建時間：2020-04-14 00:02:40 / 修改時間：00:23:35" itemprop="dateCreated datePublished" datetime="2020-04-14T00:02:40+08:00">2020-04-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -239,7 +239,7 @@
 但其實才一兩週就覺得滿辛苦的，因為看六角課程的文章不算在鐵人賽中，常常有明明看了不少東西、文章卻一點都擠不出來的感覺。<br />
 所以一直寫寫停停，甚至連原本寫筆記的步調都亂掉了。</p>
 <p>以前讀過心理學的「遊戲工作化」這個概念。<br />
-大略是說，原本因為興趣而持續在做的事情，被持續獎勵以後再抽掉獎勵，反而會失去興致。<br />
+大略是說，原本因為興趣而持續在做的事情，被獎勵以後反而會失去興致。<br />
 大概就是我最近的心得吧（不過有部份的原因是我完美主義，所以難度太高）。</p>
 <p>寫 Code 和寫文章都要有砍掉重練的勇氣；我決定不管之前寫的 Android 短文，重新以 Udacity 上的課程為基準，單純記錄看課程的筆記。<br />
 跟之前六角整個課程寫一篇的方式不同的是改以章節拆分，至於六角的筆記要不要重新拆成比較短的文章，就再說了。</p>
@@ -475,7 +475,7 @@ res 資料夾專門放專案所有的資源，其中也包含 Layout 的檔案�
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> tw.com.mydomain.myapplication;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> androidx.appcompat.app.AppCompatActivity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.widget.TextView; <span class="comment">// 通常 Android Studio 會自動幫忙引用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 要先宣告或是在 onCreate 中宣告都可以</span></span><br><span class="line">    TextView dishListTextView;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// findViewById 一定要在 setContentView 創建 View 物件後才能呼叫</span></span><br><span class="line">        dishListTextView = (TextView) findViewById(R.id.tv_dish_list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Android Studio 會推薦簡潔的寫法</span></span><br><span class="line">        <span class="keyword">for</span> (String dish : Dish.getList()) dishListTextView.append(dish + <span class="string">"\n\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="執行畫面"><a class="markdownIt-Anchor" href="#執行畫面"></a> 執行畫面</h3>
-<p>菜單列表就是這麼的樸實無華。</p>
+<p>菜單列表就是這麼地樸實無華。</p>
 <p><img src="01.png" alt="執行畫面" /></p>
 <h2 id="結語"><a class="markdownIt-Anchor" href="#結語"></a> 結語</h2>
 <p>以上就是 Lesson 1 Create Project Sunshine 的內容。<br />
