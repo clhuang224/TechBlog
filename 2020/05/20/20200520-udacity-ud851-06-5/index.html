@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文為 Udacity Developing Android Apps 「在 SQLite 中存儲數據」的課程筆記。 （這個章節好像是中文版才有；在中文版的第八章、英文版的第六到第七章之間。）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Udacity | Developing Android Apps | 在 SQLite 中存儲數據 課程筆記">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2020/05/20/20200520-udacity-ud851-06-5/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="本文為 Udacity Developing Android Apps 「在 SQLite 中存儲數據」的課程筆記。 （這個章節好像是中文版才有；在中文版的第八章、英文版的第六到第七章之間。）">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-05-20T07:14:40.000Z">
+<meta property="article:modified_time" content="2020-05-20T07:14:42.207Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/2020/05/20/20200520-udacity-ud851-06-5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Udacity | Developing Android Apps | 在 SQLite 中存儲數據 課程筆記 | Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/05/20/20200520-udacity-ud851-06-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Udacity | Developing Android Apps | 在 SQLite 中存儲數據 課程筆記
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-05-20 15:14:40 / 修改時間：15:14:42" itemprop="dateCreated datePublished" datetime="2020-05-20T15:14:40+08:00">2020-05-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E7%B7%9A%E4%B8%8A%E8%AA%B2%E7%A8%8B%E8%A7%80%E7%9C%8B%E7%AD%86%E8%A8%98/" itemprop="url" rel="index"><span itemprop="name">線上課程觀看筆記</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/05/20/20200520-udacity-ud851-06-5/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/05/20/20200520-udacity-ud851-06-5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文為 Udacity <a href="https://www.udacity.com/course/new-android-fundamentals--ud851" target="_blank" rel="noopener">Developing Android Apps</a> 「在 SQLite 中存儲數據」的課程筆記。<br />
+（這個章節好像是中文版才有；在中文版的第八章、英文版的第六到第七章之間。）</p>
+<a id="more"></a>
+<h2 id="章節目標"><a class="markdownIt-Anchor" href="#章節目標"></a> 章節目標</h2>
+<p>此章節的最後會完成一個讓店員安排客人等候的應用。<br />
+多個店員可以同時使用 App 將客人的資料新增到資料庫，並查詢排序的結果；當客人入座時，可以將等候的資料刪除。</p>
+<p>學習目標如下：</p>
+<ul>
+<li>了解如何在 Android 中使用 SQLite
+<ul>
+<li>使用 Contract 類別</li>
+<li>定義資料庫 Schema</li>
+<li>撰寫 Query 以新增、查詢及刪除資料</li>
+</ul>
+</li>
+<li>調整 RecyclerView 顯示資料的方式</li>
+</ul>
+<p>官方文件： <a href="https://developer.android.com/training/data-storage/sqlite" target="_blank" rel="noopener">Save data using SQLite</a></p>
+<h2 id="contract"><a class="markdownIt-Anchor" href="#contract"></a> Contract</h2>
+<p>Contract 類別用來連接 Android 和 SQL 資料庫中。<br />
+其中會使用 BaseColumns interface 來實作資料表名稱和欄位。<br />
+BaseColumns 已有預設一個 _ID 欄位，作為資料表的 primary key 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自訂一個 Contract 類別</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WaitlistContract</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 避免 Contract 誤被實體化，將 constructor 設為 private</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">WaitlistContract</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定義資料表名稱和欄位</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">WaitlistEntry</span> <span class="keyword">implements</span> <span class="title">BaseColumns</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 資料表名稱</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String TABLE_NAME = <span class="string">"waitlist"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 欄位名稱</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String COLUMN_GUEST_NAME = <span class="string">"guestName"</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String COLUMN_PARTY_SIZE = <span class="string">"partySize"</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String COLUMN_TIMESTAMP = <span class="string">"timestamp"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="sqliteopenhelper"><a class="markdownIt-Anchor" href="#sqliteopenhelper"></a> SQLiteOpenHelper</h2>
+<p>SQLiteOpenHelper 類別是用來創建資料庫，並在 Schema 改變時更新資料庫。<br />
+其中 onCreate 方法是資料庫被創建時的操作， onUpgrade 方法則是被更新時的內容，確保資料有被更新到。<br />
+我們可以撰寫一個 DBHelper 來 extends SQLiteOpenHelper 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WaitlistDbHelper</span> <span class="keyword">extends</span> <span class="title">SQLiteOpenHelper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 資料庫存在 Android 中的檔案名稱</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DATABASE_NAME = <span class="string">"waitlist.db"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 資料庫的版本號，每次有更新的時候就要自己加一，讓使用者依據這個版本號而被要求更新</span></span><br><span class="line">    <span class="comment">// 從 Contract 那邊更動 Schema 時，版本也要增加</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DATABASE_VERSION = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Constructor 沒有需要 override 的，所以用 super 呼叫父類別的 constructor</span></span><br><span class="line">    <span class="comment">// 其中第三個參數應該要填 CursorFactory ，這邊不需要所以為 null</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WaitlistDbHelper</span><span class="params">(Context context)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, DATABASE_NAME, <span class="keyword">null</span>, DATABASE_VERSION);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// WaitlistDbHelper 被實體化時就會呼叫 onCreate 來創建資料表</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(SQLiteDatabase sqLiteDatabase)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// SQL DLL</span></span><br><span class="line">        <span class="comment">// 想改 Schema 的話，只要到 Contract 改就可以</span></span><br><span class="line">        <span class="keyword">final</span> String SQL_CREATE_WAITLIST_TABLE =</span><br><span class="line">                <span class="string">"create table "</span> + WaitlistContract.WaitlistEntry.TABLE_NAME + <span class="string">"("</span> +</span><br><span class="line">                        WaitlistContract.WaitlistEntry._ID + <span class="string">" INTEGER PRIMARY KEY AUTOINCREMENT, "</span> +</span><br><span class="line">                        WaitlistContract.WaitlistEntry.COLUMN_GUEST_NAME + <span class="string">" TEXT NOT NULL,"</span> +</span><br><span class="line">                        WaitlistContract.WaitlistEntry.COLUMN_PARTY_SIZE + <span class="string">" INTEGER NOT NULL,"</span> +</span><br><span class="line">                        WaitlistContract.WaitlistEntry.COLUMN_TIMESTAMP + <span class="string">" TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"</span>;</span><br><span class="line">        <span class="comment">// 執行 query</span></span><br><span class="line">        sqLiteDatabase.execSQL(SQL_CREATE_WAITLIST_TABLE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 當有新的版本號時會呼叫 onUpgrade</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(SQLiteDatabase sqLiteDatabase, <span class="keyword">int</span> i, <span class="keyword">int</span> i1)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        sqLiteDatabase.execSQL(<span class="string">"DROP TABLE IF EXISTS "</span> + WaitlistContract.WaitlistEntry.TABLE_NAME + <span class="string">";"</span>);</span><br><span class="line">        onCreate(sqLiteDatabase);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="查詢所有-tuple"><a class="markdownIt-Anchor" href="#查詢所有-tuple"></a> 查詢所有 tuple</h2>
+<p>有了 Contract 和 DBHelper 後，就要在 Activity 中實體化。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> GuestListAdapter mAdapter;</span><br><span class="line">    <span class="comment">// 宣告一個 SQLiteDatabase 變數</span></span><br><span class="line">    SQLiteDatabase mDb;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        RecyclerView waitlistRecyclerView;</span><br><span class="line"></span><br><span class="line">        waitlistRecyclerView = (RecyclerView) <span class="keyword">this</span>.findViewById(R.id.all_guests_list_view);</span><br><span class="line"></span><br><span class="line">        waitlistRecyclerView.setLayoutManager(<span class="keyword">new</span> LinearLayoutManager(<span class="keyword">this</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// new 一個 DbHelper</span></span><br><span class="line">        WaitlistDbHelper dbHelper = <span class="keyword">new</span> WaitlistDbHelper(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 從 DbHelper 取得一個可寫的 DB</span></span><br><span class="line">        mDb = dbHelper.getWritableDatabase();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 取得 Cousor ，並將需要的參數傳入 Adapter 中</span></span><br><span class="line">        Cursor cursor = getAllGuests();</span><br><span class="line">        mAdapter = <span class="keyword">new</span> GuestListAdapter(<span class="keyword">this</span>, cursor);</span><br><span class="line"></span><br><span class="line">        waitlistRecyclerView.setAdapter(mAdapter);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 用 query 取得 Cousor</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Cursor <span class="title">getAllGuests</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mDb.query(</span><br><span class="line">                WaitlistContract.WaitlistEntry.TABLE_NAME,</span><br><span class="line">                <span class="keyword">null</span>,</span><br><span class="line">                <span class="keyword">null</span>,</span><br><span class="line">                <span class="keyword">null</span>,</span><br><span class="line">                <span class="keyword">null</span>,</span><br><span class="line">                <span class="keyword">null</span>,</span><br><span class="line">                WaitlistContract.WaitlistEntry.COLUMN_TIMESTAMP</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Adapter 要依據 Cursor 調整顯示的內容。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GuestListAdapter</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">Adapter</span>&lt;<span class="title">GuestListAdapter</span>.<span class="title">GuestViewHolder</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Context mContext;</span><br><span class="line">    <span class="comment">// 增加一個 member data</span></span><br><span class="line">    <span class="keyword">private</span> Cursor mCursor;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 將新的 member data 加入 constructor 中</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GuestListAdapter</span><span class="params">(Context context, Cursor cursor)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mContext = context;</span><br><span class="line">        <span class="keyword">this</span>.mCursor = cursor;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> GuestViewHolder <span class="title">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="keyword">int</span> viewType)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Get the RecyclerView item layout</span></span><br><span class="line">        LayoutInflater inflater = LayoutInflater.from(mContext);</span><br><span class="line">        View view = inflater.inflate(R.layout.guest_list_item, parent, <span class="keyword">false</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> GuestViewHolder(view);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 將資料放入 View 中</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(GuestViewHolder holder, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">this</span>.mCursor.moveToPosition(position))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        String name = mCursor.getString(mCursor.getColumnIndex(WaitlistContract.WaitlistEntry.COLUMN_GUEST_NAME));</span><br><span class="line">        <span class="keyword">int</span> partySize = mCursor.getInt(mCursor.getColumnIndex(WaitlistContract.WaitlistEntry.COLUMN_PARTY_SIZE));</span><br><span class="line">        holder.nameTextView.setText(name);</span><br><span class="line">        holder.partySizeTextView.setText(String.valueOf(partySize));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getItemCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.mCursor.getCount();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">GuestViewHolder</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ViewHolder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        TextView nameTextView;</span><br><span class="line">        TextView partySizeTextView;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">GuestViewHolder</span><span class="params">(View itemView)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>(itemView);</span><br><span class="line">            nameTextView = (TextView) itemView.findViewById(R.id.name_text_view);</span><br><span class="line">            partySizeTextView = (TextView) itemView.findViewById(R.id.party_size_text_view);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="透過-edittext-新增-tuple"><a class="markdownIt-Anchor" href="#透過-edittext-新增-tuple"></a> 透過 EditText 新增 Tuple</h2>
+<p>我們可以在 MainActivity 增加 EditText 讓使用者輸入排隊客人的名稱和人數，並將資料傳到資料庫。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> GuestListAdapter mAdapter;</span><br><span class="line">    <span class="keyword">private</span> SQLiteDatabase mDb;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 宣告 EditText 變數</span></span><br><span class="line">    EditText mNewGuestNameEditText, mNewPartySizeEditText;</span><br><span class="line"></span><br><span class="line">    String LOG_TAG = MainActivity<span class="class">.<span class="keyword">class</span>.<span class="title">getSimpleName</span>()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        RecyclerView waitlistRecyclerView;</span><br><span class="line"></span><br><span class="line">        waitlistRecyclerView = (RecyclerView) <span class="keyword">this</span>.findViewById(R.id.all_guests_list_view);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 取得 EditText 實體</span></span><br><span class="line">        mNewGuestNameEditText = (EditText) findViewById(R.id.person_name_edit_text);</span><br><span class="line">        mNewPartySizeEditText = (EditText) findViewById(R.id.party_count_edit_text);</span><br><span class="line"></span><br><span class="line">        waitlistRecyclerView.setLayoutManager(<span class="keyword">new</span> LinearLayoutManager(<span class="keyword">this</span>));</span><br><span class="line"></span><br><span class="line">        WaitlistDbHelper dbHelper = <span class="keyword">new</span> WaitlistDbHelper(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">        mDb = dbHelper.getWritableDatabase();</span><br><span class="line"></span><br><span class="line">        Cursor cursor = getAllGuests();</span><br><span class="line"></span><br><span class="line">        mAdapter = <span class="keyword">new</span> GuestListAdapter(<span class="keyword">this</span>, cursor);</span><br><span class="line"></span><br><span class="line">        waitlistRecyclerView.setAdapter(mAdapter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 宣告一個新增資料到資料庫的 function</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">long</span> <span class="title">addNewGuest</span><span class="params">(String name, <span class="keyword">int</span> partySize)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 宣告一個 ContentValues 實體</span></span><br><span class="line">        ContentValues cv = <span class="keyword">new</span> ContentValues();</span><br><span class="line">        <span class="comment">// 將資料放進對應欄位</span></span><br><span class="line">        cv.put(WaitlistContract.WaitlistEntry.COLUMN_GUEST_NAME, name);</span><br><span class="line">        cv.put(WaitlistContract.WaitlistEntry.COLUMN_PARTY_SIZE, partySize);</span><br><span class="line">        <span class="comment">// 將資料傳到資料庫</span></span><br><span class="line">        <span class="keyword">return</span> mDb.insert(WaitlistContract.WaitlistEntry.TABLE_NAME, <span class="keyword">null</span>, cv);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 宣告一個點擊新增按鈕時會觸發的 function</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addToWaitlist</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 若 EditText 為空則 return</span></span><br><span class="line">        <span class="keyword">if</span>(mNewPartySizeEditText.getText().length() == <span class="number">0</span> || mNewGuestNameEditText.getText().length() == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> partySize = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 檢查人數是否為整數</span></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            partySize = Integer.parseInt(mNewPartySizeEditText.getText().toString());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">            Log.e(LOG_TAG, <span class="string">"Failed to parse party size to integer: "</span> + e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 呼叫 addNewGuest</span></span><br><span class="line">        addNewGuest(mNewGuestNameEditText.getText().toString(), partySize);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 更新 Adapter 的 cursor （因為資料有更動）</span></span><br><span class="line">        mAdapter.swapCursor(getAllGuests());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 清除 EditText</span></span><br><span class="line">        mNewGuestNameEditText.getText().clear();</span><br><span class="line">        mNewPartySizeEditText.getText().clear();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="透過滑動刪除-tuple"><a class="markdownIt-Anchor" href="#透過滑動刪除-tuple"></a> 透過滑動刪除 Tuple</h2>
+<p>接下來的部分是讓使用者透過滑動來刪除項目。<br />
+首先我們可以在 Adapter 的 onBindViewHolder 中用 setTag 將畫面上的項目編上 id 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(GuestViewHolder holder, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!mCursor.moveToPosition(position))</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    String name = mCursor.getString(mCursor.getColumnIndex(WaitlistContract.WaitlistEntry.COLUMN_GUEST_NAME));</span><br><span class="line">    <span class="keyword">int</span> partySize = mCursor.getInt(mCursor.getColumnIndex(WaitlistContract.WaitlistEntry.COLUMN_PARTY_SIZE));</span><br><span class="line">    holder.nameTextView.setText(name);</span><br><span class="line">    holder.partySizeTextView.setText(String.valueOf(partySize));</span><br><span class="line">    <span class="comment">// 取出 cursor 目前指到的 tuple 的 id</span></span><br><span class="line">    <span class="keyword">long</span> id = mCursor.getLong(mCursor.getColumnIndex(WaitlistContract.WaitlistEntry._ID));</span><br><span class="line">    <span class="comment">// 用 setTag 將 id 放在 itemView 上</span></span><br><span class="line">    holder.itemView.setTag(id);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>在 MainActivity 中定義一個刪除資料的 function 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 刪除資料庫中特定 id 的資料</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> id 資料的 id</span></span><br><span class="line"><span class="comment">* <span class="doctag">@return</span> 是否刪除成功</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">removeGuest</span><span class="params">(Long id)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> mDb.delete(WaitlistContract.WaitlistEntry.TABLE_NAME, WaitlistContract.WaitlistEntry._ID +<span class="string">"="</span>+id,<span class="keyword">null</span>)&gt;<span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>並在 onCreate 中用 ItemTouchHelper 來處理滑動。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">new</span> ItemTouchHelper(<span class="keyword">new</span> ItemTouchHelper.SimpleCallback(<span class="number">0</span>, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 用不到所以 return false</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onMove</span><span class="params">(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 滑動時觸發的內容</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSwiped</span><span class="params">(RecyclerView.ViewHolder viewHolder, <span class="keyword">int</span> direction)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 取得放在 itemView 中的 id</span></span><br><span class="line">        <span class="keyword">long</span> id = (<span class="keyword">long</span>) viewHolder.itemView.getTag();</span><br><span class="line">        <span class="comment">// 呼叫 removeGuest</span></span><br><span class="line">        removeGuest(id);</span><br><span class="line">        <span class="comment">// 更新 Cursor</span></span><br><span class="line">        mAdapter.swapCursor(getAllGuests());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 將 ItemTouchHelper 綁到 RecyclerView</span></span><br><span class="line">&#125;).attachToRecyclerView(waitlistRecyclerView);</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/TechBlog/tags/Android/" rel="tag"># Android</a>
+              <a href="/TechBlog/tags/w3HexSchool/" rel="tag"># w3HexSchool</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/04/14/20200414-udacity-ud851-01/" rel="prev" title="Udacity | Developing Android Apps | 01 Create Project Sunshine 課程筆記">
+      <i class="fa fa-chevron-left"></i> Udacity | Developing Android Apps | 01 Create Project Sunshine 課程筆記
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#章節目標"><span class="nav-number">1.</span> <span class="nav-text"> 章節目標</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#contract"><span class="nav-number">2.</span> <span class="nav-text"> Contract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sqliteopenhelper"><span class="nav-number">3.</span> <span class="nav-text"> SQLiteOpenHelper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查詢所有-tuple"><span class="nav-number">4.</span> <span class="nav-text"> 查詢所有 tuple</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#透過-edittext-新增-tuple"><span class="nav-number">5.</span> <span class="nav-text"> 透過 EditText 新增 Tuple</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#透過滑動刪除-tuple"><span class="nav-number">6.</span> <span class="nav-text"> 透過滑動刪除 Tuple</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://clhuang224.github.io/TechBlog/2020/05/20/20200520-udacity-ud851-06-5/";
+    this.page.identifier = "2020/05/20/20200520-udacity-ud851-06-5/";
+    this.page.title = "Udacity | Developing Android Apps | 在 SQLite 中存儲數據 課程筆記";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lynns-techblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
