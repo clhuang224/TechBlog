@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文為觀看六角學院「JavaScript 入門篇 - 學徒的試煉」的筆記。 由於前半段章節為程式基本觀念，所以只會紀錄一些關鍵字。  本文使用不少 Codepen 嵌入區塊，瀏覽器可能會很卡，請讓它跑XD&quot;   Visual Studio Code 使用 VScode 作為開發環境，其內建 JS 的 Emmet 。 如果希望撰寫 JavaScript 時能有 HTML 或其他語言的快捷效">
+<meta property="og:type" content="article">
+<meta property="og:title" content="六角學院 JavaScript 入門篇 課程筆記">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2019/05/22/20190522-hex-javascript/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="本文為觀看六角學院「JavaScript 入門篇 - 學徒的試煉」的筆記。 由於前半段章節為程式基本觀念，所以只會紀錄一些關鍵字。  本文使用不少 Codepen 嵌入區塊，瀏覽器可能會很卡，請讓它跑XD&quot;   Visual Studio Code 使用 VScode 作為開發環境，其內建 JS 的 Emmet 。 如果希望撰寫 JavaScript 時能有 HTML 或其他語言的快捷效">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/05/22/20190522-hex-javascript/01.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/05/22/20190522-hex-javascript/02.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/05/22/20190522-hex-javascript/03.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/05/22/20190522-hex-javascript/04.png">
+<meta property="article:published_time" content="2019-05-22T14:34:50.000Z">
+<meta property="article:modified_time" content="2025-05-03T07:28:08.774Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://clhuang224.github.io/TechBlog/2019/05/22/20190522-hex-javascript/01.png">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/2019/05/22/20190522-hex-javascript/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>六角學院 JavaScript 入門篇 課程筆記 | Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2019/05/22/20190522-hex-javascript/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          六角學院 JavaScript 入門篇 課程筆記
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-05-22 22:34:50" itemprop="dateCreated datePublished" datetime="2019-05-22T22:34:50+08:00">2019-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E7%B7%9A%E4%B8%8A%E8%AA%B2%E7%A8%8B%E8%A7%80%E7%9C%8B%E7%AD%86%E8%A8%98/" itemprop="url" rel="index"><span itemprop="name">線上課程觀看筆記</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2019/05/22/20190522-hex-javascript/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/22/20190522-hex-javascript/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文為觀看六角學院「<a target="_blank" rel="noopener" href="https://www.udemy.com/javascript-learning/">JavaScript 入門篇 - 學徒的試煉</a>」的筆記。<br />
+由於前半段章節為程式基本觀念，所以只會紀錄一些關鍵字。</p>
+<blockquote>
+<p>本文使用不少 Codepen 嵌入區塊，瀏覽器可能會很卡，請讓它跑XD&quot;</p>
+</blockquote>
+<h2 id="visual-studio-code"><a class="markdownIt-Anchor" href="#visual-studio-code"></a> <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Visual Studio Code</a></h2>
+<p>使用 VScode 作為開發環境，其內建 JS 的 Emmet 。<br />
+如果希望撰寫 JavaScript 時能有 HTML 或其他語言的快捷效果，可以到 File &gt; Preference &gt; Setting &gt; Extensions &gt; Emmet &gt; setting.json 中加上下面的設定：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;emmet.triggerExpansionOnTab&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;emmet.includeLanguages&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;javascript&quot;</span><span class="punctuation">:</span> <span class="string">&quot;javascriptreact&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;vue-html&quot;</span><span class="punctuation">:</span> <span class="string">&quot;html&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;plaintext&quot;</span><span class="punctuation">:</span> <span class="string">&quot;jade&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>六角的介紹影片：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ZkDM77ZPkEo">VSCode 介紹 - 編譯 Sass、除錯、插件介紹</a></p>
+</blockquote>
+<span id="more"></span>
+<h2 id="variable"><a class="markdownIt-Anchor" href="#variable"></a> Variable</h2>
+<ul>
+<li>宣告變數
+<ul>
+<li>var：作用域在 function 中的變數，不建議使用。</li>
+<li>let：作用域在 block 中的變數</li>
+<li>const：常數</li>
+</ul>
+</li>
+<li>未賦值的型別為 undefined</li>
+</ul>
+<blockquote>
+<p>如果用 const 宣告陣列或物件，由於陣列和物件是 call by reference ，裡面的內容依然可以被修改。希望內容不能被修改的話可以使用 Object.freeze( 變數 ) 。</p>
+</blockquote>
+<h2 id="function"><a class="markdownIt-Anchor" href="#function"></a> Function</h2>
+<h3 id="hoisting"><a class="markdownIt-Anchor" href="#hoisting"></a> Hoisting</h3>
+<ul>
+<li>函式跟 var 宣告（不包含賦值）會提升到作用域的最上面</li>
+<li>函式優先於變數</li>
+</ul>
+<blockquote>
+<p>參考文章：<a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2018/11/10/javascript-hoisting/">TechBridge 技術共筆部落格《我知道你懂 hoisting，可是你了解到多深？》</a></p>
+</blockquote>
+<h2 id="loop"><a class="markdownIt-Anchor" href="#loop"></a> Loop</h2>
+<h3 id="json"><a class="markdownIt-Anchor" href="#json"></a> <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/JSON">JSON</a>格式</h3>
+<blockquote>
+<p>利用JSON格式的資料做迴圈的練習。</p>
+</blockquote>
+<ul>
+<li>練習資源：
+<ul>
+<li><a target="_blank" rel="noopener" href="https://data.gov.tw/">政府資料開放平台</a></li>
+<li><a target="_blank" rel="noopener" href="https://opendata.epa.gov.tw/">行政院環境保護署。環境資源資料開放平臺</a></li>
+<li><a target="_blank" rel="noopener" href="https://data.taipei/index">台北市政府資料開放平台</a></li>
+<li><a target="_blank" rel="noopener" href="https://data.kcg.gov.tw/">高雄市政府資料開放平台</a></li>
+</ul>
+<blockquote>
+<p>各縣市大概都有自己的資源。</p>
+</blockquote>
+</li>
+<li>美化格式相關插件：
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/callumlocke/json-formatter">JSON Formatter</a></li>
+<li><a target="_blank" rel="noopener" href="https://jsonview.com/">JSONView</a>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="組字串小技巧"><a class="markdownIt-Anchor" href="#組字串小技巧"></a> 組字串小技巧</h3>
+<p>在字串中需要放入變數的話可以用以下方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;小明&#x27;</span></span><br><span class="line"><span class="keyword">let</span> string = <span class="string">`&lt;div&gt;</span></span><br><span class="line"><span class="string">                我的名字是<span class="subst">$&#123;name&#125;</span>。</span></span><br><span class="line"><span class="string">              &lt;/div&gt;`</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="dom"><a class="markdownIt-Anchor" href="#dom"></a> DOM</h2>
+<h3 id="什麼是dom"><a class="markdownIt-Anchor" href="#什麼是dom"></a> 什麼是DOM</h3>
+<p><a target="_blank" rel="noopener" href="https://www.wibibi.com/info.php?tid=379">Wibibi網頁設計教學百科：W3C DOM</a></p>
+<h3 id="選取-dom-節點"><a class="markdownIt-Anchor" href="#選取-dom-節點"></a> 選取 DOM 節點</h3>
+<ul>
+<li>.getElementById(/<em>id</em>/)</li>
+<li>.getElementsByClassName(/<em>class</em>/)</li>
+<li>.getElementsByName(/<em>name</em>/)</li>
+<li>.getElementsByTagName(/<em>HTML tag</em>/)</li>
+<li>.querySelector(/<em>selector</em>/)：回傳第一筆</li>
+<li>.querySelectorAll(/<em>selector</em>/)：回傳陣列</li>
+</ul>
+<h3 id="新增-dom-節點"><a class="markdownIt-Anchor" href="#新增-dom-節點"></a> 新增 DOM 節點</h3>
+<ul>
+<li>innerHTML：利用文字直接新增 HTML 原始碼，效能較佳</li>
+<li>createElement() + appendChild()：新增節點物件，安全性較佳</li>
+</ul>
+<blockquote>
+<p>相關知識：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%B7%A8%E7%B6%B2%E7%AB%99%E6%8C%87%E4%BB%A4%E7%A2%BC">跨網站指令碼 - 維基百科，自由的百科全書</a></p>
+</blockquote>
+<h2 id="event"><a class="markdownIt-Anchor" href="#event"></a> Event</h2>
+<h3 id="什麼是event"><a class="markdownIt-Anchor" href="#什麼是event"></a> 什麼是Event</h3>
+<p>一些發生在 HTML 元素中的狀況稱為事件， JavaScript 可以針對這些事件做出反應。<br />
+事件有可能是瀏覽器或使用者引起的，例如點擊滑鼠、輸入文字等。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.w3schools.com/js/js_events.asp">W3schools - JavaScript Events</a></p>
+</blockquote>
+<p>可以藉由參數來接收 Event object ，觀察並使用裡面的屬性。<br />
+<img src="01.png" alt="事件物件" /></p>
+<h3 id="事件綁定"><a class="markdownIt-Anchor" href="#事件綁定"></a> 事件綁定</h3>
+<p>建議使用 <a target="_blank" rel="noopener" href="https://www.w3schools.com/jsref/met_element_addeventlistener.asp">addEventListener()</a> 在 HTML 元素上綁定事件。<br />
+因為像 onclick 只能綁定一個事件，而 eventListener 可以綁定多個。<br />
+Onclick 等屬性也可以寫在 HTML 標籤裡，但缺乏彈性也不夠安全。</p>
+<h3 id="event-capturing-bubbling"><a class="markdownIt-Anchor" href="#event-capturing-bubbling"></a> Event Capturing / Bubbling</h3>
+<p>addEventListener 的第三個參數， true 時為 Event Capturing ， false 為 Event Bubbling 。前者會讓監聽由外往內，後者是由內往外。</p>
+<p class="codepen" data-height="212" data-theme-id="0" data-default-tab="result" data-user="clhuang224" data-slug-hash="gNEKqr" style="height: 212px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="JavaScript 10.89 Event Capturing / Bubbling">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/gNEKqr/">
+  JavaScript 10.89 Event Capturing / Bubbling</a> by C.L.Huang (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>使用 event.stopPropagation() 可以停止冒泡事件，使監聽只發生在該事件作用的對象上。可以用 event.target.nodeName 得知事件作用的標籤名稱。<br />
+另外 event.preventDefault() 則是取消預設行為，例如點選連結會自動跳到頁面最上方。</p>
+<h3 id="常見應用"><a class="markdownIt-Anchor" href="#常見應用"></a> 常見應用</h3>
+<p>除了 click 以外，還有許多常見的應用。</p>
+<h4 id="change"><a class="markdownIt-Anchor" href="#change"></a> Change</h4>
+<p>當 element 被改變時觸發的事件；例如 &lt;select&gt; 被選到新選項時就會觸發。</p>
+<p class="codepen" data-height="358" data-theme-id="0" data-default-tab="js,result" data-user="clhuang224" data-slug-hash="BgeZZQ" style="height: 358px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="JavaScript change 事件練習">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/BgeZZQ/">
+  JavaScript change 事件練習</a> by C.L.Huang (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h4 id="keycode"><a class="markdownIt-Anchor" href="#keycode"></a> KeyCode</h4>
+<p>藉由鍵盤事件中的 keyCode 屬性，來做出不同的反應。<br />
+例如用上下左右鍵控制元素。</p>
+<p class="codepen" data-height="529" data-theme-id="0" data-default-tab="js,result" data-user="clhuang224" data-slug-hash="KjjLOz" style="height: 529px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="JavaScript keyCode 、 Canvas 練習">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/KjjLOz/">
+  JavaScript keyCode 、 Canvas 練習</a> by C.L.Huang (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h4 id="focus-blur"><a class="markdownIt-Anchor" href="#focus-blur"></a> Focus / Blur</h4>
+<p>藉由焦點改變事件做出不同的反應，例如表單驗證。</p>
+<p class="codepen" data-height="242" data-theme-id="0" data-default-tab="js,result" data-user="clhuang224" data-slug-hash="WqVrZM" style="height: 242px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="JavaScript Blur 、 Focus 疑問">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/WqVrZM/">
+  JavaScript Blur 、 Focus 疑問</a> by C.L.Huang (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h4 id="mousemove"><a class="markdownIt-Anchor" href="#mousemove"></a> Mousemove</h4>
+<p>可以設計滑鼠移動到元素上時的反應。</p>
+<p class="codepen" data-height="481" data-theme-id="0" data-default-tab="result" data-user="clhuang224" data-slug-hash="MMNJYb" style="height: 481px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="JavaScript Mousemove 練習">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/MMNJYb/">
+  JavaScript Mousemove 練習</a> by C.L.Huang (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>mouseEvent 裡面包含不同的座標，其基準點有所差異：</p>
+<ul>
+<li>screenX/Y ：以螢幕左上角為基準</li>
+<li>clientX/Y ：以瀏覽器左上角為基準</li>
+<li>pageX/Y ：以網頁左上角為基準</li>
+</ul>
+<p>用 position:fixed 的特性讓元素跟著滑鼠走：</p>
+<p class="codepen" data-height="445" data-theme-id="0" data-default-tab="result" data-user="clhuang224" data-slug-hash="KONyeg" style="height: 445px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="JavaScript 滑鼠座標應用">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/KONyeg/">
+  JavaScript 滑鼠座標應用</a> by C.L.Huang (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3 id="大範圍監聽"><a class="markdownIt-Anchor" href="#大範圍監聽"></a> 大範圍監聽</h3>
+<p>如果有一堆東西要監聽，可以監聽父元素，並在綁定的 function 中判斷作用對象，讓程式碼更簡潔。<br />
+判斷事件作用的節點可以看 nodeName 屬性，它代表節點的名稱，比 tagName 提供更多資訊。</p>
+<h2 id="local-storage"><a class="markdownIt-Anchor" href="#local-storage"></a> Local Storage</h2>
+<p>Local storage 是 HTML5 提供的本地儲存空間，只要沒有特意去刪除，會一直存在在電腦中。<br />
+想要查看各網域使用 local storage 的情形，可以看開發者工具：</p>
+<p><img src="02.png" alt="查看 Local Storage" /></p>
+<p>關於 local storage /session storage/ coockie ，以下兩篇文章介紹得很清楚：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.runoob.com/jsref/prop-win-localstorage.html">Window localStorage 属性 | 菜鸟教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://jerryzou.com/posts/cookie-and-web-storage/?source=post_page---------------------------">详说 Cookie, LocalStorage 与 SessionStorage | 咀嚼之味</a></li>
+</ul>
+<h3 id="儲存-讀取"><a class="markdownIt-Anchor" href="#儲存-讀取"></a> 儲存 / 讀取</h3>
+<p>將資料儲存到 local storage 及取出的方法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 儲存</span></span><br><span class="line"><span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>(key, value);</span><br><span class="line"><span class="variable language_">localStorage</span>.<span class="property">key</span> = value;</span><br><span class="line"><span class="variable language_">localStorage</span>[key] = value;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 讀取</span></span><br><span class="line"><span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(key);</span><br><span class="line"><span class="variable language_">localStorage</span>.<span class="property">key</span>;</span><br><span class="line"><span class="variable language_">localStorage</span>[key];</span><br></pre></td></tr></table></figure>
+<p>如果資料是陣列，需要轉換成JSON格式；取出後也要轉回來才能使用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;阿明&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">100</span>,</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 儲存</span></span><br><span class="line"><span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>(key, <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(arr));</span><br><span class="line"><span class="comment">// 讀取</span></span><br><span class="line">arr = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;keyName&#x27;</span>));</span><br></pre></td></tr></table></figure>
+<p>另外關於 array 的操作可以參考這篇：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array">Array - JavaScript | MDN</a></p>
+<h3 id="html5-data-屬性"><a class="markdownIt-Anchor" href="#html5-data-屬性"></a> HTML5 data-* 屬性</h3>
+<p>當需要特別標記 HTML 元素時（例如撲克牌有自己的花色、顏色，放在 class 又很難用時……），可以用 data-* 自訂屬性；用法如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">data-color</span>=<span class="string">&quot;black&quot;</span> <span class="attr">data-suit</span>=<span class="string">&quot;spade&quot;</span> <span class="attr">data-number</span>=<span class="string">&quot;1&quot;</span> <span class="attr">id</span>=<span class="string">&quot;spade1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;card&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在 JavaScript 中要使用的時候用 .dataset 就可以取得自訂屬性的 list ，再選擇需要的屬性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取出黑桃一的花色</span></span><br><span class="line">documant.<span class="title function_">querySelector</span>(<span class="string">&#x27;#spade1&#x27;</span>).<span class="property">dataset</span>.<span class="property">suit</span>;</span><br></pre></td></tr></table></figure>
+<p>在 CSS 中利用中括號來選擇帶有特定屬性的元素：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.card</span><span class="selector-attr">[data-color=<span class="string">&quot;black&quot;</span>]</span>&#123;</span><br><span class="line">  <span class="attribute">color</span>: black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>參考文章：<a target="_blank" rel="noopener" href="https://pjchender.blogspot.com/2017/01/html-5-data-attribute.html">什麼是 HTML 5 中的資料屬性（data-* attribute） ~ PJCHENder</a></p>
+</blockquote>
+<h3 id="to-do-list-範例"><a class="markdownIt-Anchor" href="#to-do-list-範例"></a> To-do list 範例</h3>
+<p>可以將待辦事項存入 local storage 中，讓使用者每次開啟網頁仍能讀取上次的內容。</p>
+<p class="codepen" data-height="315" data-theme-id="0" data-default-tab="result" data-user="clhuang224" data-slug-hash="eqBQMv" style="height: 315px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="JavaScript 簡易備忘">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/eqBQMv/">
+  JavaScript 簡易備忘</a> by C.L.Huang (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h2 id="bom"><a class="markdownIt-Anchor" href="#bom"></a> BOM</h2>
+<p>參考文章：<br />
+<a target="_blank" rel="noopener" href="https://www.happycoding.today/posts/43">JavaScript入門系列：BOM和DOM筆記 | 快樂學程式</a></p>
+<p>Browser Object Model 是一個以物件達成 JavaScript 與瀏覽器溝通的結構，各家瀏覽器有著不同的實作，沒有統一的規範。其中最上層的全域物件為 window ，內有許多 member data 和 method 。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">sreen</span>; <span class="comment">// 當下螢幕尺寸</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span>; <span class="comment">// 當下網址</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="property">navigator</span>.<span class="property">onLine</span>; <span class="comment">// 當下是否連網</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="property">frames</span>; <span class="comment">// 與框架相關的操作</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="property">history</span>; <span class="comment">// 與瀏覽紀錄相關的操作</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">print</span>(); <span class="comment">// 列印</span></span><br></pre></td></tr></table></figure>
+<h3 id="historyback-forward"><a class="markdownIt-Anchor" href="#historyback-forward"></a> history.back() / .forward()</h3>
+<p>可以利用 history 中的 forward() 和 back() 製作上 / 下一頁的功能，其會自動跳到使用者離開的位置。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#backButton&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>,<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="property">history</span>.<span class="title function_">back</span>();</span><br><span class="line">  <span class="comment">// = window.history.go(-1);</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#forwardButton&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>,<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="property">history</span>.<span class="title function_">forward</span>();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="windowopen"><a class="markdownIt-Anchor" href="#windowopen"></a> <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/open">window.open()</a></h3>
+<p>除了將 location.href 直接更改，在當前視窗跳轉到特定網頁以外，開啟新分頁。與 &lt;a&gt; 不同的地方在於使用者無法按右鍵複製網址，適合用在較隱私的資料上。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">open</span>(strUrl, strWindowName, [strWindowFeatures]);</span><br></pre></td></tr></table></figure>
+<h3 id="滿版效果"><a class="markdownIt-Anchor" href="#滿版效果"></a> 滿版效果</h3>
+<p>利用 innerHeight 的值與 resize 事件，使進站畫面恆為滿版：</p>
+<p class="codepen" data-height="253" data-theme-id="0" data-default-tab="js,result" data-user="clhuang224" data-slug-hash="bXBaRq" style="height: 253px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="JavaScript 動態滿版效果">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/bXBaRq/">
+  JavaScript 動態滿版效果</a> by C.L.Huang (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h2 id="ajax"><a class="markdownIt-Anchor" href="#ajax"></a> AJAX</h2>
+<h3 id="什麼是ajax"><a class="markdownIt-Anchor" href="#什麼是ajax"></a> 什麼是AJAX</h3>
+<p>Asynchronous JavaScript and XML 簡稱為 AJAX ，為　2005 年時由 Jesse James Garrett 所發明的術語，描述一種使用數個既有技術的方法。這些技術包括 HTML 或 XHTML 、 CSS 、 JavaScript 、 DOM 、 XML 、 XSLT 以及最重要的 XMLHttpRequest 物件。透過這些技術向伺服器請求所需的資料，能快速、即時更動介面及內容，不需要重新讀取整個網頁，讓程式更快回應使用者的操作。雖然其名稱包含 XML ，但實際上資料格式可以由 JSON 代替，進一步減少資料量，即為 AJAJ （ asynchronous JavaScript and JSON ）。</p>
+<blockquote>
+<p>參考文章：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/Guide/AJAX">Ajax - Web 開發者指引 | MDN</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/AJAX">AJAX - 維基百科，自由的百科全書</a></li>
+</ul>
+</blockquote>
+<h3 id="xmlhttprequest"><a class="markdownIt-Anchor" href="#xmlhttprequest"></a> <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a></h3>
+<p>可以透過 XMLHttpRequest 物件實現 AJAX 的概念。</p>
+<h4 id="基本操作"><a class="markdownIt-Anchor" href="#基本操作"></a> 基本操作</h4>
+<p>首先宣告一個物件，用 open() 指定 request 類型、位址和是否同步。<br />
+如果 request 為 POST ，就需要用setRequestHeader() 在 request 表頭裡加上一些內容。<br />
+接著用 send() 將 request 送出。<br />
+可以利用 .onload 指定 load 事件（資料下載完畢）時要觸發的 function 。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&#x27;Request 類型&#x27;</span>,<span class="string">&#x27;網址&#x27;</span>,<span class="literal">true</span>);</span><br><span class="line">xhr.<span class="title function_">setRequestHeader</span>(<span class="string">&#x27;key&#x27;</span>,<span class="string">&#x27;value&#x27;</span>);</span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="literal">null</span>);</span><br><span class="line">xhr.<span class="property">onload</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="ready-state"><a class="markdownIt-Anchor" href="#ready-state"></a> Ready State</h4>
+<p>.readyState 可以看出物件目前的狀態：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">值</th>
+<th style="text-align:center">狀態</th>
+<th>意義</th>
+<th>可以做的事</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">UNSENT</td>
+<td>物件已建立。</td>
+<td>呼叫 open() ，指定存取方式、位址及是否同步。</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">OPENED</td>
+<td>已呼叫 open() 。</td>
+<td>呼叫 setRequestHeader() 設定表頭。</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">HEADERS_RECEIVED</td>
+<td>已呼叫 send() ，且收到回應表頭（ response header ）。</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">LOADING</td>
+<td>下載回應資料中。</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">DONE</td>
+<td>操作完成，可能成功或失敗。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><img src="03.png" alt="readyState" /></p>
+<blockquote>
+<p>參考文章： <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/XMLHttpRequest/readyState">XMLHttpRequest.readyState - Web APIs | MDN</a> 。</p>
+</blockquote>
+<h4 id="status"><a class="markdownIt-Anchor" href="#status"></a> Status</h4>
+<p>可以從 .status 觀察 HTTP 狀態碼，瞭解資料傳遞的情形。<br />
+在 Chrome 開發人員工具 &gt; Network 中也可以看到各請求的狀態碼。</p>
+<p>參考文章：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/HTTP%E7%8A%B6%E6%80%81%E7%A0%81">HTTP狀態碼 - 維基百科，自由的百科全書</a></p>
+<h4 id="content-type"><a class="markdownIt-Anchor" href="#content-type"></a> Content Type</h4>
+<p>依據後端的需求， Request header 裡可以用 Content-type 指定不同的資料格式，傳送資料時就要使用指定格式的字串。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Content-type</th>
+<th style="text-align:center">資料字串</th>
+<th style="text-align:center">備註</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">application/x-www-form-urlencoded</td>
+<td style="text-align:center">‘key=value&amp;key=value’</td>
+<td style="text-align:center">&lt;form&gt; 預設的傳送方式。</td>
+</tr>
+<tr>
+<td style="text-align:center">application/json</td>
+<td style="text-align:center">JSON.stringify( 變數 )</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="用開發人員工具觀察封包"><a class="markdownIt-Anchor" href="#用開發人員工具觀察封包"></a> 用開發人員工具觀察封包</h4>
+<p>從 Chrome 開發人員工具 &gt; Network 中可以看到網頁所傳遞的資料，點開來可以觀察 Request 和 Response 的內容。</p>
+<p><img src="04.png" alt="封包" /></p>
+<h4 id="get-範例"><a class="markdownIt-Anchor" href="#get-範例"></a> GET 範例</h4>
+<p class="codepen" data-height="346" data-theme-id="0" data-default-tab="js,result" data-user="clhuang224" data-slug-hash="MNQXKx" style="height: 346px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="JavaScript XMLHttpRequest 練習">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/MNQXKx/">
+  JavaScript XMLHttpRequest 練習</a> by C.L.Huang (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h4 id="post-範例"><a class="markdownIt-Anchor" href="#post-範例"></a> POST 範例</h4>
+<p class="codepen" data-height="373" data-theme-id="0" data-default-tab="result" data-user="clhuang224" data-slug-hash="rXdWLb" style="height: 373px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="JavaScript XTMLHttpRequest POST 練習">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/rXdWLb/">
+  JavaScript XTMLHttpRequest POST 練習</a> by C.L.Huang (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3 id="cors"><a class="markdownIt-Anchor" href="#cors"></a> CORS</h3>
+<p>Cross-Origin Resource Sharing 是一種存取跨網域資料的機制。一般來說由於資安的考量， XMLHttpRequest 遵守 same-origin policy ，而只能存取同網域的資料；如果要存取跨網域的資料，就需要 CORS 。</p>
+<p>Request 有可能會因為後端沒有提供跨網域共享，而存取失敗。可以用 <a target="_blank" rel="noopener" href="http://www.test-cors.org">test-cors.org</a> 網站測試遠端資料是否開放跨網域存取。</p>
+<blockquote>
+<p>參考文章：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/CORS">跨來源資源共用（CORS） - HTTP | MDN</a></li>
+<li><a target="_blank" rel="noopener" href="https://noob.tw/js-cors/">解決 AJAX 沒辦法取得 CORS（跨網域存取）資料的問題</a>。</li>
+</ul>
+</blockquote>
+<h2 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h2>
+<p>用 ECMAScript 6 的語法可能會有相容性的問題，可以用 <a target="_blank" rel="noopener" href="https://babeljs.io/">Babel</a> 編譯成具相容性的語法。</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/TechBlog/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TechBlog/2019/02/07/20190207-hex-jquery/" rel="prev" title="六角學院 jQuery 課程筆記">
+      <i class="fa fa-chevron-left"></i> 六角學院 jQuery 課程筆記
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/" rel="next" title="F2E 2nd 第一關「蕃茄鐘」 挑戰筆記">
+      F2E 2nd 第一關「蕃茄鐘」 挑戰筆記 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#visual-studio-code"><span class="nav-number">1.</span> <span class="nav-text"> Visual Studio Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#variable"><span class="nav-number">2.</span> <span class="nav-text"> Variable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#function"><span class="nav-number">3.</span> <span class="nav-text"> Function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hoisting"><span class="nav-number">3.1.</span> <span class="nav-text"> Hoisting</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loop"><span class="nav-number">4.</span> <span class="nav-text"> Loop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#json"><span class="nav-number">4.1.</span> <span class="nav-text"> JSON格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B5%84%E5%AD%97%E4%B8%B2%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="nav-number">4.2.</span> <span class="nav-text"> 組字串小技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dom"><span class="nav-number">5.</span> <span class="nav-text"> DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AFdom"><span class="nav-number">5.1.</span> <span class="nav-text"> 什麼是DOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%B8%E5%8F%96-dom-%E7%AF%80%E9%BB%9E"><span class="nav-number">5.2.</span> <span class="nav-text"> 選取 DOM 節點</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E-dom-%E7%AF%80%E9%BB%9E"><span class="nav-number">5.3.</span> <span class="nav-text"> 新增 DOM 節點</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#event"><span class="nav-number">6.</span> <span class="nav-text"> Event</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AFevent"><span class="nav-number">6.1.</span> <span class="nav-text"> 什麼是Event</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%B6%81%E5%AE%9A"><span class="nav-number">6.2.</span> <span class="nav-text"> 事件綁定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#event-capturing-bubbling"><span class="nav-number">6.3.</span> <span class="nav-text"> Event Capturing &#x2F; Bubbling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A6%8B%E6%87%89%E7%94%A8"><span class="nav-number">6.4.</span> <span class="nav-text"> 常見應用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#change"><span class="nav-number">6.4.1.</span> <span class="nav-text"> Change</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#keycode"><span class="nav-number">6.4.2.</span> <span class="nav-text"> KeyCode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#focus-blur"><span class="nav-number">6.4.3.</span> <span class="nav-text"> Focus &#x2F; Blur</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mousemove"><span class="nav-number">6.4.4.</span> <span class="nav-text"> Mousemove</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E7%AF%84%E5%9C%8D%E7%9B%A3%E8%81%BD"><span class="nav-number">6.5.</span> <span class="nav-text"> 大範圍監聽</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#local-storage"><span class="nav-number">7.</span> <span class="nav-text"> Local Storage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%84%B2%E5%AD%98-%E8%AE%80%E5%8F%96"><span class="nav-number">7.1.</span> <span class="nav-text"> 儲存 &#x2F; 讀取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#html5-data-%E5%B1%AC%E6%80%A7"><span class="nav-number">7.2.</span> <span class="nav-text"> HTML5 data-* 屬性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#to-do-list-%E7%AF%84%E4%BE%8B"><span class="nav-number">7.3.</span> <span class="nav-text"> To-do list 範例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bom"><span class="nav-number">8.</span> <span class="nav-text"> BOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#historyback-forward"><span class="nav-number">8.1.</span> <span class="nav-text"> history.back() &#x2F; .forward()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#windowopen"><span class="nav-number">8.2.</span> <span class="nav-text"> window.open()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%BF%E7%89%88%E6%95%88%E6%9E%9C"><span class="nav-number">8.3.</span> <span class="nav-text"> 滿版效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ajax"><span class="nav-number">9.</span> <span class="nav-text"> AJAX</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AFajax"><span class="nav-number">9.1.</span> <span class="nav-text"> 什麼是AJAX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xmlhttprequest"><span class="nav-number">9.2.</span> <span class="nav-text"> XMLHttpRequest</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">9.2.1.</span> <span class="nav-text"> 基本操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ready-state"><span class="nav-number">9.2.2.</span> <span class="nav-text"> Ready State</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#status"><span class="nav-number">9.2.3.</span> <span class="nav-text"> Status</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#content-type"><span class="nav-number">9.2.4.</span> <span class="nav-text"> Content Type</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E9%96%8B%E7%99%BC%E4%BA%BA%E5%93%A1%E5%B7%A5%E5%85%B7%E8%A7%80%E5%AF%9F%E5%B0%81%E5%8C%85"><span class="nav-number">9.2.5.</span> <span class="nav-text"> 用開發人員工具觀察封包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-%E7%AF%84%E4%BE%8B"><span class="nav-number">9.2.6.</span> <span class="nav-text"> GET 範例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#post-%E7%AF%84%E4%BE%8B"><span class="nav-number">9.2.7.</span> <span class="nav-text"> POST 範例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cors"><span class="nav-number">9.3.</span> <span class="nav-text"> CORS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">10.</span> <span class="nav-text"> 其他</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v8.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://clhuang224.github.io/TechBlog/2019/05/22/20190522-hex-javascript/";
+    this.page.identifier = "2019/05/22/20190522-hex-javascript/";
+    this.page.title = "六角學院 JavaScript 入門篇 課程筆記";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lynns-techblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

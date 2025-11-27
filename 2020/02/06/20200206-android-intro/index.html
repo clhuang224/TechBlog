@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="現代人天天使用行動裝置，如果想要製作一般人都能輕鬆使用的應用程式工具，除了撰寫網頁，行動裝置應用程式也是一個很常見的途徑。本系列文將會介紹使用 Android Studio 整合開發環境及 Java 語言開發 Android 應用程式的相關知識。 本篇我會先介紹 Android 的背景知識。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【 Android 開發入門 01 】什麼是 Android">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2020/02/06/20200206-android-intro/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="現代人天天使用行動裝置，如果想要製作一般人都能輕鬆使用的應用程式工具，除了撰寫網頁，行動裝置應用程式也是一個很常見的途徑。本系列文將會介紹使用 Android Studio 整合開發環境及 Java 語言開發 Android 應用程式的相關知識。 本篇我會先介紹 Android 的背景知識。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/06/20200206-android-intro/01.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/06/20200206-android-intro/02.png">
+<meta property="article:published_time" content="2020-02-06T13:59:12.000Z">
+<meta property="article:modified_time" content="2025-05-03T07:28:08.815Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://clhuang224.github.io/TechBlog/2020/02/06/20200206-android-intro/01.png">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/2020/02/06/20200206-android-intro/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>【 Android 開發入門 01 】什麼是 Android | Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/02/06/20200206-android-intro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【 Android 開發入門 01 】什麼是 Android
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-02-06 21:59:12" itemprop="dateCreated datePublished" datetime="2020-02-06T21:59:12+08:00">2020-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/" itemprop="url" rel="index"><span itemprop="name">系列文章</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/02/06/20200206-android-intro/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/06/20200206-android-intro/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>現代人天天使用行動裝置，如果想要製作一般人都能輕鬆使用的應用程式工具，除了撰寫網頁，行動裝置應用程式也是一個很常見的途徑。本系列文將會介紹使用 Android Studio 整合開發環境及 Java 語言開發 Android 應用程式的相關知識。</p>
+<p>本篇我會先介紹 Android 的背景知識。</p>
+<span id="more"></span>
+<h2 id="android-是什麼"><a class="markdownIt-Anchor" href="#android-是什麼"></a> Android 是什麼</h2>
+<p>Android 是一套以 Linux 為基底的開源作業系統，最初針對手機等行動裝置，現已逐漸擴充到平板、電子書閱讀器及網路電視等領域； Android 的市佔率與 iOS 在伯仲之間。</p>
+<p>Android 開發通常是指開發 Android 作業系統上的應用程式（ App ）。</p>
+<h2 id="安卓以德一段歷史"><a class="markdownIt-Anchor" href="#安卓以德一段歷史"></a> 安卓以德，一段歷史</h2>
+<p>Android 作業系統一開始由 Android, Inc 所開發， 2005 年這家公司被 Google 收購，並與其它相關廠商組成開放式手持裝置聯盟（ Open Handset Alliance ），而成為開源作業系統。</p>
+<p>Android 整合 Google 的多項服務，以權利金及廣告點擊作為獲利來源。 2010 年多家手機廠商使用 Android 系統；隔年 Android 推出針對平板的 3.x 版，使 Android 成為最廣泛使用的手機及平版作業系統之一； 2011 年推出 4.0 版整合手機及平板的系統； 5.0 版成為 64 位元的系統。</p>
+<p>目前 Android 最新版本為第 10 版。</p>
+<blockquote>
+<p>以前 Android 的版本都以按照字母順序的甜點名稱命名，不過到 Android Q 就直接稱為 Android 10 了呢。</p>
+</blockquote>
+<h2 id="整合開發環境"><a class="markdownIt-Anchor" href="#整合開發環境"></a> 整合開發環境</h2>
+<p>Google 最初支援 Eclipse 使用 Android 開發工具（ADT）外掛程式，為主要的整合開發環境。</p>
+<p>2013 年 Google 推出 Android Studio 整合開發環境，為現在大多數人所使用的 Android 開發工具，內含 Android SDK ，包含 debugger 、函式庫、文件、範例程式碼及模擬器等。</p>
+<blockquote>
+<p>什麼是 SDK ：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E5%8C%85">軟體開發套件 - 維基百科，自由的百科全書</a></p>
+</blockquote>
+<h2 id="程式語言"><a class="markdownIt-Anchor" href="#程式語言"></a> 程式語言</h2>
+<p>Android App 可以使用 Java 或 Kotlin 作為開發語言。 Google 在 2017 年宣布 Kotlin 為開發 Android 優先的程式語言。</p>
+<p>這邊我選擇使用 Java ，主要是學業需要。</p>
+<h2 id="安裝"><a class="markdownIt-Anchor" href="#安裝"></a> 安裝</h2>
+<p>了解了基本的背景知識，接下來就來建置開發環境吧！</p>
+<p>首先要安裝 Android Studio ；而用 Java 開發程式，還需要安裝 Java 開發工具組（ Jave Develop Kit, JDK ），內含 Java 執行階段環境、Java 編譯器和 Java API；其中 Android Studio 的安裝時間會比較久。</p>
+<p>安裝的原則是「有預設就選預設」。</p>
+<p>下載連結：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/studio">Android Studio</a>
+<ul>
+<li><img src="01.png" alt="下載 Android Studio" /></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">JDK</a>
+<ul>
+<li><img src="02.png" alt="下載 JDK" /></li>
+</ul>
+</li>
+</ul>
+<h2 id="下集預告"><a class="markdownIt-Anchor" href="#下集預告"></a> 下集預告</h2>
+<p>下一篇文章會介紹如何開始第一個專案。</p>
+<h2 id="參考資料"><a class="markdownIt-Anchor" href="#參考資料"></a> 參考資料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.flag.com.tw/books/product_s/F5772">新觀念 Android 程式設計範例教本：使用 Android Studio</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E4%BB%BD%E9%A2%9D">作業系統使用份額 - 維基百科，自由的百科全書</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Android%E7%89%88%E6%9C%AC%E5%88%97%E8%A1%A8">Android版本列表 - 維基百科，自由的百科全書</a></li>
+<li><a target="_blank" rel="noopener" href="https://youtu.be/sehxt5wbsgM">【Android教學】1.1&amp;1.2 Android開發概述和開發工具</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10200176">[Andriod] Andriod Studio 從入門到進入狀況系列 [Day 01] 安裝Android Studio</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/TechBlog/tags/Android/" rel="tag"># Android</a>
+              <a href="/TechBlog/tags/w3HexSchool/" rel="tag"># w3HexSchool</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/01/16/20200116-hex-vscode/" rel="prev" title="六角學院 Visual Studio Code 課程學習筆記">
+      <i class="fa fa-chevron-left"></i> 六角學院 Visual Studio Code 課程學習筆記
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/" rel="next" title="F2E 2nd 第十關「 口罩地圖」 挑戰筆記">
+      F2E 2nd 第十關「 口罩地圖」 挑戰筆記 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#android-%E6%98%AF%E4%BB%80%E9%BA%BC"><span class="nav-number">1.</span> <span class="nav-text"> Android 是什麼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%8D%93%E4%BB%A5%E5%BE%B7%E4%B8%80%E6%AE%B5%E6%AD%B7%E5%8F%B2"><span class="nav-number">2.</span> <span class="nav-text"> 安卓以德，一段歷史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text"> 整合開發環境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80"><span class="nav-number">4.</span> <span class="nav-text"> 程式語言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D"><span class="nav-number">5.</span> <span class="nav-text"> 安裝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E9%9B%86%E9%A0%90%E5%91%8A"><span class="nav-number">6.</span> <span class="nav-text"> 下集預告</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">7.</span> <span class="nav-text"> 參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v8.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://clhuang224.github.io/TechBlog/2020/02/06/20200206-android-intro/";
+    this.page.identifier = "2020/02/06/20200206-android-intro/";
+    this.page.title = "【 Android 開發入門 01 】什麼是 Android";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lynns-techblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

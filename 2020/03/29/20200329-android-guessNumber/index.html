@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="最近發現 Udacity 的免費課程還滿有趣的，雖然入門的課程真的很入門，但是教學方式滿可愛的。 接下來的文章多多少少會參考 Udacity 的內容。  Android 基礎：用戶介面 Android 應用開發 Android 基礎知識  今天我會透過製作猜數字遊戲，來概略介紹 Android 開發的流程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【 Android 開發入門 03 】猜數字遊戲">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2020/03/29/20200329-android-guessNumber/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="最近發現 Udacity 的免費課程還滿有趣的，雖然入門的課程真的很入門，但是教學方式滿可愛的。 接下來的文章多多少少會參考 Udacity 的內容。  Android 基礎：用戶介面 Android 應用開發 Android 基礎知識  今天我會透過製作猜數字遊戲，來概略介紹 Android 開發的流程。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/03/29/20200329-android-guessNumber/01.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/03/29/20200329-android-guessNumber/02.png">
+<meta property="article:published_time" content="2020-03-29T15:27:06.000Z">
+<meta property="article:modified_time" content="2025-05-03T07:28:08.826Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://clhuang224.github.io/TechBlog/2020/03/29/20200329-android-guessNumber/01.png">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/2020/03/29/20200329-android-guessNumber/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>【 Android 開發入門 03 】猜數字遊戲 | Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/03/29/20200329-android-guessNumber/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【 Android 開發入門 03 】猜數字遊戲
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-03-29 23:27:06" itemprop="dateCreated datePublished" datetime="2020-03-29T23:27:06+08:00">2020-03-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/" itemprop="url" rel="index"><span itemprop="name">系列文章</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/03/29/20200329-android-guessNumber/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/29/20200329-android-guessNumber/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>最近發現 Udacity 的免費課程還滿有趣的，雖然入門的課程真的很入門，但是教學方式滿可愛的。<br />
+接下來的文章多多少少會參考 Udacity 的內容。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://classroom.udacity.com/courses/ud834">Android 基礎：用戶介面</a></li>
+<li><a target="_blank" rel="noopener" href="https://classroom.udacity.com/courses/ud851">Android 應用開發 Android 基礎知識</a></li>
+</ul>
+<p>今天我會透過製作猜數字遊戲，來概略介紹 Android 開發的流程。</p>
+<span id="more"></span>
+<h2 id="開發流程"><a class="markdownIt-Anchor" href="#開發流程"></a> 開發流程</h2>
+<p>如果有用 Vue.js 之類的框架開發過網站，應該能很快想像出開發 Android App 的流程。</p>
+<p>我們在開發網站時，會在 HTML 裡面寫好介面的骨架，接著把 CSS 樣式套進去，然後用 JavaScript 寫程式邏輯；而在 Vue.js 等框架中，又能將一些元素切割成所需的元件，並將資料與介面綁定在一起。</p>
+<p>Android 專案則是以 XML 撰寫介面的佈局檔案（也可以用圖形介面的編輯器），並利用字串、樣式等檔案套入所需的內容與樣式，再在 Java 中指定要使用的介面與邏輯，並打包成 .apk 。</p>
+<h2 id="專案架構"><a class="markdownIt-Anchor" href="#專案架構"></a> 專案架構</h2>
+<p>Android 專案中的檔案可以簡單分成程式邏輯和資源，資源包含圖檔、音樂、佈局、樣式等。<br />
+開發者可以依據組態設定，針對使用者當前的環境選擇適當的資源。這樣的好處就是能夠適應各種不同的裝置和 API 版本，也能製作多語系的內容；另一方面也比較容易協作，並增進開發效率。</p>
+<p>以猜數字遊戲來說，視覺設計的內容如下：</p>
+<ul>
+<li>可以輸入四位數字</li>
+<li>可以看到歷史紀錄，包含幾 A 幾 B</li>
+<li>有送出和開新遊戲的選項</li>
+</ul>
+<p>程式邏輯則是：</p>
+<ul>
+<li>每局隨機產生一組四位數字</li>
+<li>送出時會比對答案並回傳幾 A 幾 B</li>
+<li>把歷史紀錄放進畫面中</li>
+</ul>
+<p>會更動到的檔案有這些：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">app</span><br><span class="line">├── java</span><br><span class="line">|   └── [packageName]</span><br><span class="line">|       ├── MainActivity        // 程式邏輯</span><br><span class="line">|       └── Game                // 遊戲邏輯</span><br><span class="line">└── res</span><br><span class="line">    ├── layout</span><br><span class="line">    |   └── activity_main.xml   // 介面佈局</span><br><span class="line">    └── values</span><br><span class="line">        ├── colors.xml          // 顏色資源</span><br><span class="line">        └── strings.xml         // 字串資源</span><br></pre></td></tr></table></figure>
+<h2 id="實作"><a class="markdownIt-Anchor" href="#實作"></a> 實作</h2>
+<h3 id="gamejava"><a class="markdownIt-Anchor" href="#gamejava"></a> Game.java</h3>
+<p>在一切開始之前，我們先把猜數字的遊戲邏輯準備好。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Game</span> &#123;</span><br><span class="line"><span class="comment">//    data</span></span><br><span class="line">    <span class="keyword">private</span> String answer;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="variable">win</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line"><span class="comment">//    getter</span></span><br><span class="line">    String <span class="title function_">getAnswer</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> answer;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">isWin</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> win;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//    function</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">generateAnswer</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">char</span>[] list = &#123;<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;1&#x27;</span>,<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;3&#x27;</span>,<span class="string">&#x27;4&#x27;</span>,<span class="string">&#x27;5&#x27;</span>,<span class="string">&#x27;6&#x27;</span>,<span class="string">&#x27;7&#x27;</span>,<span class="string">&#x27;8&#x27;</span>,<span class="string">&#x27;9&#x27;</span>&#125;;</span><br><span class="line">        <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>().nextInt(list.length);</span><br><span class="line">            result += list[index];</span><br><span class="line">        &#125;</span><br><span class="line">        answer = result;</span><br><span class="line">    &#125;</span><br><span class="line">    String <span class="title function_">checkAnswer</span><span class="params">(String guess)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">0</span>, b = <span class="number">0</span>;</span><br><span class="line">        <span class="type">boolean</span>[] answerUsed = &#123;<span class="literal">false</span>,<span class="literal">false</span>,<span class="literal">false</span>,<span class="literal">false</span>&#125;;</span><br><span class="line">        <span class="type">boolean</span>[] guessUsed = &#123;<span class="literal">false</span>,<span class="literal">false</span>,<span class="literal">false</span>,<span class="literal">false</span>&#125;;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(guess.charAt(i)==answer.charAt(i)) &#123;</span><br><span class="line">                answerUsed[i]=<span class="literal">true</span>;</span><br><span class="line">                guessUsed[i]=<span class="literal">true</span>;</span><br><span class="line">                a++;</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; <span class="number">4</span>; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!guessUsed[i] &amp;&amp; !answerUsed[j] &amp;&amp; guess.charAt(i) == answer.charAt(j)) &#123;</span><br><span class="line">                    answerUsed[j] = <span class="literal">true</span>;</span><br><span class="line">                    guessUsed[i] = <span class="literal">true</span>;</span><br><span class="line">                    b++;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> a + <span class="string">&quot;A&quot;</span> + b + <span class="string">&quot;B&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span>(a==<span class="number">4</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            win = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="activity_mainxml"><a class="markdownIt-Anchor" href="#activity_mainxml"></a> activity_main.xml</h3>
+<p>再來是畫面的部分。</p>
+<p>Android 中的每一個頁面稱為 Activity ， Activity 中有一組一組的元件稱為 ViewGroup ，而每個元件（例如輸入框、按鈕等）就稱為 View 。<br />
+activity_main.xml 是預設的進入頁面 ，而猜數字遊戲也只需要這一頁。</p>
+<p>就像 HTML 一樣，我們可以先依照畫面中想要有的架構，安排標籤，代表特定的 View。<br />
+View 底下沒有更小的 View 時，可以用 self-closing tag （Android Studio 會提醒）。<br />
+就像下面這樣子：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span>&gt;</span>  <span class="comment">&lt;!-- 一種佈局方式 --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">TextView</span>/&gt;</span>         <span class="comment">&lt;!-- 文字的 View ，類似 &lt;p&gt; --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">EditText</span>/&gt;</span>         <span class="comment">&lt;!-- 輸入文字的 View，類似 &lt;input type=&quot;text&quot;&gt; --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">Button</span>/&gt;</span>           <span class="comment">&lt;!-- 按鈕的 View --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">ScrollView</span>&gt;</span>        <span class="comment">&lt;!-- 卷軸區塊的 View --&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">LinearLayout</span>&gt;</span>  <span class="comment">&lt;!-- 另一種佈局方式 --&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">TextView</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">TextView</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ScrollView</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">FrameLayout</span>/&gt;</span>      <span class="comment">&lt;!-- 再另外一種佈局方式 --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">Button</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>針對每個 View 要有怎樣的寬高、樣式都要寫在屬性中，所以會變成下面這個樣子。<br />
+其中寫到一些佈局的設定，這篇文章暫時不解釋。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:background</span>=<span class="string">&quot;@color/colorPrimary&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">&quot;.MainActivity&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/title&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginTop</span>=<span class="string">&quot;60dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">&quot;@string/title&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:textColor</span>=<span class="string">&quot;@color/colorPrimaryDark&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:textSize</span>=<span class="string">&quot;36sp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">&quot;parent&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">EditText</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/inputNumber&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginTop</span>=<span class="string">&quot;40dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:ems</span>=<span class="string">&quot;10&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:inputType</span>=<span class="string">&quot;number&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:maxLength</span>=<span class="string">&quot;4&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:textColor</span>=<span class="string">&quot;@color/colorSecondary&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintTop_toBottomOf</span>=<span class="string">&quot;@+id/title&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/submitButton&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginTop</span>=<span class="string">&quot;40dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:background</span>=<span class="string">&quot;@color/colorAccent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">&quot;@string/submit&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:textColor</span>=<span class="string">&quot;@color/colorPrimaryDark&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintTop_toBottomOf</span>=<span class="string">&quot;@+id/inputNumber&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">ScrollView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/scrollView2&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;300dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;390dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginTop</span>=<span class="string">&quot;40dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:background</span>=<span class="string">&quot;@color/colorSecondary&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintTop_toBottomOf</span>=<span class="string">&quot;@+id/submitButton&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintVertical_bias</span>=<span class="string">&quot;0.0&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:orientation</span>=<span class="string">&quot;horizontal&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:id</span>=<span class="string">&quot;@+id/history_input&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_width</span>=<span class="string">&quot;150dp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:padding</span>=<span class="string">&quot;24dp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:textColor</span>=<span class="string">&quot;@color/colorPrimaryDark&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:textSize</span>=<span class="string">&quot;24sp&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:id</span>=<span class="string">&quot;@+id/history_result&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_width</span>=<span class="string">&quot;150dp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:padding</span>=<span class="string">&quot;24dp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:textColor</span>=<span class="string">&quot;@color/colorPrimaryDark&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:textSize</span>=<span class="string">&quot;24sp&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:textAlignment</span>=<span class="string">&quot;viewEnd&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">android:gravity</span>=<span class="string">&quot;end&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ScrollView</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">FrameLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/cover&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">tools:layout_editor_absoluteX</span>=<span class="string">&quot;0dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">tools:layout_editor_absoluteY</span>=<span class="string">&quot;0dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:background</span>=<span class="string">&quot;@color/transparent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:visibility</span>=<span class="string">&quot;invisible&quot;</span></span></span><br><span class="line"><span class="tag">        &gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">FrameLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/restartButton&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:background</span>=<span class="string">&quot;@color/colorAccent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">&quot;@string/restart&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:textColor</span>=<span class="string">&quot;@color/colorPrimaryDark&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintHorizontal_bias</span>=<span class="string">&quot;1.0&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">tools:ignore</span>=<span class="string">&quot;MissingConstraints&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">tools:layout_editor_absoluteY</span>=<span class="string">&quot;2dp&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>一開始看到可能會覺得有點多有點亂，這邊來說明一下各個屬性的作用：</p>
+<ul>
+<li>android:id
+<ul>
+<li>View 的 ID</li>
+<li>值的格式是 @+id/{ ID }</li>
+<li>在 Java 中會變成 R 類別的 member ，例如 R.id.submitButton</li>
+</ul>
+</li>
+<li>android:layout_width 、 android:layout_height
+<ul>
+<li>View 的寬高</li>
+<li>值
+<ul>
+<li>wrap_content ：依內容的寬高而定</li>
+<li>match_parent ：依父層的寬高而定</li>
+<li>dp 、 in 、 mm 、 px 、 sp ：用 px 會被建議改成 dp</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>android:padding 、 android:margin
+<ul>
+<li>就和 CSS 的 padding 、 margin 一樣</li>
+</ul>
+</li>
+<li>android:ems
+<ul>
+<li>TextView 為幾個字的寬度</li>
+</ul>
+</li>
+<li>android:inputType
+<ul>
+<li>EditText 的內容類型</li>
+<li>可以填的類型非常多種，例如 textEmailAddress 、 number等</li>
+</ul>
+</li>
+<li>android:maxLength
+<ul>
+<li>EditText 可輸入的字數上限</li>
+</ul>
+</li>
+<li>android:visibility
+<ul>
+<li>是否顯示 View ，類似 CSS 中的 display 或 opacity</li>
+<li>值
+<ul>
+<li>visible ：預設值，可見</li>
+<li>invisible ：不可見，但存在</li>
+<li>gone ：不存在</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>android:background
+<ul>
+<li>View 的背景，可以是顏色或圖片</li>
+<li>值：可以取用資源或直接寫色碼</li>
+</ul>
+</li>
+<li>android:text
+<ul>
+<li>View 的文字內容</li>
+<li>值：可以取用字元或直接寫字串</li>
+</ul>
+</li>
+<li>android:textColor
+<ul>
+<li>View 的文字顏色</li>
+<li>值：可以取用資源或直接寫色碼</li>
+</ul>
+</li>
+</ul>
+<h3 id="resource"><a class="markdownIt-Anchor" href="#resource"></a> Resource</h3>
+<p>看到上面的最後三點可能會覺得有點奇怪，取用資源是什麼意思呢？<br />
+Android 的裝置有各種廠牌、尺寸，加上不同語言的狀況，如果每一種都做一版可能要做到天荒地老；所以開發 Android App 基本上推薦用 congifuration 的方式，也就是用類似變數的方式，統一管理不同情境的資源（類似 Vue I18n 的概念）。</p>
+<p>res 資料夾就是拿來存放這些資源，佈局（例如上面的 activity_main.xml ）和一些數值都是屬於 Resource 。</p>
+<p>以猜數字遊戲來說，就使用到 colors.xml 和 strings.xml 這些資源。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// colors.xml</span><br><span class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">color</span> <span class="attr">name</span>=<span class="string">&quot;colorPrimary&quot;</span>&gt;</span>#9B7874<span class="tag">&lt;/<span class="name">color</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">color</span> <span class="attr">name</span>=<span class="string">&quot;colorPrimaryDark&quot;</span>&gt;</span>#44090A<span class="tag">&lt;/<span class="name">color</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">color</span> <span class="attr">name</span>=<span class="string">&quot;colorSecondary&quot;</span>&gt;</span>#F1DEDE<span class="tag">&lt;/<span class="name">color</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">color</span> <span class="attr">name</span>=<span class="string">&quot;colorAccent&quot;</span>&gt;</span>#BBACC1<span class="tag">&lt;/<span class="name">color</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">color</span> <span class="attr">name</span>=<span class="string">&quot;transparent&quot;</span>&gt;</span>#88000000<span class="tag">&lt;/<span class="name">color</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// strings.xml</span><br><span class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">&quot;app_name&quot;</span>&gt;</span>GuessNumber<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">&quot;title&quot;</span>&gt;</span>猜數字遊戲<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">&quot;submit&quot;</span>&gt;</span>送出<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">&quot;restart&quot;</span>&gt;</span>重新開始<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在佈局中要使用到這些設定值，用 @string/restart 這樣的格式。</p>
+<h3 id="mainactivityjava"><a class="markdownIt-Anchor" href="#mainactivityjava"></a> MainActivity.java</h3>
+<p>把資源都準備好後，就可以來寫程式邏輯了。<br />
+在這邊只需要知道：</p>
+<ul>
+<li>Android Studio 很貼心，引用函式庫會自動幫忙 import</li>
+<li>Activity 被創造出來之後發生的行為就寫在 onCreate() 中</li>
+<li>View 的類別名稱就跟它的標籤一樣</li>
+<li>變數不能在 onCreate() 前賦值</li>
+<li>findViewById() 就類似 JavaScript 的 getElementById() ，不過參數要用 R 類別中的 id</li>
+</ul>
+<p>剩下例如按鈕的點擊事件、如何更改 View 的屬性，都是需要的時候上網查就可以。<br />
+以下用註解說明程式邏輯。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> tw.com.mydomain.guessnumber;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Android Studio 貼心幫忙引入函式庫</span></span><br><span class="line"><span class="keyword">import</span> android.annotation.SuppressLint;</span><br><span class="line"><span class="keyword">import</span> android.app.Activity;</span><br><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.widget.Button;</span><br><span class="line"><span class="keyword">import</span> android.widget.EditText;</span><br><span class="line"><span class="keyword">import</span> android.widget.FrameLayout;</span><br><span class="line"><span class="keyword">import</span> android.widget.TextView;</span><br><span class="line"><span class="keyword">import</span> android.widget.Toast;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MainActivity</span> <span class="keyword">extends</span> <span class="title class_">Activity</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 先宣告 View 的變數</span></span><br><span class="line">    Button submitButton;</span><br><span class="line">    Button restartButton;</span><br><span class="line">    EditText inputNumber;</span><br><span class="line">    TextView historyInput;</span><br><span class="line">    TextView historyResult;</span><br><span class="line">    <span class="comment">// Toast 是畫面下面會跳出來的小提示框</span></span><br><span class="line">    Toast toast;</span><br><span class="line">    FrameLayout cover;</span><br><span class="line">    <span class="type">int</span> counter;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(Bundle savedInstanceState)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 找到畫面中的 View</span></span><br><span class="line">        submitButton = (Button) findViewById(R.id.submitButton);</span><br><span class="line">        restartButton = (Button) findViewById(R.id.restartButton);</span><br><span class="line">        inputNumber = (EditText) findViewById(R.id.inputNumber);</span><br><span class="line">        historyInput = (TextView) findViewById(R.id.history_input);</span><br><span class="line">        historyResult = (TextView) findViewById(R.id.history_result);</span><br><span class="line">        cover = (FrameLayout) findViewById(R.id.cover);</span><br><span class="line">        counter = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 宣告一個 Game 實體</span></span><br><span class="line">        <span class="keyword">final</span> <span class="type">Game</span> <span class="variable">game</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Game</span>();</span><br><span class="line">        <span class="comment">// 產生一個隨機的答案</span></span><br><span class="line">        game.generateAnswer();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> <span class="type">Context</span> <span class="variable">that</span> <span class="operator">=</span> <span class="built_in">this</span>;</span><br><span class="line">        <span class="comment">// 設定送出按鈕的點擊事件</span></span><br><span class="line">        submitButton.setOnClickListener(<span class="keyword">new</span> <span class="title class_">View</span>.OnClickListener()&#123;</span><br><span class="line">            <span class="meta">@SuppressLint(&quot;SetTextI18n&quot;)</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClick</span><span class="params">(View v)</span>&#123;</span><br><span class="line">                <span class="comment">// 一定要輸入四個數字才有反應</span></span><br><span class="line">                <span class="keyword">if</span>(inputNumber.getText().length() == <span class="number">4</span>) &#123;</span><br><span class="line">                    <span class="comment">// 將使用者輸入的數字跟幾 A 幾 B 放入文字框框中</span></span><br><span class="line">                    historyInput.setText((inputNumber.getText() + <span class="string">&quot;\n&quot;</span>) + historyInput.getText());</span><br><span class="line">                    historyResult.setText((game.checkAnswer(inputNumber.getText().toString()) + <span class="string">&quot;\n&quot;</span>) + historyResult.getText());</span><br><span class="line">                    <span class="comment">// 清空輸入框</span></span><br><span class="line">                    inputNumber.setText(<span class="string">&quot;&quot;</span>);</span><br><span class="line">                    <span class="comment">// 如果猜中了</span></span><br><span class="line">                    <span class="keyword">if</span> (game.isWin()) &#123;</span><br><span class="line">                        <span class="comment">// 跳出獲勝的訊息</span></span><br><span class="line">                        Toast.makeText(that, <span class="string">&quot;You win&quot;</span>, Toast.LENGTH_LONG).show();</span><br><span class="line">                        inputNumber.setEnabled(<span class="literal">false</span>);</span><br><span class="line">                        submitButton.setEnabled(<span class="literal">false</span>);</span><br><span class="line">                        cover.setVisibility(View.VISIBLE);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">// 設定重新開始按鈕的點擊事件</span></span><br><span class="line">        restartButton.setOnClickListener(<span class="keyword">new</span> <span class="title class_">View</span>.OnClickListener()&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClick</span><span class="params">(View v)</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(game.isWin())</span><br><span class="line">                &#123;</span><br><span class="line">                    Toast.makeText(that, (<span class="string">&quot;Game restarted&quot;</span>), Toast.LENGTH_LONG).show();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="comment">// 沒有獲勝的話會顯示答案</span></span><br><span class="line">                    Toast.makeText(that, (<span class="string">&quot;Last answer: &quot;</span> + game.getAnswer()+<span class="string">&quot;\n\n   Game restarted&quot;</span>), Toast.LENGTH_LONG).show();</span><br><span class="line">                &#125;</span><br><span class="line">                inputNumber.setEnabled(<span class="literal">false</span>);</span><br><span class="line">                inputNumber.setEnabled(<span class="literal">true</span>);</span><br><span class="line">                submitButton.setEnabled(<span class="literal">true</span>);</span><br><span class="line">                game.generateAnswer();</span><br><span class="line">                historyInput.setText(<span class="string">&quot;&quot;</span>);</span><br><span class="line">                historyResult.setText(<span class="string">&quot;&quot;</span>);</span><br><span class="line">                cover.setVisibility(View.INVISIBLE);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="執行畫面"><a class="markdownIt-Anchor" href="#執行畫面"></a> 執行畫面</h2>
+<p>遊戲執行起來就像這個樣子：</p>
+<p><img src="01.png" alt="遊玩中" /><br />
+<img src="02.png" alt="重新開始" /></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/TechBlog/tags/Android/" rel="tag"># Android</a>
+              <a href="/TechBlog/tags/w3HexSchool/" rel="tag"># w3HexSchool</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/03/15/20200315-vue-i18n/" rel="prev" title="Vue I18n 實作多國語系">
+      <i class="fa fa-chevron-left"></i> Vue I18n 實作多國語系
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/04/14/20200414-udacity-ud851-01/" rel="next" title="Udacity | Developing Android Apps | 01 Create Project Sunshine 課程筆記">
+      Udacity | Developing Android Apps | 01 Create Project Sunshine 課程筆記 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%96%8B%E7%99%BC%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text"> 開發流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%88%E6%A1%88%E6%9E%B6%E6%A7%8B"><span class="nav-number">2.</span> <span class="nav-text"> 專案架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%A6%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text"> 實作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gamejava"><span class="nav-number">3.1.</span> <span class="nav-text"> Game.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activity_mainxml"><span class="nav-number">3.2.</span> <span class="nav-text"> activity_main.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#resource"><span class="nav-number">3.3.</span> <span class="nav-text"> Resource</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mainactivityjava"><span class="nav-number">3.4.</span> <span class="nav-text"> MainActivity.java</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%B7%E8%A1%8C%E7%95%AB%E9%9D%A2"><span class="nav-number">4.</span> <span class="nav-text"> 執行畫面</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v8.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://clhuang224.github.io/TechBlog/2020/03/29/20200329-android-guessNumber/";
+    this.page.identifier = "2020/03/29/20200329-android-guessNumber/";
+    this.page.title = "【 Android 開發入門 03 】猜數字遊戲";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lynns-techblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

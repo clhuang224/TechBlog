@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文整理有關使用者旅程地圖的學習筆記。  什麼是使用者旅程地圖  User Journey Map（UJM），是把使用者的旅程視覺化的一種方式 如果已知目標使用者為客戶（例如 B2C 的場景），可稱為 Customer Journey Map （CJM） 利用圖表的方式，描述使用者在不同階段的行為、心智地圖及情緒反應，讓品牌站在使用者的角度，預測和分析使用者行為 CJM 可以用來改善客戶體驗、提高">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用者旅程地圖">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2025/06/14/20250614-ujm/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="本文整理有關使用者旅程地圖的學習筆記。  什麼是使用者旅程地圖  User Journey Map（UJM），是把使用者的旅程視覺化的一種方式 如果已知目標使用者為客戶（例如 B2C 的場景），可稱為 Customer Journey Map （CJM） 利用圖表的方式，描述使用者在不同階段的行為、心智地圖及情緒反應，讓品牌站在使用者的角度，預測和分析使用者行為 CJM 可以用來改善客戶體驗、提高">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2025-06-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-12T16:33:38.914Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="UX">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/2025/06/14/20250614-ujm/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>使用者旅程地圖 | Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2025/06/14/20250614-ujm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用者旅程地圖
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2025-06-14 00:00:00" itemprop="dateCreated datePublished" datetime="2025-06-14T00:00:00+08:00">2025-06-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-11-13 00:33:38" itemprop="dateModified" datetime="2025-11-13T00:33:38+08:00">2025-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/PM-%E7%AD%86%E8%A8%98/" itemprop="url" rel="index"><span itemprop="name">PM 筆記</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2025/06/14/20250614-ujm/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2025/06/14/20250614-ujm/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文整理有關使用者旅程地圖的學習筆記。</p>
+<h2 id="什麼是使用者旅程地圖"><a class="markdownIt-Anchor" href="#什麼是使用者旅程地圖"></a> 什麼是使用者旅程地圖</h2>
+<ul>
+<li>User Journey Map（UJM），是把使用者的旅程視覺化的一種方式</li>
+<li>如果已知目標使用者為客戶（例如 B2C 的場景），可稱為 Customer Journey Map （CJM）</li>
+<li>利用圖表的方式，描述使用者在不同階段的行為、心智地圖及情緒反應，讓品牌站在使用者的角度，預測和分析使用者行為</li>
+<li>CJM 可以用來改善客戶體驗、提高營收、提高客戶忠誠度</li>
+<li>是擬定產品策略的重要環節</li>
+</ul>
+<h2 id="ujm-的三個使用方式"><a class="markdownIt-Anchor" href="#ujm-的三個使用方式"></a> UJM 的三個使用方式</h2>
+<ul>
+<li>發想新的產品</li>
+<li>迭代現有的產品</li>
+<li>與團隊成員溝通設計概念</li>
+</ul>
+<h2 id="ujm-所包含的元素"><a class="markdownIt-Anchor" href="#ujm-所包含的元素"></a> UJM 所包含的元素</h2>
+<ul>
+<li>The Lens：用戶的基本訊息
+<ul>
+<li>Users：角色</li>
+<li>Scenario：發生情境及場景，例如凌晨兩點拿著手機在路邊</li>
+<li>Goals and Expectations：目標與期待，例如想找最近的行動電源</li>
+</ul>
+</li>
+<li>The Experience：體驗
+<ul>
+<li>Journey Phases：旅程階段</li>
+<li>Actions：行為</li>
+<li>Mindsets：想法</li>
+<li>Emotions：情感</li>
+</ul>
+</li>
+<li>The Insights：觀點
+<ul>
+<li>Opportunities：痛點及潛在機會</li>
+<li>Internal ownership：對應痛點的設計或功能</li>
+</ul>
+</li>
+</ul>
+<h3 id="客戶是誰"><a class="markdownIt-Anchor" href="#客戶是誰"></a> 客戶是誰</h3>
+<ul>
+<li>基本資訊，例如：
+<ul>
+<li>外型</li>
+<li>喜好</li>
+<li>興趣</li>
+<li>年齡</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>可以用親和圖法（Affinity Diagram）發想並聚焦主要及次要目標客戶。</p>
+</blockquote>
+<h3 id="時間尺度"><a class="markdownIt-Anchor" href="#時間尺度"></a> 時間尺度</h3>
+<ul>
+<li>顧客旅程的長度</li>
+<li>跟商品類型相關，例如：
+<ul>
+<li>假訊息查詢系統
+<ul>
+<li>整體使用：數年</li>
+<li>每次查詢：一小時內</li>
+</ul>
+</li>
+<li>診所官網
+<ul>
+<li>整體使用：數年</li>
+<li>瀏覽醫療資訊分享：30 分鐘</li>
+<li>預約看診：10 分鐘</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="顧客旅程階段"><a class="markdownIt-Anchor" href="#顧客旅程階段"></a> 顧客旅程階段</h3>
+<p>將顧客行為和旅程連結，了解該給顧客什麼服務。</p>
+<h3 id="互動行為及感受"><a class="markdownIt-Anchor" href="#互動行為及感受"></a> 互動行為及感受</h3>
+<ul>
+<li>預測或觀察顧客會做出哪些行動</li>
+<li>可能的正面、負面體驗</li>
+<li>每次互動的動機</li>
+<li>促進他們進入下一階段的動力為何</li>
+<li>過程中的阻礙</li>
+</ul>
+<h3 id="互動渠道接觸點"><a class="markdownIt-Anchor" href="#互動渠道接觸點"></a> 互動渠道/接觸點</h3>
+<ul>
+<li>顧客與品牌互動的媒介，例如：
+<ul>
+<li>FB 、 IG 等網路社群</li>
+<li>簡訊、電話</li>
+<li>官網、電商平台</li>
+<li>實體門市</li>
+<li>活動、口耳相傳</li>
+</ul>
+</li>
+</ul>
+<h2 id="如何製作-cjm"><a class="markdownIt-Anchor" href="#如何製作-cjm"></a> 如何製作 CJM</h2>
+<h3 id="定義目標和範圍"><a class="markdownIt-Anchor" href="#定義目標和範圍"></a> 定義目標和範圍</h3>
+<ol>
+<li>競爭對手分析：製作競爭對手的顧客旅程圖，尋找勝出機會、提升品牌吸引力</li>
+<li>完整旅程描繪：認識品牌、購買到忠誠的顧客旅程地圖</li>
+<li>提高購買率：針對消費流程，包含瀏覽電商網站、加入購物車到結帳</li>
+<li>溝通策略：探索在 FB、IG、LINE、Email、簡訊等溝通渠道的互動行為及彼此之間的影響，通常可以透過自動化工具來設計旅程</li>
+</ol>
+<h3 id="收集顧客數據定義目標客戶"><a class="markdownIt-Anchor" href="#收集顧客數據定義目標客戶"></a> 收集顧客數據，定義目標客戶</h3>
+<ul>
+<li>根據前一步驟，建立人物誌（Persona），描繪客戶具體形象，包含：
+<ul>
+<li>性別、年齡、地區、興趣</li>
+<li>互動行為，例如如何進入網站、想達成什麼目標</li>
+</ul>
+</li>
+</ul>
+<h3 id="定義顧客旅程階段"><a class="markdownIt-Anchor" href="#定義顧客旅程階段"></a> 定義顧客旅程階段</h3>
+<p>例如：收到廣告傳單 -&gt; 用手機掃 qrcode 進入商品 landing page -&gt; 點選直接購買 -&gt; 填寫結帳資訊 -&gt; 送出訂單。</p>
+<h3 id="繪製接觸點"><a class="markdownIt-Anchor" href="#繪製接觸點"></a> 繪製接觸點</h3>
+<p>例如收到廣告傳單。</p>
+<h3 id="描述接觸點的顧客行為"><a class="markdownIt-Anchor" href="#描述接觸點的顧客行為"></a> 描述接觸點的顧客行為</h3>
+<p>例如掃傳單上的 QR code。</p>
+<h3 id="尋找顧客痛點"><a class="markdownIt-Anchor" href="#尋找顧客痛點"></a> 尋找顧客痛點</h3>
+<ul>
+<li>根據各階段的互動行為，思考可能的顧客體驗</li>
+<li>在各階段用線條圖畫出顧客的情緒起伏，找出影響顧客對品牌觀感的時間點</li>
+<li>辨識正面的階段、改善負面的階段</li>
+</ul>
+<h2 id="cjm-範例"><a class="markdownIt-Anchor" href="#cjm-範例"></a> CJM 範例</h2>
+<ul>
+<li>The Lens
+<ul>
+<li>Persona：許小芳，25 歲研究生，不太常用 3C，平常不喜歡帶太多東西在身上</li>
+<li>Scenario：凌晨兩點，走路回家的路上，發現手機快要沒電</li>
+<li>Goals and Expectations：找到可以充電的行動電源</li>
+</ul>
+</li>
+<li>The Experience / The insights</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>發現沒電</th>
+<th>開 APP</th>
+<th>出發</th>
+<th>租借</th>
+<th>取得</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Action</td>
+<td>滑開手機看電量</td>
+<td>點開 APP 看地圖</td>
+<td>走路移動到目的地</td>
+<td>掃 QRcode</td>
+<td>等待</td>
+</tr>
+<tr>
+<td>Mindset</td>
+<td>要在沒電之前找到行動電源</td>
+<td>找地點會稍微一點花時間</td>
+<td>有地圖不會迷路</td>
+<td>操作滿簡單的</td>
+<td>很快就拿到了</td>
+</tr>
+<tr>
+<td>Emotion</td>
+<td>😰</td>
+<td>🤔</td>
+<td>😏</td>
+<td>🙂</td>
+<td>😊</td>
+</tr>
+<tr>
+<td>Opportunity</td>
+<td></td>
+<td>缺少優先推薦的地點</td>
+<td>減少迷路的感覺</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Internel ownership</td>
+<td></td>
+<td>新增一鍵定位推薦點</td>
+<td>新增導航提示</td>
+<td>改良電池機台 UI 設計</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="參考資料"><a class="markdownIt-Anchor" href="#參考資料"></a> 參考資料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.nngroup.com/articles/journey-mapping-101/">Journey Mapping 101</a></li>
+<li><a target="_blank" rel="noopener" href="https://pagerank.ing/customer-journey-map-for-product-managers/">顧客旅程地圖入門｜產品經理也要略懂的顧客旅程地圖</a></li>
+<li><a target="_blank" rel="noopener" href="https://peterpowerfullife.com/blog/pm-basic-user-journey-map/">產品經理的硬實力 - User Journey Map(用戶體驗地圖)</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/TechBlog/tags/UX/" rel="tag"># UX</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/04/14/20200414-udacity-ud851-01/" rel="prev" title="Udacity | Developing Android Apps | 01 Create Project Sunshine 課程筆記">
+      <i class="fa fa-chevron-left"></i> Udacity | Developing Android Apps | 01 Create Project Sunshine 課程筆記
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E4%BD%BF%E7%94%A8%E8%80%85%E6%97%85%E7%A8%8B%E5%9C%B0%E5%9C%96"><span class="nav-number">1.</span> <span class="nav-text"> 什麼是使用者旅程地圖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ujm-%E7%9A%84%E4%B8%89%E5%80%8B%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text"> UJM 的三個使用方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ujm-%E6%89%80%E5%8C%85%E5%90%AB%E7%9A%84%E5%85%83%E7%B4%A0"><span class="nav-number">3.</span> <span class="nav-text"> UJM 所包含的元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B6%E6%98%AF%E8%AA%B0"><span class="nav-number">3.1.</span> <span class="nav-text"> 客戶是誰</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%82%E9%96%93%E5%B0%BA%E5%BA%A6"><span class="nav-number">3.2.</span> <span class="nav-text"> 時間尺度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%A7%E5%AE%A2%E6%97%85%E7%A8%8B%E9%9A%8E%E6%AE%B5"><span class="nav-number">3.3.</span> <span class="nav-text"> 顧客旅程階段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%92%E5%8B%95%E8%A1%8C%E7%82%BA%E5%8F%8A%E6%84%9F%E5%8F%97"><span class="nav-number">3.4.</span> <span class="nav-text"> 互動行為及感受</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%92%E5%8B%95%E6%B8%A0%E9%81%93%E6%8E%A5%E8%A7%B8%E9%BB%9E"><span class="nav-number">3.5.</span> <span class="nav-text"> 互動渠道&#x2F;接觸點</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A3%BD%E4%BD%9C-cjm"><span class="nav-number">4.</span> <span class="nav-text"> 如何製作 CJM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E7%BE%A9%E7%9B%AE%E6%A8%99%E5%92%8C%E7%AF%84%E5%9C%8D"><span class="nav-number">4.1.</span> <span class="nav-text"> 定義目標和範圍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B6%E9%9B%86%E9%A1%A7%E5%AE%A2%E6%95%B8%E6%93%9A%E5%AE%9A%E7%BE%A9%E7%9B%AE%E6%A8%99%E5%AE%A2%E6%88%B6"><span class="nav-number">4.2.</span> <span class="nav-text"> 收集顧客數據，定義目標客戶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E7%BE%A9%E9%A1%A7%E5%AE%A2%E6%97%85%E7%A8%8B%E9%9A%8E%E6%AE%B5"><span class="nav-number">4.3.</span> <span class="nav-text"> 定義顧客旅程階段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B9%AA%E8%A3%BD%E6%8E%A5%E8%A7%B8%E9%BB%9E"><span class="nav-number">4.4.</span> <span class="nav-text"> 繪製接觸點</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0%E6%8E%A5%E8%A7%B8%E9%BB%9E%E7%9A%84%E9%A1%A7%E5%AE%A2%E8%A1%8C%E7%82%BA"><span class="nav-number">4.5.</span> <span class="nav-text"> 描述接觸點的顧客行為</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8B%E6%89%BE%E9%A1%A7%E5%AE%A2%E7%97%9B%E9%BB%9E"><span class="nav-number">4.6.</span> <span class="nav-text"> 尋找顧客痛點</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cjm-%E7%AF%84%E4%BE%8B"><span class="nav-number">5.</span> <span class="nav-text"> CJM 範例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">6.</span> <span class="nav-text"> 參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v8.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://clhuang224.github.io/TechBlog/2025/06/14/20250614-ujm/";
+    this.page.identifier = "2025/06/14/20250614-ujm/";
+    this.page.title = "使用者旅程地圖";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lynns-techblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

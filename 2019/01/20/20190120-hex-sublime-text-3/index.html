@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文為觀看六角學院：一小時上手 Sublime Text 3 網頁編輯器的筆記。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="六角學院 Sublime Text 3 課程筆記">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2019/01/20/20190120-hex-sublime-text-3/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="本文為觀看六角學院：一小時上手 Sublime Text 3 網頁編輯器的筆記。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/01/20/20190120-hex-sublime-text-3/01.png">
+<meta property="og:image" content="https://udemy-certificate.s3.amazonaws.com/image/UC-257H2F69.jpg?l=zh_TW">
+<meta property="article:published_time" content="2019-01-20T03:57:06.000Z">
+<meta property="article:modified_time" content="2025-05-03T07:28:08.773Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="Sublime Text 3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://clhuang224.github.io/TechBlog/2019/01/20/20190120-hex-sublime-text-3/01.png">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/2019/01/20/20190120-hex-sublime-text-3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>六角學院 Sublime Text 3 課程筆記 | Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2019/01/20/20190120-hex-sublime-text-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          六角學院 Sublime Text 3 課程筆記
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-01-20 11:57:06" itemprop="dateCreated datePublished" datetime="2019-01-20T11:57:06+08:00">2019-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E7%B7%9A%E4%B8%8A%E8%AA%B2%E7%A8%8B%E8%A7%80%E7%9C%8B%E7%AD%86%E8%A8%98/" itemprop="url" rel="index"><span itemprop="name">線上課程觀看筆記</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2019/01/20/20190120-hex-sublime-text-3/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/20/20190120-hex-sublime-text-3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文為觀看六角學院：<a href="https://www.udemy.com/sublime-text-3/" target="_blank">一小時上手 Sublime Text 3 網頁編輯器</a>的筆記。</p>
+<span id="more"></span>
+<h2 id="安裝與基礎操作"><a class="markdownIt-Anchor" href="#安裝與基礎操作"></a> 安裝與基礎操作</h2>
+<h3 id="安裝"><a class="markdownIt-Anchor" href="#安裝"></a> 安裝</h3>
+<p><a target="_blank" rel="noopener" href="https://www.sublimetext.com/3">Sublime text 3</a></p>
+<h3 id="自訂編輯器外觀"><a class="markdownIt-Anchor" href="#自訂編輯器外觀"></a> 自訂編輯器外觀</h3>
+<p>Preferences選單可以自訂編輯器外觀，調整字體大小。</p>
+<h3 id="調整視窗"><a class="markdownIt-Anchor" href="#調整視窗"></a> 調整視窗</h3>
+<p>View&gt;Layout可以改視窗顯示的方式。</p>
+<h3 id="側欄"><a class="markdownIt-Anchor" href="#側欄"></a> 側欄</h3>
+<p>View&gt;Side Bar可以把專案資料夾拉進side bar方便看。</p>
+<h3 id="搜尋檔案及程式碼"><a class="markdownIt-Anchor" href="#搜尋檔案及程式碼"></a> 搜尋檔案及程式碼</h3>
+<ul>
+<li>Goto&gt;Goto Anything（Ctrl+P）<br />
+可以搜尋檔案，例如「資料夾名稱 檔名」；後面加上「:行數」可以跳到該行。</li>
+<li>Goto&gt;Goto Symbol（Ctrl+R）<br />
+可以搜尋css檔案中的class名稱。</li>
+</ul>
+<h3 id="常用熱鍵"><a class="markdownIt-Anchor" href="#常用熱鍵"></a> 常用熱鍵</h3>
+<ul>
+<li>Edit&gt;Text&gt;Insert Line Before（Ctrl+Shift+Enter）</li>
+<li>Edit&gt;Text&gt;Insert Line After（Ctrl+Enter）<br />
+方便新增空行。</li>
+<li>Edit&gt;Code Folding<br />
+裡面有一些方便摺疊code的熱鍵，要注意縮排要先縮對。</li>
+<li>Ctrl+D<br />
+多選相同的標籤。</li>
+</ul>
+<h2 id="插件分享"><a class="markdownIt-Anchor" href="#插件分享"></a> 插件分享</h2>
+<h3 id="使用package-control"><a class="markdownIt-Anchor" href="#使用package-control"></a> 使用Package Control</h3>
+<p>安裝<a target="_blank" rel="noopener" href="https://packagecontrol.io/installation">Package Control</a>：開console（Ctrl+`）把網頁裡的程式碼貼進去安裝。<br />
+Tools&gt;Commend Palette（Ctrl+Shift+P）可以搜尋指令。<br />
+搜尋「Package Control: Install Package」，點選之後會跑出可以安裝的Plugin。</p>
+<h3 id="package-control"><a class="markdownIt-Anchor" href="#package-control"></a> <a target="_blank" rel="noopener" href="https://packagecontrol.io">Package Control</a>網站</h3>
+<ul>
+<li>trending是最近流行的議題；new通常是使用者做的；popular是比較熱門的。</li>
+<li>沒事可以找來玩，不想用了的話用Ctrl+Shift+P搜尋「Package Control: Remove Package」來移除。</li>
+</ul>
+<h3 id="emmet"><a class="markdownIt-Anchor" href="#emmet"></a> <a target="_blank" rel="noopener" href="https://packagecontrol.io/packages/Emmet">Emmet</a></h3>
+<p>排行第一，大家都在用。<br />
+輸入標籤的時候會出現選項，用法可以查詢<a target="_blank" rel="noopener" href="https://docs.emmet.io/cheat-sheet/">Emmet字典</a>。</p>
+<p>以下打完按tab會自動產生特定格式：</p>
+<ul>
+<li>「HTML:5」或「!」：HTML5。</li>
+<li>「.class名稱」：class名稱的div。</li>
+<li>「link:css」：css的link標籤。</li>
+<li>「標籤名稱*個數」：產生好幾個標籤。</li>
+<li>「標籤1&gt;標籤2」：巢狀的標籤。</li>
+<li>「標籤1+標籤2」：同層的標籤。</li>
+<li>「lotem字數」：特定字數的假字</li>
+<li>「標籤[屬性=屬性內容]{標籤內容}」：產生特定屬性內容跟標籤內容的標籤</li>
+<li>「$＠數字」：從指定數字開始自動計數；可以用在class名稱和標籤內容等。</li>
+<li>CSS相關的寫法例如：
+<ul>
+<li>「m10」：margin: 10px;</li>
+<li>「ml10%」：margin-left: 10%;</li>
+<li>「pr10」：padding-right: 10px;</li>
+<li>「h10」：height: 10px;</li>
+<li>「w10」：width: 10px;</li>
+<li>「bg#fff」：background: #fff;</li>
+<li>「c#000」：color: #fff;</li>
+<li>「fl:l」：float: left;</li>
+<li>「pos-r」：position: relative;</li>
+<li>「fz12」：font-size: 12%;</li>
+</ul>
+</li>
+</ul>
+<h3 id="autofilename"><a class="markdownIt-Anchor" href="#autofilename"></a> <a target="_blank" rel="noopener" href="https://packagecontrol.io/packages/AutoFileName">AutoFileName</a></h3>
+<p>在打檔名的時候方便找到位址。<br />
+之後在各種需要寫路徑的地方會跳出符合的選項，圖片還會顯示長寬。<br />
+在css檔案裡面寫url時也有功能。</p>
+<h3 id="goto-css-declaration"><a class="markdownIt-Anchor" href="#goto-css-declaration"></a> <a target="_blank" rel="noopener" href="https://packagecontrol.io/packages/Goto-CSS-Declaration">Goto-CSS-Declaration</a></h3>
+<p>能從HTML或JS直接跳到對應的CSS。<br />
+安裝後，在class名稱的地方按super+alto+.或,，就會跳到對應的第一個css（前提是css檔案要開著），繼續按.或,會往上或往下找含有同樣名稱的css。<br />
+在Preference&gt;Package Settings&gt;Goto-CSS-Declaration&gt;Key Binding的地方可以確認一下熱鍵的設定。</p>
+<h3 id="sidebarenhancements"><a class="markdownIt-Anchor" href="#sidebarenhancements"></a> <a target="_blank" rel="noopener" href="https://packagecontrol.io/packages/SideBarEnhancements">SideBarEnhancements</a></h3>
+<p>讓側欄除了新增刪除檔案之外，有更多功能：</p>
+<ul>
+<li>指定瀏覽器開網頁</li>
+<li>開啟檔案所在資料夾</li>
+<li>在專案資料夾按右鍵&gt;Project&gt;Remove Folder From Project，可以把專案資料夾從側欄拿掉（不是把檔案刪除。）</li>
+</ul>
+<p><img src="01.png" alt="右鍵選單的變化" /></p>
+<h3 id="html-css-js-prettify"><a class="markdownIt-Anchor" href="#html-css-js-prettify"></a> <a target="_blank" rel="noopener" href="https://packagecontrol.io/packages/HTML-CSS-JS%20Prettify">HTML-CSS-JS Prettify</a></h3>
+<p>能自動縮排。<br />
+必須先安裝<a target="_blank" rel="noopener" href="https://nodejs.org/en/#download">Node.js</a>，再用Package Control安裝以後，按Ctrl+Shift+H就會自動調整縮排。<br />
+如果Node.js路徑不對，會跳出可以改路徑的提示訊息跟檔案。</p>
+<h3 id="其他插件"><a class="markdownIt-Anchor" href="#其他插件"></a> 其他插件</h3>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://packagecontrol.io/packages/Color%20Highlight">Color Highlight</a>：色碼會有相應底色。</li>
+<li><a target="_blank" rel="noopener" href="https://packagecontrol.io/packages/ColorPicker">ColorPicker</a>：Ctrl+Shift+C可以用調色盤選色。</li>
+</ul>
+<h2 id="證書"><a class="markdownIt-Anchor" href="#證書"></a> 證書</h2>
+<p>最後附上人生第一張Udemy證書XD</p>
+<p><img src="https://udemy-certificate.s3.amazonaws.com/image/UC-257H2F69.jpg?l=zh_TW" alt="Udemy證書" /></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/TechBlog/tags/Sublime-Text-3/" rel="tag"># Sublime Text 3</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TechBlog/2019/01/19/20190119-hex-chrome/" rel="prev" title="六角學院 Chrome 課程筆記（更新中）">
+      <i class="fa fa-chevron-left"></i> 六角學院 Chrome 課程筆記（更新中）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TechBlog/2019/01/22/20190122-hex-htmlcss/" rel="next" title="六角學院 HTML、CSS 課程筆記">
+      六角學院 HTML、CSS 課程筆記 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E8%88%87%E5%9F%BA%E7%A4%8E%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text"> 安裝與基礎操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D"><span class="nav-number">1.1.</span> <span class="nav-text"> 安裝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E8%A8%82%E7%B7%A8%E8%BC%AF%E5%99%A8%E5%A4%96%E8%A7%80"><span class="nav-number">1.2.</span> <span class="nav-text"> 自訂編輯器外觀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AA%BF%E6%95%B4%E8%A6%96%E7%AA%97"><span class="nav-number">1.3.</span> <span class="nav-text"> 調整視窗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%B4%E6%AC%84"><span class="nav-number">1.4.</span> <span class="nav-text"> 側欄</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E5%B0%8B%E6%AA%94%E6%A1%88%E5%8F%8A%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">1.5.</span> <span class="nav-text"> 搜尋檔案及程式碼</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%86%B1%E9%8D%B5"><span class="nav-number">1.6.</span> <span class="nav-text"> 常用熱鍵</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E5%88%86%E4%BA%AB"><span class="nav-number">2.</span> <span class="nav-text"> 插件分享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8package-control"><span class="nav-number">2.1.</span> <span class="nav-text"> 使用Package Control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#package-control"><span class="nav-number">2.2.</span> <span class="nav-text"> Package Control網站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#emmet"><span class="nav-number">2.3.</span> <span class="nav-text"> Emmet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autofilename"><span class="nav-number">2.4.</span> <span class="nav-text"> AutoFileName</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#goto-css-declaration"><span class="nav-number">2.5.</span> <span class="nav-text"> Goto-CSS-Declaration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sidebarenhancements"><span class="nav-number">2.6.</span> <span class="nav-text"> SideBarEnhancements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#html-css-js-prettify"><span class="nav-number">2.7.</span> <span class="nav-text"> HTML-CSS-JS Prettify</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%8F%92%E4%BB%B6"><span class="nav-number">2.8.</span> <span class="nav-text"> 其他插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AD%89%E6%9B%B8"><span class="nav-number">3.</span> <span class="nav-text"> 證書</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v8.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://clhuang224.github.io/TechBlog/2019/01/20/20190120-hex-sublime-text-3/";
+    this.page.identifier = "2019/01/20/20190120-hex-sublime-text-3/";
+    this.page.title = "六角學院 Sublime Text 3 課程筆記";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lynns-techblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

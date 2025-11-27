@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本作品大致製作完成，但在縮放視窗時，物件大小有誤；文章短期內不會更新。  這次的挑戰比較特別。 我看了這次直播的影片：《HTML5 Canvas 遊戲開發超入門#2》 X 《THE F2E 2nd》，覺得 Mick 老師介紹的 Phaser 遊戲框架很方便有趣，影片介紹也很詳盡，適合跟著做；所以嘗試用 Phaser 來製作這次的內容，也因此選了六角的設計稿。 雖然大部分是跟著直播影片做的，但因為">
+<meta property="og:type" content="article">
+<meta property="og:title" content="F2E 2nd 第五關「 90 秒挑戰遊戲」 挑戰筆記">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2019/08/13/20190813-f2e-2-w5-Game/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="本作品大致製作完成，但在縮放視窗時，物件大小有誤；文章短期內不會更新。  這次的挑戰比較特別。 我看了這次直播的影片：《HTML5 Canvas 遊戲開發超入門#2》 X 《THE F2E 2nd》，覺得 Mick 老師介紹的 Phaser 遊戲框架很方便有趣，影片介紹也很詳盡，適合跟著做；所以嘗試用 Phaser 來製作這次的內容，也因此選了六角的設計稿。 雖然大部分是跟著直播影片做的，但因為">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-08-13T12:10:23.000Z">
+<meta property="article:modified_time" content="2025-05-03T07:28:08.795Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Phaser">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/2019/08/13/20190813-f2e-2-w5-Game/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>F2E 2nd 第五關「 90 秒挑戰遊戲」 挑戰筆記 | Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2019/08/13/20190813-f2e-2-w5-Game/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          F2E 2nd 第五關「 90 秒挑戰遊戲」 挑戰筆記
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-08-13 20:10:23" itemprop="dateCreated datePublished" datetime="2019-08-13T20:10:23+08:00">2019-08-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E9%96%8B%E7%99%BC%E6%97%A5%E8%A8%98/" itemprop="url" rel="index"><span itemprop="name">開發日記</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2019/08/13/20190813-f2e-2-w5-Game/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/13/20190813-f2e-2-w5-Game/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>本作品大致製作完成，但在縮放視窗時，物件大小有誤；文章短期內不會更新。</p>
+</blockquote>
+<p>這次的挑戰比較特別。<br />
+我看了這次直播的影片：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=iXL4IbShoCQ">《HTML5 Canvas 遊戲開發超入門#2》 X 《THE F2E 2nd》</a>，覺得 Mick 老師介紹的 Phaser 遊戲框架很方便有趣，影片介紹也很詳盡，適合跟著做；所以嘗試用 Phaser 來製作這次的內容，也因此選了六角的設計稿。<br />
+雖然大部分是跟著直播影片做的，但因為直播介紹的跟設計稿的內容有點不同，所以我還是依據設計稿將細節調整過。</p>
+<h2 id="作品"><a class="markdownIt-Anchor" href="#作品"></a> 作品</h2>
+<p><a target="_blank" href="https://clhuang224.github.io/F2E_2nd/#W5">Lynn 的 F2E 2nd 作品列表 / 第五關： 90 秒挑戰遊戲</a></p>
+<span id="more"></span>
+<h2 id="設計稿"><a class="markdownIt-Anchor" href="#設計稿"></a> 設計稿</h2>
+<p>採用 <a target="_blank" rel="noopener" href="https://challenge.thef2e.com/user/2760?schedule=3808#works-3808">吳俊儀 Junior</a> 的設計稿。</p>
+<h2 id="基本結構"><a class="markdownIt-Anchor" href="#基本結構"></a> 基本結構</h2>
+<p>首先，在 HTML 中放入一個要產生遊戲內容的區塊，再引用 phaser 和自己的 .js 檔。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;game&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;js/lib/phaser.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;js/index.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>再來寫好遊戲的基本設定，宣告遊戲的實體。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">Phaser</span>.<span class="property">AUTO</span>,  <span class="comment">// 官方推薦的圖形呈現方式，如果瀏覽器支援就使用 WebGL，否則會使用 Canvas</span></span><br><span class="line">    <span class="attr">width</span>: gameWidth,</span><br><span class="line">    <span class="attr">height</span>: gameHeight</span><br><span class="line">    <span class="attr">parent</span>: <span class="string">&#x27;game&#x27;</span>,     <span class="comment">// 遊戲產生的區塊 id</span></span><br><span class="line">    <span class="attr">scene</span>: [            <span class="comment">// 場景物件</span></span><br><span class="line">        gameStart,</span><br><span class="line">        gamePlay,</span><br><span class="line">        gameEnd,</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">backgroundColor</span>: <span class="number">0x7EBE8D</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> game = <span class="keyword">new</span> <span class="title class_">Phaser</span>.<span class="title class_">Game</span>(config);</span><br></pre></td></tr></table></figure>
+<p>從上面可以看到，我將遊戲分為 gameStart 、 gamePlay 和 gameEnd 三個場景，再分別實作。<br />
+場景物件的結構如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> gameStart = &#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;gameStart&#x27;</span>,</span><br><span class="line">    <span class="attr">preload</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">// 載入時要執行的內容</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">create</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">// 進入場景時要執行的內容</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">update</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">// 更新畫面時要執行的內容</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接著就介紹各場景的實際內容。</p>
+<h2 id="game-start"><a class="markdownIt-Anchor" href="#game-start"></a> Game Start</h2>
+<p>如果以 HTML 、 CSS 的方式來思考，遊戲的起始畫面很簡單；就是左邊有一張圖，右邊有一個白色方塊，方塊裡面有標題、副標題和按鈕。<br />
+但在 Phaser 裡面，這些元素都是不同的物件，要先載入所需的資源，再宣告物件，並指定物件的行為。</p>
+<h3 id="preload"><a class="markdownIt-Anchor" href="#preload"></a> preload</h3>
+<p>先載入圖片：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">preload</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">load</span>.<span class="title function_">image</span>(<span class="string">&#x27;img-title&#x27;</span>, <span class="string">&#x27;./img/img-title.png&#x27;</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">load</span>.<span class="title function_">image</span>(<span class="string">&#x27;text-title&#x27;</span>, <span class="string">&#x27;./img/txt-title.png&#x27;</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">load</span>.<span class="title function_">image</span>(<span class="string">&#x27;text-subtitle&#x27;</span>, <span class="string">&#x27;./img/txt-subtitle.png&#x27;</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">load</span>.<span class="title function_">image</span>(<span class="string">&#x27;button&#x27;</span>, <span class="string">&#x27;./img/btn-press-start.png&#x27;</span>);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>待續</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/TechBlog/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/TechBlog/tags/Phaser/" rel="tag"># Phaser</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TechBlog/2019/08/12/20190812-f2e-2-w4-Payment/" rel="prev" title="F2E 2nd 第四關「線上支付」 挑戰筆記">
+      <i class="fa fa-chevron-left"></i> F2E 2nd 第四關「線上支付」 挑戰筆記
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TechBlog/2019/11/03/20191103-hex-jsunderground-01/" rel="next" title="JS 新手地下城 F1 「九九乘法表」 挑戰筆記">
+      JS 新手地下城 F1 「九九乘法表」 挑戰筆記 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E5%93%81"><span class="nav-number">1.</span> <span class="nav-text"> 作品</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%AD%E8%A8%88%E7%A8%BF"><span class="nav-number">2.</span> <span class="nav-text"> 設計稿</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%B5%90%E6%A7%8B"><span class="nav-number">3.</span> <span class="nav-text"> 基本結構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#game-start"><span class="nav-number">4.</span> <span class="nav-text"> Game Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#preload"><span class="nav-number">4.1.</span> <span class="nav-text"> preload</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v8.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://clhuang224.github.io/TechBlog/2019/08/13/20190813-f2e-2-w5-Game/";
+    this.page.identifier = "2019/08/13/20190813-f2e-2-w5-Game/";
+    this.page.title = "F2E 2nd 第五關「 90 秒挑戰遊戲」 挑戰筆記";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lynns-techblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

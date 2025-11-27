@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文為觀看用 jQuery 打造互動性網頁動畫效果的紀錄。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="六角學院 jQuery 課程筆記">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2019/02/07/20190207-hex-jquery/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="本文為觀看用 jQuery 打造互動性網頁動畫效果的紀錄。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://udemy-certificate.s3.amazonaws.com/image/UC-DL9XOIXW.jpg?l=null">
+<meta property="article:published_time" content="2019-02-07T14:57:14.000Z">
+<meta property="article:modified_time" content="2025-05-03T07:28:08.774Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="jQuery">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://udemy-certificate.s3.amazonaws.com/image/UC-DL9XOIXW.jpg?l=null">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/2019/02/07/20190207-hex-jquery/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>六角學院 jQuery 課程筆記 | Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2019/02/07/20190207-hex-jquery/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          六角學院 jQuery 課程筆記
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-02-07 22:57:14" itemprop="dateCreated datePublished" datetime="2019-02-07T22:57:14+08:00">2019-02-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E7%B7%9A%E4%B8%8A%E8%AA%B2%E7%A8%8B%E8%A7%80%E7%9C%8B%E7%AD%86%E8%A8%98/" itemprop="url" rel="index"><span itemprop="name">線上課程觀看筆記</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2019/02/07/20190207-hex-jquery/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/07/20190207-hex-jquery/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文為觀看<a target="_blank" rel="noopener" href="https://www.udemy.com/jquery-learning/">用 jQuery 打造互動性網頁動畫效果</a>的紀錄。</p>
+<span id="more"></span>
+<h2 id="jquery-入門"><a class="markdownIt-Anchor" href="#jquery-入門"></a> jQuery 入門</h2>
+<h3 id="簡介"><a class="markdownIt-Anchor" href="#簡介"></a> 簡介</h3>
+<p>jQuery是由JS寫成，兼容許多瀏覽器的函式庫。</p>
+<h3 id="用chorme測試與偵錯"><a class="markdownIt-Anchor" href="#用chorme測試與偵錯"></a> 用Chorme測試與偵錯</h3>
+<ul>
+<li>可以用Chrome的console直接寫jquery測試；Chrome是用V8引擎，渲染JS很快。</li>
+<li>可以觀察inline css的變化</li>
+</ul>
+<h3 id="安裝"><a class="markdownIt-Anchor" href="#安裝"></a> <a target="_blank" rel="noopener" href="http://jquery.com/">安裝</a></h3>
+<ul>
+<li>下載壓縮版本，節省網頁空間。</li>
+</ul>
+<blockquote>
+<p>slim版本會少一些功能。</p>
+</blockquote>
+<h3 id="載入及使用"><a class="markdownIt-Anchor" href="#載入及使用"></a> 載入及使用</h3>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--載入--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;位址&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用（等待 HTML DOM 都載入後才執行ready裡的程式碼）</span></span><br><span class="line">$(<span class="variable language_">document</span>).<span class="title function_">ready</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;程式碼&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="jquery插件"><a class="markdownIt-Anchor" href="#jquery插件"></a> <a target="_blank" rel="noopener" href="https://packagecontrol.io/packages/jQuery">jQuery插件</a></h3>
+<h2 id="選擇器與事件"><a class="markdownIt-Anchor" href="#選擇器與事件"></a> 選擇器與事件</h2>
+<h3 id="click"><a class="markdownIt-Anchor" href="#click"></a> <a target="_blank" rel="noopener" href="https://api.jquery.com/click">Click</a>、<a target="_blank" rel="noopener" href="https://api.jquery.com/category/effects/basics/">Show、Hide、Toggle</a></h3>
+<blockquote>
+<p>hide()和css(“display”,“none”)的差異是，hide()會記錄原本的值，使用show()會變回原本的屬性</p>
+</blockquote>
+<p class="codepen" data-height="216" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="YBaqov" style="height: 216px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="JQ3.13~16 練習">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/YBaqov/">
+  JQ3.13~16 練習</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h3 id="jquery-quick-api-reference"><a class="markdownIt-Anchor" href="#jquery-quick-api-reference"></a> <a target="_blank" rel="noopener" href="https://oscarotero.com/jquery/">jQuery Quick API Reference</a></h3>
+<h2 id="更多動畫效果"><a class="markdownIt-Anchor" href="#更多動畫效果"></a> 更多動畫效果</h2>
+<h3 id="sliding"><a class="markdownIt-Anchor" href="#sliding"></a> <a target="_blank" rel="noopener" href="https://api.jquery.com/category/effects/sliding/">Sliding</a> 和 <a target="_blank" rel="noopener" href="https://api.jquery.com/category/effects/fading/">Fading</a></h3>
+<p class="codepen" data-height="247" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="wNmQMb" style="height: 247px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="JQ 3.18~19 練習 slide fade">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/wNmQMb/">
+  JQ 3.18~19 練習 slide fade</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h3 id="class-attibute"><a class="markdownIt-Anchor" href="#class-attibute"></a> <a target="_blank" rel="noopener" href="https://api.jquery.com/category/manipulation/class-attribute/">Class Attibute</a>、<a target="_blank" rel="noopener" href="https://www.w3schools.com/css/css3_transitions.asp">CSS Transitions</a></h3>
+<p class="codepen" data-height="228" data-theme-id="0" data-default-tab="html,result" data-user="chiaya710623" data-slug-hash="ZwxZOx" style="height: 228px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="JQuery 4.20練習">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/ZwxZOx/">
+  JQuery 4.20練習</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h3 id="overflow-hiddentransition組合技"><a class="markdownIt-Anchor" href="#overflow-hiddentransition組合技"></a> 「overflow: hidden」+「transition」組合技</h3>
+<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="chiaya710623" data-slug-hash="jdzRXx" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="JQ 4.21練習">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/jdzRXx/">
+  JQ 4.21練習</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h3 id="鏈式寫法"><a class="markdownIt-Anchor" href="#鏈式寫法"></a> 鏈式寫法</h3>
+<p>method可以相連，會連續產生效果。</p>
+<h3 id="chrome-開發人員工具"><a class="markdownIt-Anchor" href="#chrome-開發人員工具"></a> Chrome 開發人員工具</h3>
+<p>可以用chrome開發人員工具sources的部分幫助調整動畫效果。</p>
+<h2 id="css-jquery-的動畫效果"><a class="markdownIt-Anchor" href="#css-jquery-的動畫效果"></a> CSS + jQuery 的動畫效果</h2>
+<h3 id="preventdefalt"><a class="markdownIt-Anchor" href="#preventdefalt"></a> <a target="_blank" rel="noopener" href="https://www.w3schools.com/jquery/event_preventdefault.asp">.preventDefalt()</a></h3>
+<p>.preventDefalt()可以取消預設事件，例如改變瀏覽器大小、點擊、滾輪、送出表單等。</p>
+<blockquote>
+<p>即使寫&lt;a herf=“”&gt;不會連結到別的畫面，還是有跳到id錨點或瀏覽器頂部的效果，所以可以利用preventDefalt一併取消。</p>
+</blockquote>
+<h3 id="css"><a class="markdownIt-Anchor" href="#css"></a> <a target="_blank" rel="noopener" href="https://www.w3schools.com/jquery/jquery_css.asp">.css()</a></h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;p&quot;</span>).<span class="title function_">css</span>(&#123;<span class="string">&quot;background-color&quot;</span>: <span class="string">&quot;yellow&quot;</span>, <span class="string">&quot;font-size&quot;</span>: <span class="string">&quot;200%&quot;</span>&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以用「“”」移除css()加上去的屬性</p>
+</blockquote>
+<h3 id="下拉式選單設計"><a class="markdownIt-Anchor" href="#下拉式選單設計"></a> 下拉式選單設計</h3>
+<ul>
+<li>透過toggle類型的method，切換選單顯示與否，也可以同時切換選單的樣式。</li>
+<li>在同時有多個選單時，可以用「this」等selector指定作用的對象。</li>
+<li>使用setTimeout可以延遲CSS改變的時間，但內部無法直接使用「this」，所以需要存在變數中。</li>
+<li>可以利用「event.stopPropagation();」和選擇html，使點擊選單以外的地方時，會將選單收起來。</li>
+</ul>
+<p class="codepen" data-height="255" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="NoOdEB" style="height: 255px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="jQuery 5.27 下拉式選單">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/NoOdEB/">
+  jQuery 5.27 下拉式選單</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h3 id="delay"><a class="markdownIt-Anchor" href="#delay"></a> <a target="_blank" rel="noopener" href="https://api.jquery.com/delay/">.delay()</a></h3>
+<p>.delay()能延遲後續的動畫效果。</p>
+<ul>
+<li>show()之類的要寫秒數</li>
+<li>removeClass等無法使用，可以用<a target="_blank" rel="noopener" href="https://www.w3schools.com/jsref/met_win_settimeout.asp">setTimeout()</a></li>
+</ul>
+<blockquote>
+<p>同時用toggleClass跟jQuery的動畫可能會有一些衝突</p>
+</blockquote>
+<p class="codepen" data-height="264" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="omQGLd" style="height: 264px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="jQuery 5.28 delay練習">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/omQGLd/">
+  jQuery 5.28 delay練習</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h3 id="字體切換功能使用css"><a class="markdownIt-Anchor" href="#字體切換功能使用css"></a> 字體切換功能：使用css()</h3>
+<p class="codepen" data-height="276" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="JxezGw" style="height: 276px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="5.29 字體切換功能">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/JxezGw/">
+  5.29 字體切換功能</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<blockquote>
+<p>用range的數值調整字體大小</p>
+</blockquote>
+<p class="codepen" data-height="251" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="ErOMXG" style="height: 251px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="用range調整字體大小">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/ErOMXG/">
+  用range調整字體大小</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h3 id="可關閉廣告設計"><a class="markdownIt-Anchor" href="#可關閉廣告設計"></a> 可關閉廣告設計</h3>
+<p class="codepen" data-height="235" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="dawdze" style="height: 235px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="jQuerfy 5.30關閉廣告">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/dawdze/">
+  jQuerfy 5.30關閉廣告</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h3 id="stop"><a class="markdownIt-Anchor" href="#stop"></a> <a target="_blank" rel="noopener" href="https://api.jquery.com/stop/">.stop()</a></h3>
+<blockquote>
+<p>如果按很多下動畫，但只按一次stop()，就只會停止當下的動畫，而繼續跑後面的動畫；<br />
+使用.stop(true).jumpToEnd(true)可以直接跳到整個動畫最後而停止。</p>
+</blockquote>
+<p class="codepen" data-height="329" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="daLOgR" style="height: 329px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="jQuery 5.31 .stop()">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/daLOgR/">
+  jQuery 5.31 .stop()</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h3 id="off-canvas-menu"><a class="markdownIt-Anchor" href="#off-canvas-menu"></a> off-Canvas Menu</h3>
+<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="RvXRGV" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="jQuery 5.32 用offCanvas製作選單">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/RvXRGV/">
+  jQuery 5.32 用offCanvas製作選單</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h3 id="animatecss"><a class="markdownIt-Anchor" href="#animatecss"></a> <a target="_blank" rel="noopener" href="https://daneden.github.io/animate.css/">Animate.css</a></h3>
+<ul>
+<li>元素含有animated和動畫名稱的類別時會發生動畫</li>
+<li>利用事件加上類別名稱產生動畫</li>
+<li>單純加上事件而不消除的話，會只能點擊一次，可以透過兩種方法解決：
+<ul>
+<li>利用官方寫好的<a target="_blank" rel="noopener" href="https://github.com/daneden/animate.css">function animateCss(element, animationName, callback)</a></li>
+<li>利用.one(‘webkitAnimationEnd oanimationend msAnimationEnd animationend’, function(event) { /* … */ });，設定動畫結束時移除類別</li>
+</ul>
+</li>
+</ul>
+<p class="codepen" data-height="249" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="PVMzVB" style="height: 249px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="jQuery 5.33 Animate.css">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/PVMzVB/">
+  jQuery 5.33 Animate.css</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h2 id="操控網頁元素"><a class="markdownIt-Anchor" href="#操控網頁元素"></a> 操控網頁元素</h2>
+<h3 id="tree-traversal"><a class="markdownIt-Anchor" href="#tree-traversal"></a> <a target="_blank" rel="noopener" href="https://api.jquery.com/category/traversing/tree-traversal/">Tree Traversal</a></h3>
+<ul>
+<li>this：我（觸發函式的元素）</li>
+<li>「.~~()」※沒有參數
+<ul>
+<li>.offsetParent()：從長輩中找positioned（position為relative、absolute或fixed）且最近的一個人</li>
+</ul>
+</li>
+<li>「.~~(FILTER)」
+<ul>
+<li>.parents()：所有長輩</li>
+<li>.parent()：父母</li>
+<li>.siblings()：所有兄弟姊妹</li>
+<li>.prevAll()：所有兄姊</li>
+<li>.prev()：前一個兄姊</li>
+<li>.next()：後一個弟妹</li>
+<li>.nextAll()：所有弟妹</li>
+<li>.children()：兒子女兒</li>
+<li>.find() ：子孫後代們</li>
+<li>.closest()：從我開始往長輩中找符合選擇器且最近的一個人</li>
+</ul>
+</li>
+<li>「.~~Until(不包含的人, FILTER)」
+<ul>
+<li>.parentsUntil()：所有長輩但不包含括號的人跟再往上的長輩</li>
+<li>.prevUntil()：所有兄姊但不包含括號的人跟更大的兄姊</li>
+<li>.nextUntil()：所有弟妹但不包含括號的人跟更小的弟妹</li>
+</ul>
+</li>
+</ul>
+<h3 id="利用tree-traversal設計選單"><a class="markdownIt-Anchor" href="#利用tree-traversal設計選單"></a> 利用Tree Traversal設計選單</h3>
+<p class="codepen" data-height="243" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="PLYgWB" style="height: 243px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="jQuery 6.38 QA選單練習">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/PLYgWB/">
+  jQuery 6.38 QA選單練習</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h3 id="dom-insertion-inside"><a class="markdownIt-Anchor" href="#dom-insertion-inside"></a> <a target="_blank" rel="noopener" href="https://api.jquery.com/category/manipulation/dom-insertion-inside/">DOM Insertion, Inside</a></h3>
+<ul>
+<li>.html()：取得html內容</li>
+<li>.html(程式碼)：以文字或function的回傳值放入html內容</li>
+<li>.text()：取得文字內容（xml也可以用）</li>
+<li>.text(程式碼)：以文字或function的回傳值放入文字</li>
+</ul>
+<p class="codepen" data-height="389" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="ZPEMJz" style="height: 389px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="jQuery 6.40 DOM Insertion, Inside">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/ZPEMJz/">
+  jQuery 6.40 DOM Insertion, Inside</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h3 id="on"><a class="markdownIt-Anchor" href="#on"></a> .on()</h3>
+<p>監聽特定區塊的事件，才能產生效果。</p>
+<p class="codepen" data-height="291" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="VRYjdY" style="height: 291px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="jQuery 6.41 on()">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/VRYjdY/">
+  jQuery 6.41 on()</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h2 id="常用小技巧"><a class="markdownIt-Anchor" href="#常用小技巧"></a> 常用小技巧</h2>
+<h3 id="general-attributes"><a class="markdownIt-Anchor" href="#general-attributes"></a> <a target="_blank" rel="noopener" href="http://api.jquery.com/category/manipulation/general-attributes/">General Attributes</a></h3>
+<p>.attr()：取得或放入屬性</p>
+<h3 id="dom-removal"><a class="markdownIt-Anchor" href="#dom-removal"></a> <a target="_blank" rel="noopener" href="https://api.jquery.com/category/manipulation/dom-removal/">DOM Removal</a></h3>
+<p>.remove()：移除html標籤</p>
+<blockquote>
+<p>真正從畫面中消失，而非隱藏，方便管理畫面中的資料</p>
+</blockquote>
+<p class="codepen" data-height="252" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="rRabpX" style="height: 252px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="jQuery 7.45 remove()">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/rRabpX/">
+  jQuery 7.45 remove()</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h3 id="scrolltop"><a class="markdownIt-Anchor" href="#scrolltop"></a> <a target="_blank" rel="noopener" href="https://api.jquery.com/scrollTop/">.scrollTop()</a></h3>
+<p class="codepen" data-height="249" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="zbxXmG" style="height: 249px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="7.46 Top anchor滾動效果">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/zbxXmG/">
+  7.46 Top anchor滾動效果</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h3 id="font-awesome"><a class="markdownIt-Anchor" href="#font-awesome"></a> <a target="_blank" rel="noopener" href="https://fontawesome.com/">Font Awesome</a></h3>
+<blockquote>
+<p>用「<a target="_blank" rel="noopener" href="https://www.w3schools.com/cssref/css_selectors.asp">[attribute$=value]</a>」之類的選擇器，指定特定連結</p>
+</blockquote>
+<p class="codepen" data-height="282" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="GeJRvg" style="height: 282px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="jQuery 7.47 Font Awesome ">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/GeJRvg/">
+  jQuery 7.47 Font Awesome </a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h2 id="第三方plugin"><a class="markdownIt-Anchor" href="#第三方plugin"></a> 第三方Plugin</h2>
+<h3 id="lightbox"><a class="markdownIt-Anchor" href="#lightbox"></a> <a target="_blank" rel="noopener" href="https://lokeshdhakar.com/projects/lightbox2/">Lightbox</a></h3>
+<ul>
+<li>商品圖等等經常是使用小圖，讓使用者可以看大圖。</li>
+<li>透過官網裡提供的設定方法，或自己修改css，更改成想要的樣式；要暴力壓過<a target="_blank" rel="noopener" href="http://cssspecificity.com/">權重</a>可以使用!important。</li>
+</ul>
+<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="pYJebZ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="jQuery 7.49~50 Lightbox">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/pYJebZ/">
+  jQuery 7.49~50 Lightbox</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h3 id="swiper"><a class="markdownIt-Anchor" href="#swiper"></a> <a target="_blank" rel="noopener" href="http://idangero.us/swiper/">Swiper</a></h3>
+<blockquote>
+<p>上線的網頁用min的版本比較節省資源</p>
+</blockquote>
+<p class="codepen" data-height="316" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="pYjeya" style="height: 316px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="jQuery 8.51 Swiper">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/pYjeya/">
+  jQuery 8.51 Swiper</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h3 id="lightbox-swiper-組合技"><a class="markdownIt-Anchor" href="#lightbox-swiper-組合技"></a> Lightbox + Swiper 組合技</h3>
+<ul>
+<li>引用jQuery的順序：jQuery本人→第三方插件→自己寫的jQuery</li>
+<li>引用CSS的順序：Reset→自己寫的CSS→第三方插件</li>
+<li>利用on:…使Swiper生成後，移除複本，避免被Lightbox計算到</li>
+</ul>
+<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="chiaya710623" data-slug-hash="oVYXER" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="8.55 Lightbox + Swiper">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623/pen/oVYXER/">
+  8.55 Lightbox + Swiper</a> by Lynn Huang (<a target="_blank" rel="noopener" href="https://codepen.io/chiaya710623">@chiaya710623</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h2 id="如何更精進"><a class="markdownIt-Anchor" href="#如何更精進"></a> 如何更精進</h2>
+<h3 id="類別管理撇步"><a class="markdownIt-Anchor" href="#類別管理撇步"></a> 類別管理撇步</h3>
+<p>一般的CSS類別名稱就直接取；jQuery中要用到的類別名稱可以加個jq-前綴。</p>
+<h2 id="證書"><a class="markdownIt-Anchor" href="#證書"></a> 證書</h2>
+<p><img src="https://udemy-certificate.s3.amazonaws.com/image/UC-DL9XOIXW.jpg?l=null" alt="證書" /></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/TechBlog/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/TechBlog/tags/jQuery/" rel="tag"># jQuery</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TechBlog/2019/01/22/20190122-hex-htmlcss/" rel="prev" title="六角學院 HTML、CSS 課程筆記">
+      <i class="fa fa-chevron-left"></i> 六角學院 HTML、CSS 課程筆記
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TechBlog/2019/05/22/20190522-hex-javascript/" rel="next" title="六角學院 JavaScript 入門篇 課程筆記">
+      六角學院 JavaScript 入門篇 課程筆記 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#jquery-%E5%85%A5%E9%96%80"><span class="nav-number">1.</span> <span class="nav-text"> jQuery 入門</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B0%A1%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text"> 簡介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8chorme%E6%B8%AC%E8%A9%A6%E8%88%87%E5%81%B5%E9%8C%AF"><span class="nav-number">1.2.</span> <span class="nav-text"> 用Chorme測試與偵錯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D"><span class="nav-number">1.3.</span> <span class="nav-text"> 安裝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BC%89%E5%85%A5%E5%8F%8A%E4%BD%BF%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text"> 載入及使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jquery%E6%8F%92%E4%BB%B6"><span class="nav-number">1.5.</span> <span class="nav-text"> jQuery插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%B8%E6%93%87%E5%99%A8%E8%88%87%E4%BA%8B%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text"> 選擇器與事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#click"><span class="nav-number">2.1.</span> <span class="nav-text"> Click、Show、Hide、Toggle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jquery-quick-api-reference"><span class="nav-number">2.2.</span> <span class="nav-text"> jQuery Quick API Reference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9A%E5%8B%95%E7%95%AB%E6%95%88%E6%9E%9C"><span class="nav-number">3.</span> <span class="nav-text"> 更多動畫效果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sliding"><span class="nav-number">3.1.</span> <span class="nav-text"> Sliding 和 Fading</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#class-attibute"><span class="nav-number">3.2.</span> <span class="nav-text"> Class Attibute、CSS Transitions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#overflow-hiddentransition%E7%B5%84%E5%90%88%E6%8A%80"><span class="nav-number">3.3.</span> <span class="nav-text"> 「overflow: hidden」+「transition」組合技</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%8F%88%E5%BC%8F%E5%AF%AB%E6%B3%95"><span class="nav-number">3.4.</span> <span class="nav-text"> 鏈式寫法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chrome-%E9%96%8B%E7%99%BC%E4%BA%BA%E5%93%A1%E5%B7%A5%E5%85%B7"><span class="nav-number">3.5.</span> <span class="nav-text"> Chrome 開發人員工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css-jquery-%E7%9A%84%E5%8B%95%E7%95%AB%E6%95%88%E6%9E%9C"><span class="nav-number">4.</span> <span class="nav-text"> CSS + jQuery 的動畫效果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#preventdefalt"><span class="nav-number">4.1.</span> <span class="nav-text"> .preventDefalt()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css"><span class="nav-number">4.2.</span> <span class="nav-text"> .css()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E6%8B%89%E5%BC%8F%E9%81%B8%E5%96%AE%E8%A8%AD%E8%A8%88"><span class="nav-number">4.3.</span> <span class="nav-text"> 下拉式選單設計</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delay"><span class="nav-number">4.4.</span> <span class="nav-text"> .delay()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E9%AB%94%E5%88%87%E6%8F%9B%E5%8A%9F%E8%83%BD%E4%BD%BF%E7%94%A8css"><span class="nav-number">4.5.</span> <span class="nav-text"> 字體切換功能：使用css()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%97%9C%E9%96%89%E5%BB%A3%E5%91%8A%E8%A8%AD%E8%A8%88"><span class="nav-number">4.6.</span> <span class="nav-text"> 可關閉廣告設計</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stop"><span class="nav-number">4.7.</span> <span class="nav-text"> .stop()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#off-canvas-menu"><span class="nav-number">4.8.</span> <span class="nav-text"> off-Canvas Menu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#animatecss"><span class="nav-number">4.9.</span> <span class="nav-text"> Animate.css</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E6%8E%A7%E7%B6%B2%E9%A0%81%E5%85%83%E7%B4%A0"><span class="nav-number">5.</span> <span class="nav-text"> 操控網頁元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tree-traversal"><span class="nav-number">5.1.</span> <span class="nav-text"> Tree Traversal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8tree-traversal%E8%A8%AD%E8%A8%88%E9%81%B8%E5%96%AE"><span class="nav-number">5.2.</span> <span class="nav-text"> 利用Tree Traversal設計選單</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dom-insertion-inside"><span class="nav-number">5.3.</span> <span class="nav-text"> DOM Insertion, Inside</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#on"><span class="nav-number">5.4.</span> <span class="nav-text"> .on()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%B0%8F%E6%8A%80%E5%B7%A7"><span class="nav-number">6.</span> <span class="nav-text"> 常用小技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#general-attributes"><span class="nav-number">6.1.</span> <span class="nav-text"> General Attributes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dom-removal"><span class="nav-number">6.2.</span> <span class="nav-text"> DOM Removal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scrolltop"><span class="nav-number">6.3.</span> <span class="nav-text"> .scrollTop()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#font-awesome"><span class="nav-number">6.4.</span> <span class="nav-text"> Font Awesome</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9plugin"><span class="nav-number">7.</span> <span class="nav-text"> 第三方Plugin</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lightbox"><span class="nav-number">7.1.</span> <span class="nav-text"> Lightbox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swiper"><span class="nav-number">7.2.</span> <span class="nav-text"> Swiper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lightbox-swiper-%E7%B5%84%E5%90%88%E6%8A%80"><span class="nav-number">7.3.</span> <span class="nav-text"> Lightbox + Swiper 組合技</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%9B%B4%E7%B2%BE%E9%80%B2"><span class="nav-number">8.</span> <span class="nav-text"> 如何更精進</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%9E%E5%88%A5%E7%AE%A1%E7%90%86%E6%92%87%E6%AD%A5"><span class="nav-number">8.1.</span> <span class="nav-text"> 類別管理撇步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AD%89%E6%9B%B8"><span class="nav-number">9.</span> <span class="nav-text"> 證書</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v8.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://clhuang224.github.io/TechBlog/2019/02/07/20190207-hex-jquery/";
+    this.page.identifier = "2019/02/07/20190207-hex-jquery/";
+    this.page.title = "六角學院 jQuery 課程筆記";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lynns-techblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="在練習寫網頁的過程中，難免會有偷瞄別人的作品的時候。有時會看到「這次練習一下 Grid 排版」之類的註解，但一直只知道 Bootstrap 是以格線系統為主，而沒有實際去了解過相關的知識。 最近看到有人大推 CSS Grid ，不禁覺得很好奇，於是就來好好了解一番。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS Grid">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2020/03/07/20200307-css-grid/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="在練習寫網頁的過程中，難免會有偷瞄別人的作品的時候。有時會看到「這次練習一下 Grid 排版」之類的註解，但一直只知道 Bootstrap 是以格線系統為主，而沒有實際去了解過相關的知識。 最近看到有人大推 CSS Grid ，不禁覺得很好奇，於是就來好好了解一番。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/03/07/20200307-css-grid/01.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/03/07/20200307-css-grid/02.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/03/07/20200307-css-grid/03.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/03/07/20200307-css-grid/04.png">
+<meta property="article:published_time" content="2020-03-07T14:53:33.000Z">
+<meta property="article:modified_time" content="2025-05-03T07:28:08.825Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://clhuang224.github.io/TechBlog/2020/03/07/20200307-css-grid/01.png">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/2020/03/07/20200307-css-grid/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>CSS Grid | Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/03/07/20200307-css-grid/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSS Grid
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-03-07 22:53:33" itemprop="dateCreated datePublished" datetime="2020-03-07T22:53:33+08:00">2020-03-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E6%8A%80%E8%A1%93%E7%9F%AD%E6%96%87/" itemprop="url" rel="index"><span itemprop="name">技術短文</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/03/07/20200307-css-grid/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/07/20200307-css-grid/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在練習寫網頁的過程中，難免會有偷瞄別人的作品的時候。有時會看到「這次練習一下 Grid 排版」之類的註解，但一直只知道 Bootstrap 是以格線系統為主，而沒有實際去了解過相關的知識。<br />
+最近看到有人大推 CSS Grid ，不禁覺得很好奇，於是就來好好了解一番。</p>
+<span id="more"></span>
+<h2 id="什麼是-css-grid"><a class="markdownIt-Anchor" href="#什麼是-css-grid"></a> 什麼是 CSS Grid</h2>
+<p>CSS Grid 是以格線為基礎的佈局系統，用欄列取代 float 或 position 的排版方式。<br />
+Grid 與 Flex 的差異是，Flex 只能針對一個維度來排版， Grid 則是針對兩個維度。<br />
+目前大部分的瀏覽器都有支援 Grid 。</p>
+<h2 id="基本佈局"><a class="markdownIt-Anchor" href="#基本佈局"></a> 基本佈局</h2>
+<p>我們可以想像 Grid 的排版方式就像在方格紙（作筆記的那種）上畫格子一樣。<br />
+所以大概有三個步驟：</p>
+<ol>
+<li>拿張紙</li>
+<li>印方格</li>
+<li>畫格子</li>
+</ol>
+<h3 id="拿張紙"><a class="markdownIt-Anchor" href="#拿張紙"></a> 拿張紙</h3>
+<p>就像使用 canvas 或 flex 一樣，我們要先指定想要在哪塊地方使用 grid ，也就是指定 grid 的外部容器。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 就決定是你了！ --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span>&#123;</span><br><span class="line">    <span class="attribute">display</span>: grid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="01.png" alt="拿張紙" /></p>
+<h3 id="印方格"><a class="markdownIt-Anchor" href="#印方格"></a> 印方格</h3>
+<p>方格筆記紙之所以好用，是因為我們可以決定我們寫一個字上去要佔幾格、每一行又要隔幾格，這樣筆記就會變得很整齊漂亮。<br />
+所以在決定了 grid 的外部容器之後，我們要先決定這個元素裡面的行列數。<br />
+和方格紙不同的是，每一行每一列的寬高是可以不同的；可以想像成方格紙、稿紙、有注音格子的稿紙這類的差異；總之是可以自由定義的。</p>
+<p><img src="02.png" alt="印方格" /></p>
+<p>以上圖來說，這是有 3 個 row 和 4 個 column 的 template （模板）；每個 row 和 每個 column 的寬度是相等的。<br />
+要指定外部容器的模板，要用 grid-template-columns 及 grid-template-rows ，或者用 grid-template 寫在一起。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span>&#123;</span><br><span class="line">    <span class="comment">/* 可以用 pixel 寫死每格的寬度 */</span></span><br><span class="line">    <span class="attribute">grid-template-columns</span>: <span class="number">50px</span> <span class="number">50px</span> <span class="number">50px</span> <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">grid-template-rows</span>: <span class="number">50px</span> <span class="number">50px</span> <span class="number">50px</span> <span class="number">50px</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 或是寫成這樣 */</span></span><br><span class="line">    <span class="attribute">grid-template</span>: <span class="number">50px</span> <span class="number">50px</span> <span class="number">50px</span> <span class="number">50px</span> / <span class="number">50px</span> <span class="number">50px</span> <span class="number">50px</span> <span class="number">50px</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 讓第一欄和第四欄自動伸展就用 auto */</span></span><br><span class="line">    <span class="attribute">grid-template</span>: <span class="number">50px</span> <span class="number">50px</span> <span class="number">50px</span> <span class="number">50px</span> / auto <span class="number">50px</span> <span class="number">50px</span> auto;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 或是用 fr 指定比例 */</span></span><br><span class="line">    <span class="attribute">grid-template-columns</span>: <span class="number">1</span>fr <span class="number">2</span>fr <span class="number">2</span>fr <span class="number">1</span>fr; <span class="comment">/* 1:2:2:1 */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 格子超多的時候還可以用 repeat() */</span></span><br><span class="line">    <span class="attribute">grid-template-columns</span>: <span class="built_in">repeat</span>(<span class="number">12</span>, <span class="number">1</span>fr);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* pixel 和 fr 混搭的狀況下，是先將 pixel 扣除後才分配比例 */</span></span><br><span class="line">    <span class="attribute">grid-template-columns</span>: <span class="number">100px</span> <span class="number">1</span>fr <span class="number">2</span>fr <span class="number">1</span>fr; <span class="comment">/* 左攔為 100px ，剩下的空間為 1:2:1 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果希望格子之間可以有一些空白，但是不希望最邊邊的格子外側有空白，可以用 gap 來設定。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span>&#123;</span><br><span class="line">    <span class="comment">/* 可以分別設定行列 */</span></span><br><span class="line">    <span class="attribute">grid-column</span>-<span class="attribute">gap</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">grid-row</span>-<span class="attribute">gap</span>: <span class="number">5px</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 或寫在一起 */</span></span><br><span class="line">    <span class="attribute">grid-gap</span>: <span class="number">5px</span> <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="畫格子"><a class="markdownIt-Anchor" href="#畫格子"></a> 畫格子</h3>
+<p>印好自己的稿紙之後，就可以在上面作畫了。<br />
+假設我們想排版成下圖這樣：</p>
+<p><img src="03.png" alt="畫格子" /></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item a&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item b&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item c&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item d&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item e&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item f&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>以 a 為例；我們可以這樣表達：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.a</span> &#123;</span><br><span class="line">    <span class="comment">/* a 佔兩欄 */</span></span><br><span class="line">    <span class="attribute">grid-column</span>: span <span class="number">2</span>;</span><br><span class="line">    <span class="comment">/* a 佔兩列 */</span></span><br><span class="line">    <span class="attribute">grid-row</span>: span <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而 b 的部分如果照上面的方式，你會發現 b 在 a 的右邊，而不是在下面；這是因為 grid 中的元素預設是以由左到右、由上到下的方式自動排列。<br />
+如果想解決這個問題，一種方式是改變 HTML 標籤的順序，另一種是直接指定 grid 的位置。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.b</span> &#123;</span><br><span class="line">    <span class="comment">/* 從欄的第一條線開始 */</span></span><br><span class="line">    <span class="attribute">grid-column-start</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="comment">/* 到欄的第三條線 */</span></span><br><span class="line">    <span class="attribute">grid-column-end</span>: <span class="number">3</span>;</span><br><span class="line">    <span class="comment">/* 從列的第一條線開始 */</span></span><br><span class="line">    <span class="attribute">grid-row-start</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="comment">/* 到列的第三條線 */</span></span><br><span class="line">    <span class="attribute">grid-row-end</span>: <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 以上可以簡化成兩句話 */</span></span><br><span class="line">    <span class="attribute">grid-column</span>: <span class="number">1</span> / <span class="number">3</span>;</span><br><span class="line">    <span class="attribute">grid-row</span>: <span class="number">1</span> / <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 又可以再簡化為一句 */</span></span><br><span class="line">    <span class="attribute">grid-area</span>: <span class="number">1</span> / <span class="number">1</span> / <span class="number">3</span> / <span class="number">3</span>; <span class="comment">/* row-start / column-start / row-end / column-end */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果覺得線的編號有點不親切，可以幫線命名（同一條線可以有多個名稱）。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">grid-template-columns</span>: [col-<span class="number">1</span>-start] <span class="number">1</span>fr [col-<span class="number">1</span>-end col-<span class="number">2</span>-start] <span class="number">1</span>fr [col-<span class="number">2</span>-end];</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.b</span>&#123;</span><br><span class="line">    <span class="attribute">grid-column</span>: col-<span class="number">1</span>-start / col-<span class="number">2</span>-end;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外 grid 排列的方式是可以更改的。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="comment">/* row | column | row dense | column dense */</span></span><br><span class="line">    <span class="attribute">grid-auto-flow</span>: column;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>除了直接指定子元素的所佔的格子範圍，我們也可以先幫格子範圍取好名稱，再讓子元素認領。<br />
+以 e 為例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 在父元素先規範好區塊 */</span></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">grid-template-areas</span>: <span class="string">&quot;a a d d&quot;</span></span><br><span class="line">                         <span class="string">&quot;a a e f&quot;</span></span><br><span class="line">                         <span class="string">&quot;b c e f&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 在子元素說說自己想要的地盤 */</span></span><br><span class="line"><span class="selector-class">.e</span> &#123;</span><br><span class="line">    <span class="attribute">grid-area</span>: e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用 grid-template-areas 的方便之處在於，設計響應式網頁時，只要改動一個屬性就可以大幅更改排版方式。</p>
+<p class="codepen" data-height="270" data-theme-id="default" data-default-tab="css,result" data-user="clhuang224" data-slug-hash="wvaPqev" style="height: 270px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="CSS grid-template-areas">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/wvaPqev">
+  CSS grid-template-areas</a> by Lynn (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<p>另外 grid-template-areas 如果出現非矩形的範圍（比如說 T 形），排版會失敗。</p>
+<h2 id="術語"><a class="markdownIt-Anchor" href="#術語"></a> 術語</h2>
+<p>說到這裡，可能會覺得說格子有點容易混淆，因此可以來認識一下 Grid 的術語。</p>
+<ul>
+<li>Container ：指定 display: grid 的元素</li>
+<li>Item ：Container 下一層的子元素</li>
+<li>Line ：格線</li>
+<li>Track ：一個欄或列</li>
+<li>Cell ：一個格子</li>
+<li>Area ：四條線之間的區域，包含多個格子</li>
+</ul>
+<h2 id="對齊語法"><a class="markdownIt-Anchor" href="#對齊語法"></a> 對齊語法</h2>
+<p>當 item 有特定寬高而它的 area 又不是 auto 時，就可能會出現 item 比 area 小，而預設靠左上的情形。</p>
+<p><img src="04.png" alt="預設對齊" /></p>
+<p>如果想要置中或是用特定的方式排列，可以用下面的語法。</p>
+<h3 id="container-的設定"><a class="markdownIt-Anchor" href="#container-的設定"></a> Container 的設定</h3>
+<p>我們可以在 container 針對不同的方向及基準來設定對齊方式。</p>
+<h4 id="方向"><a class="markdownIt-Anchor" href="#方向"></a> 方向</h4>
+<ul>
+<li>justify ：水平方向</li>
+<li>align ：垂直方向</li>
+<li>place ：水平及垂直方向</li>
+</ul>
+<h4 id="基準"><a class="markdownIt-Anchor" href="#基準"></a> 基準</h4>
+<ul>
+<li>items ：所有 item 相對於 area 的位置
+<ul>
+<li>start 、 end 、 center 、 stretch</li>
+</ul>
+</li>
+<li>content ：所有 area 相對於 container 的位置
+<ul>
+<li>start 、 end 、 center 、 stretch 、 space-evenly 、 space-between 、 space-around</li>
+</ul>
+</li>
+</ul>
+<p>例如所有 item 針對 area 垂直置中並水平撐滿、所有 area 針對 container 水平方向平均分配內部的空白：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span>&#123;</span><br><span class="line">    <span class="attribute">place-items</span>: center stretch;</span><br><span class="line">    <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="item-的設定"><a class="markdownIt-Anchor" href="#item-的設定"></a> Item 的設定</h3>
+<p>如果有比較特立獨行的 item ，則可以用 ___-self 來設定。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* .c 針對自己的 area 水平垂直置中 */</span></span><br><span class="line"><span class="selector-class">.c</span>&#123;</span><br><span class="line">    <span class="attribute">place-self</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上就是有關 CSS Grid 的基礎知識。</p>
+<h2 id="參考資料"><a class="markdownIt-Anchor" href="#參考資料"></a> 參考資料</h2>
+<p><a target="_blank" rel="noopener" href="https://css-tricks.com/snippets/css/complete-guide-grid/">A Complete Guide to Grid | CSS-Tricks</a><br />
+<a target="_blank" rel="noopener" href="https://www.minwt.com/webdesign-dev/css/19881.html">[教學] CSS3 Grid 原生網格系統，讓版面編排更靈活 | 梅問題．教學網</a><br />
+<a target="_blank" rel="noopener" href="https://gridbyexample.com/">Grid by Example</a><br />
+<a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2017/02/03/css-grid-intro/">與 CSS Grid 的第一次接觸</a><br />
+<a target="_blank" rel="noopener" href="https://wcc723.github.io/css/2017/03/22/css-grid-layout/">CSS Grid 屬性介紹 | 卡斯伯 Blog - 前端，沒有極限</a><br />
+<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/CSS/CSS_Grid_Layout">CSS格線布局 - CSS | MDN</a></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/TechBlog/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/TechBlog/tags/w3HexSchool/" rel="tag"># w3HexSchool</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/02/20/20200220-android-createNewProject/" rel="prev" title="【 Android 開發入門 02 】開啟專案、設定模擬器與裝置">
+      <i class="fa fa-chevron-left"></i> 【 Android 開發入門 02 】開啟專案、設定模擬器與裝置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/03/15/20200315-vue-i18n/" rel="next" title="Vue I18n 實作多國語系">
+      Vue I18n 實作多國語系 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-css-grid"><span class="nav-number">1.</span> <span class="nav-text"> 什麼是 CSS Grid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%88%E5%B1%80"><span class="nav-number">2.</span> <span class="nav-text"> 基本佈局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%BF%E5%BC%B5%E7%B4%99"><span class="nav-number">2.1.</span> <span class="nav-text"> 拿張紙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B0%E6%96%B9%E6%A0%BC"><span class="nav-number">2.2.</span> <span class="nav-text"> 印方格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%95%AB%E6%A0%BC%E5%AD%90"><span class="nav-number">2.3.</span> <span class="nav-text"> 畫格子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%93%E8%AA%9E"><span class="nav-number">3.</span> <span class="nav-text"> 術語</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8D%E9%BD%8A%E8%AA%9E%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text"> 對齊語法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#container-%E7%9A%84%E8%A8%AD%E5%AE%9A"><span class="nav-number">4.1.</span> <span class="nav-text"> Container 的設定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E5%90%91"><span class="nav-number">4.1.1.</span> <span class="nav-text"> 方向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%BA%96"><span class="nav-number">4.1.2.</span> <span class="nav-text"> 基準</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#item-%E7%9A%84%E8%A8%AD%E5%AE%9A"><span class="nav-number">4.2.</span> <span class="nav-text"> Item 的設定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text"> 參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v8.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://clhuang224.github.io/TechBlog/2020/03/07/20200307-css-grid/";
+    this.page.identifier = "2020/03/07/20200307-css-grid/";
+    this.page.title = "CSS Grid";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lynns-techblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

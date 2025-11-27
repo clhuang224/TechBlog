@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本作品更新的進度到能夠新增、刪除番茄鐘，及更改番茄鐘的鈴聲；尚無編輯及統計番茄的功能。 短期內不會進行更新。  期待這個活動已久，今天總算開賽了！ 希望能在過程中將自己還不會的坑盡量補上，也將這些坑記錄在網誌中。  作品 Lynn 的 F2E 2nd 作品列表 &#x2F; 第一關：番茄鐘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="F2E 2nd 第一關「蕃茄鐘」 挑戰筆記">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="本作品更新的進度到能夠新增、刪除番茄鐘，及更改番茄鐘的鈴聲；尚無編輯及統計番茄的功能。 短期內不會進行更新。  期待這個活動已久，今天總算開賽了！ 希望能在過程中將自己還不會的坑盡量補上，也將這些坑記錄在網誌中。  作品 Lynn 的 F2E 2nd 作品列表 &#x2F; 第一關：番茄鐘">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/01.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/02.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/03.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/04.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/05.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/06.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/07.gif">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/11.gif">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/08.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/12.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/09.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/10.png">
+<meta property="article:published_time" content="2019-07-08T04:06:03.000Z">
+<meta property="article:modified_time" content="2025-05-03T07:28:08.776Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/01.png">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>F2E 2nd 第一關「蕃茄鐘」 挑戰筆記 | Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          F2E 2nd 第一關「蕃茄鐘」 挑戰筆記
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-07-08 12:06:03" itemprop="dateCreated datePublished" datetime="2019-07-08T12:06:03+08:00">2019-07-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E9%96%8B%E7%99%BC%E6%97%A5%E8%A8%98/" itemprop="url" rel="index"><span itemprop="name">開發日記</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/08/20190708-f2e-2-w1-Pomodoro/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>本作品更新的進度到能夠新增、刪除番茄鐘，及更改番茄鐘的鈴聲；尚無編輯及統計番茄的功能。<br />
+短期內不會進行更新。</p>
+</blockquote>
+<p>期待這個活動已久，今天總算開賽了！<br />
+希望能在過程中將自己還不會的坑盡量補上，也將這些坑記錄在網誌中。</p>
+<h2 id="作品"><a class="markdownIt-Anchor" href="#作品"></a> 作品</h2>
+<p><a target="_blank" href="https://clhuang224.github.io/F2E_2nd/#W1">Lynn 的 F2E 2nd 作品列表 / 第一關：番茄鐘</a></p>
+<span id="more"></span>
+<h3 id="設計稿"><a class="markdownIt-Anchor" href="#設計稿"></a> 設計稿</h3>
+<p>這次的精神時光屋分為設計組跟前端組，前端組可以使用設計組的成果來製作網頁。<br />
+由於剛開賽，目前只有一個<a target="_blank" rel="noopener" href="https://xd.adobe.com/spec/4f6eb081-4411-4b48-69ae-34b92df3f3e4-395f/">設計稿</a>，因此決定採用這個設計。</p>
+<h4 id="使用資源"><a class="markdownIt-Anchor" href="#使用資源"></a> 使用資源</h4>
+<p>設計稿裡面有提供所使用的字體、Icon及音效來源。</p>
+<h5 id="字體"><a class="markdownIt-Anchor" href="#字體"></a> 字體</h5>
+<p>設計稿中所使用的字體為Google提供的<a target="_blank" rel="noopener" href="https://fonts.google.com/specimen/Roboto">Roboto</a>，在網頁中選擇字體後，就會產生用來嵌入字體的語法；將語法貼到頁面的 &lt;head&gt; 就可以了。</p>
+<p><img src="01.png" alt="嵌入字體" /></p>
+<h5 id="icon"><a class="markdownIt-Anchor" href="#icon"></a> Icon</h5>
+<p><a target="_blank" rel="noopener" href="https://material.io/tools/icons/?style=baseline">Material Design &gt; Tools &gt; Icons</a></p>
+<p>會用到的Icon名稱如下：</p>
+<ul>
+<li>play_circle_filled</li>
+<li>play_circle_outline</li>
+<li>pause_circle_filled</li>
+<li>list</li>
+<li>library_music</li>
+<li>assessment</li>
+</ul>
+<h2 id="初試啼聲"><a class="markdownIt-Anchor" href="#初試啼聲"></a> 初試啼聲</h2>
+<blockquote>
+<p>由於沒什麼經驗，以下採取亂無章法「有什麼做什麼」的流水帳方式。</p>
+</blockquote>
+<h3 id="html-結構"><a class="markdownIt-Anchor" href="#html-結構"></a> HTML 結構</h3>
+<p>原先我想可以把設計稿的版面可以分為兩頁：一是主要的番茄鐘畫面，二是其他的功能。其他功能雖然又分為三頁，但可以用隱藏區塊的方式做在同一頁上。<br />
+排著排著我發現，其實右邊的選單跟大標可以一直固定在同樣的位置，而左邊區塊分成番茄鐘跟其他功能。所以可以把所有區塊都寫在同一個 *.html 中。</p>
+<p>以下是有點長又充滿註解的 HTML 結構（還有很多細節要修改）：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 左大塊（顯示timer或window） --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;timer&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- timer的配色分為工作跟休息兩種 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;ADD A NEW MISSON...&quot;</span> <span class="attr">id</span>=<span class="string">&quot;addMission&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h2</span> <span class="attr">id</span>=<span class="string">&quot;currentMission&quot;</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- todolist裡的第一個內容 --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 還要產生數到第幾個圈圈 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;time&quot;</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 剩餘時間 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;todo&quot;</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 產生待辦節點&lt;li&gt; 內含項目符號圈圈和右邊的 play_circle_outline --&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 使timer隱藏 window打開 todolist打開 --&gt;</span></span><br><span class="line">                MORE</span><br><span class="line">            <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;play&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 外框線 &gt; 大圓 &gt; play_circle_filled 和 正方形 --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 計時時 變成 白色大圓 和 pause_circle_filled 正方形反白 還有外圈在跑 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;window&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;menu&quot;</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- .active的選項外觀不同 --&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;img/baseline-list-24px.svg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span>TO-DO LIST<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;img/baseline-assessment-24px.svg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span>ANALYTICS<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;img/baseline-library_music-24px.svg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span>RINGTONES<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;bottom&quot;</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 把.timer&gt;.play 和 .timer&gt;.left&gt;.time 和 #currentMission拿來 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- window的右邊區塊（顯示todolist或analytics或ringtones） --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;todolist&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 把#addMission挪來 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>TO-DO<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;dropdown&quot;</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 產生待辦事項的li --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 打勾之後要重刷資料 會移到done去 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>DONE<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;dropdown&quot;</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 產生已做完的todolist的li --&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;analytics&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>FOCUS TIME<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 顯示累積的番茄 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>CHART<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 顯示圖表 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;ringtones&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>WORK<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;work&quot;</span> <span class="attr">value</span>=<span class="string">&quot;NONE&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h3</span>&gt;</span>BREAK<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">name</span>=<span class="string">&quot;break&quot;</span> <span class="attr">value</span>=<span class="string">&quot;NONE&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- // window的右邊區塊（顯示todolist或analytics或ringtones） --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- //左大塊（顯示timer或window） --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- timer時顯示menu window時顯示X --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;menu&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>POMODORO<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果看起來太雜亂，以下是示意圖：</p>
+<p><img src="02.png" alt="HTML結構" /></p>
+<h3 id="css-撰寫"><a class="markdownIt-Anchor" href="#css-撰寫"></a> CSS 撰寫</h3>
+<blockquote>
+<p>由於沒有用什麼厲害技術，一切採取「總之刻就對了」的態度。</p>
+</blockquote>
+<h4 id="css-reset"><a class="markdownIt-Anchor" href="#css-reset"></a> CSS Reset</h4>
+<p>使用<a target="_blank" rel="noopener" href="https://meyerweb.com/eric/tools/css/reset/">myeyerweb.com</a>的reset。</p>
+<h4 id="大區塊排版"><a class="markdownIt-Anchor" href="#大區塊排版"></a> 大區塊排版</h4>
+<p>首先要讓網頁的門面是對的，所以先從一進入網頁就會看到的畫面著手，也將一開始不會顯示的區塊隱藏起來。</p>
+<p>依據原本的架構，應該在 body 用 width:1280px ，後來想到應該讓整個畫面置中，所以增加了 .wrap 包在 body 裡面。<br />
+而右邊的 .right 區塊，除了取名實在有點弱我不愛之外（？），想了想其實它應該是 header ，所以改為 &lt;header&gt; 標籤。<br />
+結構調整如下：<br />
+<img src="03.png" alt="調整後的排版" /></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 隱藏.window */</span></span><br><span class="line"><span class="selector-class">.window</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 設定各大區塊寬度、排列方式及背景顏色 */</span></span><br><span class="line"><span class="selector-class">.wrap</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">1280px</span>;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.timer</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">86.9375%</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#FFEDF7</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to right, <span class="number">#FFEDF7</span> <span class="number">75.4545%</span>, <span class="number">#003164</span> <span class="number">24.5455%</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.timer</span> <span class="selector-class">.content</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50.9091%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">800px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.timer</span> <span class="selector-class">.play</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">49.0909%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">800px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">header</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">14.0625%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">800px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#003164</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="header排版"><a class="markdownIt-Anchor" href="#header排版"></a> &lt;header&gt;排版</h4>
+<p>header 分為上面的連結部分，和下面的標題部分；用 flexbox 將兩者靠右、貼上跟貼下，再用 margin 和 transition 調整位置。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">header</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: flex-end;</span><br><span class="line">    <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">header</span> <span class="selector-tag">ul</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">36px</span>;</span><br><span class="line">    <span class="attribute">margin-right</span>: <span class="number">85px</span>;</span><br><span class="line">    <span class="attribute">min-height</span>: auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">header</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">48px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">36px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">36px</span>;</span><br><span class="line">    <span class="attribute">fill</span>: <span class="number">#FFF</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">header</span> <span class="selector-tag">h1</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">24px</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">36px</span>;</span><br><span class="line">    <span class="attribute">font-family</span>: Roboto;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#FFF</span>;</span><br><span class="line">    <span class="attribute">transform-origin</span>: <span class="number">100%</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">90deg</span>) <span class="built_in">translateX</span>(<span class="number">121px</span>);</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">85px</span> <span class="number">48px</span> <span class="number">0px</span> <span class="number">0px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">165px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="svg-處理"><a class="markdownIt-Anchor" href="#svg-處理"></a> SVG 處理</h4>
+<p>要如何使用並調整 *.svg 的尺寸跟顏色呢？</p>
+<p>1 將 *.svg 中的原始碼貼到 HTML 檔中。<br />
+2 將 width 和 height 刪除，使其大小自適應父元素。<br />
+3 觀察一下 path 是 icon 的哪個部分，用 fill 屬性上色。</p>
+<p>到此為止，網站的樣貌：</p>
+<p><img src="04.png" alt="網站進展狀況" /></p>
+<h4 id="timer-排版"><a class="markdownIt-Anchor" href="#timer-排版"></a> .timer 排版</h4>
+<p>.timer 分為左側的主要資訊和右側的播放大圓。架構經過調整後如下：<br />
+<img src="05.png" alt=".timer 架構" /></p>
+<h5 id="主要資訊"><a class="markdownIt-Anchor" href="#主要資訊"></a> 主要資訊</h5>
+<p>在網頁的左上方能讓使用者輸入新的事項，在框格右側有一個＋的按鈕可以點擊。<br />
+這邊我用 input 和 button 並排，讓它看起來像是一體成形。<br />
+一個可以注意的細節是，按鈕點擊之後會有一個藍框框，可以用 outline: none 去除。</p>
+<p>當下事項、時間及待辦事項大略如架構圖那樣排版，但因為使用 flexbox ，還加了一些 &lt;div&gt; 幫助排版。<br />
+這部分寫得有點土法煉鋼（經常用寬度撐排版之類的），希望之後能夠調整得更簡潔。</p>
+<h5 id="播放大圓"><a class="markdownIt-Anchor" href="#播放大圓"></a> 播放大圓</h5>
+<p>這裡大概是整個排版裡面我最不懂的部分XD<br />
+原先以為需要用一個外框、一個內圓、計時的扇形和兩個按鈕，後來發現可以只用一個 &lt;div&gt; 設邊框，再用漸層色弄出透明的部分。<br />
+內部的元素則用絕對定位處理。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.timer</span> <span class="selector-class">.play</span> &#123;</span><br><span class="line">    <span class="attribute">min-width</span>: <span class="number">540px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">540px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">#FF4384</span> <span class="number">4px</span> solid;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">130px</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">radial-gradient</span>(<span class="number">#FF4384</span> <span class="number">251px</span>, transparent <span class="number">19px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外到底要如何讓圓的邊邊隨著計時而填滿呢？<br />
+爬文找到這一篇：<a target="_blank" rel="noopener" href="https://www.oxxostudio.tw/articles/201503/css-pie-chart.html">OOXXStudo 純 CSS 繪製圓餅圖</a><br />
+這到寫 JavaScript 的時候一同解決。</p>
+<p>到此為止，網站的樣貌：</p>
+<p><img src="06.png" alt="網站進展狀況" /></p>
+<h3 id="撰寫主畫面功能"><a class="markdownIt-Anchor" href="#撰寫主畫面功能"></a> 撰寫主畫面功能</h3>
+<blockquote>
+<p>寫到這裡，發現先將連結和一些功能完成，之後再增加其他功能比較容易做下去。因此先處理主畫面的功能部分。</p>
+</blockquote>
+<h4 id="資料結構"><a class="markdownIt-Anchor" href="#資料結構"></a> 資料結構</h4>
+<p>1 網頁需要一個陣列來裝當天待辦事項；每個待辦事項包含內容、時間和是否已完成。<br />
+2 在 Analytics 需要用日期區間查詢完成的番茄數量，可以從資料中以年月日作為 key 找到特定日期的番茄數。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">todolist =</span><br><span class="line">    [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">content</span>: <span class="title class_">String</span>(), <span class="comment">// 待辦項目的內容文字</span></span><br><span class="line">            <span class="attr">time</span>: <span class="number">25</span>*<span class="number">60</span>,       <span class="comment">// 剩餘時間</span></span><br><span class="line">            <span class="attr">done</span>: <span class="title class_">Boolean</span>(),   <span class="comment">// 用來辨認是否完成</span></span><br><span class="line">        &#125;,</span><br><span class="line">    ];</span><br><span class="line">tomatoRecord =</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">YYYY</span>: &#123;</span><br><span class="line">            <span class="attr">MM</span>:</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">DD</span>: <span class="title class_">Number</span>();</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="新增-刪除待辦事項"><a class="markdownIt-Anchor" href="#新增-刪除待辦事項"></a> 新增 / 刪除待辦事項</h4>
+<p>欠了太多總是要還的（？）。由於我還沒有真的好好學過怎麼監聽事件，所以也不確定自己的方法算不算很土法煉鋼。<br />
+總而言之先用 onclick 屬性來裝 function ，讓番茄能自由進出 todolist ，也能更新畫面。</p>
+<p>新增的部分，就是在點擊輸入框格的＋按鈕時，把輸入框格的內容放進 todolist 中。<br />
+但我在做的時候很在意表單驗證的問題，不知道為什麼很不想把外層改成 &lt;form&gt; ，又堅持想要用 HTML5 的 required 自動驗證。<br />
+爬文了一圈之後，還是妥協把上層改為 &lt;form&gt; 了……即便如此，現在還有一個問題是，點完按鈕後， input 的 focus 狀態消不掉，還會顯示表單驗證的訊息，感覺不太好看。</p>
+<p>另外有個排版的小細節是在 &lt;input&gt; 和 &lt;button&gt; 之間不能換行，不然會有接縫。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">&quot;addMission&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;ADD A NEW MISSON...&quot;</span> <span class="attr">onblur</span>=<span class="string">&quot;this.placeholder=&#x27;ADD A NEW MISSON...&#x27;&quot;</span> <span class="attr">onfocus</span>=<span class="string">&quot;this.placeholder = &#x27;&#x27;&quot;</span> <span class="attr">required</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">&quot;addMission();&quot;</span>&gt;</span>＋<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">addMission</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> input = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.timer input&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (input.<span class="property">validity</span>.<span class="property">valid</span>) &#123;</span><br><span class="line">        todolist.<span class="title function_">push</span>(</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">content</span>: input.<span class="property">value</span>,</span><br><span class="line">                <span class="attr">time</span>: <span class="number">25</span> * <span class="number">60</span>,</span><br><span class="line">                <span class="attr">done</span>: <span class="literal">false</span></span><br><span class="line">            &#125;);</span><br><span class="line">        input.<span class="property">value</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="title function_">update</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>刪除的部分就把第一筆資料拿掉（在 JavaScript 中是用 shift() ）；更新則需要稍微考慮一下空陣列的狀況。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 刪除待辦事項</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">deleteMission</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (todolist.<span class="property">length</span> != <span class="number">0</span>) &#123;</span><br><span class="line">        todolist.<span class="title function_">shift</span>();</span><br><span class="line">        <span class="title function_">update</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更新畫面</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">update</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> currentMission = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.currentMission h2&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> todoAmount = todolist.<span class="property">length</span>;</span><br><span class="line">    <span class="keyword">let</span> todoUl = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.timer ul&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> timeDiv = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.timer .time&#x27;</span>);</span><br><span class="line">    <span class="keyword">let</span> more = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.container a&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (todolist.<span class="property">length</span> == <span class="number">0</span>) &#123;</span><br><span class="line">        currentMission.<span class="property">textContent</span> = <span class="string">&#x27;TO-DO LIST IS EMPTY&#x27;</span>;</span><br><span class="line">        todoUl.<span class="property">innerHTML</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        timeDiv.<span class="property">textContent</span> = <span class="string">&#x27;我心已空&#x27;</span>;</span><br><span class="line">        more.<span class="title function_">setAttribute</span>(<span class="string">&#x27;style&#x27;</span>,<span class="string">&#x27;display:none&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 顯示當下事項</span></span><br><span class="line">        currentMission.<span class="property">textContent</span> = todolist[<span class="number">0</span>].<span class="property">content</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 顯示待辦事項</span></span><br><span class="line">        todoUl.<span class="property">innerHTML</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; todoAmount &amp;&amp; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">let</span> newLi = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;li&#x27;</span>);</span><br><span class="line">            newLi.<span class="property">innerHTML</span> = <span class="string">&#x27;&lt;div class=&quot;listCircle&quot;&gt;&lt;/div&gt;&lt;p&gt;&#x27;</span> + todolist[i].<span class="property">content</span> + <span class="string">&#x27;&lt;/p&gt;&lt;button&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M0 0h24v24H0z&quot; fill=&quot;#FFEDF7&quot; /&gt;&lt;path d=&quot;M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z&quot; filled=&quot;#003164&quot; /&gt;&lt;/svg&gt;&lt;/button&gt;&#x27;</span>;</span><br><span class="line">            todoUl.<span class="title function_">appendChild</span>(newLi);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> time = todolist[<span class="number">0</span>].<span class="property">time</span>;</span><br><span class="line">        timeDiv.<span class="property">textContent</span> = (time / <span class="number">60</span> &lt; <span class="number">10</span> ? <span class="string">&#x27;0&#x27;</span> : <span class="string">&#x27;&#x27;</span>) + <span class="title class_">Math</span>.<span class="title function_">floor</span>(todolist[<span class="number">0</span>].<span class="property">time</span> / <span class="number">60</span>) + <span class="string">&#x27;:&#x27;</span> + (time % <span class="number">60</span> &lt; <span class="number">10</span> ? <span class="string">&#x27;0&#x27;</span> : <span class="string">&#x27;&#x27;</span>) + todolist[<span class="number">0</span>].<span class="property">time</span> % <span class="number">60</span>;</span><br><span class="line">        more.<span class="title function_">setAttribute</span>(<span class="string">&#x27;style&#x27;</span>,<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，我的心開始像那用完的番茄一樣空（已開始語無倫次）：<br />
+<img src="07.gif" alt="網站進展狀況" /></p>
+<hr />
+<h2 id="大幅調整"><a class="markdownIt-Anchor" href="#大幅調整"></a> 大幅調整</h2>
+<p>由於自己跟 JavaScript 太不熟，無法很快速想像出適當的程式結構，加上時間不足，最後只好先放棄寫文，埋頭狂寫再說。<br />
+以下簡單敘述趕工的狀況。</p>
+<h3 id="更換圖檔"><a class="markdownIt-Anchor" href="#更換圖檔"></a> 更換圖檔</h3>
+<p>由於無法解決 &lt;svg&gt; 透明背景顯示為灰色的問題，我把圖檔全部改為 .png ，並且以 background-image 的方式呈現。<br />
+不同顏色的圖檔全部分為不同的檔案，放棄用 CSS 上色的方式。<br />
+不過我發現繪製 &lt;svg&gt; 的方式和 &lt;canvas&gt; 很像，之後可以繼續研究。</p>
+<h3 id="改變資料結構"><a class="markdownIt-Anchor" href="#改變資料結構"></a> 改變資料結構</h3>
+<p>將原本在物件中標記是否完成的方式，改為分別的 todolist 和 donelist ，方便管理。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> todolist = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">content</span>: <span class="string">&#x27;THE FIRST THING TO DO TODAY&#x27;</span>, <span class="comment">// 事項內容</span></span><br><span class="line">        <span class="attr">working</span>: <span class="literal">false</span>, <span class="comment">// 是否為工作中</span></span><br><span class="line">        <span class="attr">time</span>: <span class="number">3</span>, <span class="comment">// 剩餘秒數</span></span><br><span class="line">        <span class="attr">tomato</span>: <span class="number">2</span>, <span class="comment">// 累積番茄數</span></span><br><span class="line">    &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> doneList = [];</span><br></pre></td></tr></table></figure>
+<h3 id="addeventlistener"><a class="markdownIt-Anchor" href="#addeventlistener"></a> addEventListener()</h3>
+<p>前面提到我用了 onclick 的方式加上事件，後來去惡補六角的課程，發現應該用 addEventListener() 比較好維護，於是全部改用了。</p>
+<h3 id="番茄鐘功能"><a class="markdownIt-Anchor" href="#番茄鐘功能"></a> 番茄鐘功能</h3>
+<p>這部分我原本依據印象，想使用 setTimeout() 和 while 來重複執行，沒想到這樣只會使瀏覽器完全卡住；掙扎許久才改用 setInterval() ，發現完全不困難－－<br />
+但是因為時間不夠，所以並沒有做出大圓外側和小圓圈填滿的動畫效果。</p>
+<p>休息狀態改為藍色樣式的方式是在 .wrap 上加上 .break ，並逐一改變顏色樣式；在讀秒完時，顏色就會自動改變，也會有音效。</p>
+<p><img src="11.gif" alt="Clock" /></p>
+<h3 id="管理與統計待辦事項"><a class="markdownIt-Anchor" href="#管理與統計待辦事項"></a> 管理與統計待辦事項</h3>
+<p>這部分實在來不及做，只切好頁面就先放著。<br />
+下拉式選單的三角形是用 CSS 畫的，在網路上找到一個方便的工具：<a target="_blank" rel="noopener" href="http://apps.eky.hk/css-triangle-generator/zh-hant">CSS三角形產生器</a>。</p>
+<p><img src="08.png" alt="TO-DO LIST" /></p>
+<p>長條圖的結構如下：</p>
+<p><img src="12.png" alt=".chart" /></p>
+<p><img src="09.png" alt="ANYLYTICS" /></p>
+<h3 id="選擇音效"><a class="markdownIt-Anchor" href="#選擇音效"></a> 選擇音效</h3>
+<p>在 RINGTONES 頁面需要使用自訂的項目符號來選擇音效，爬文找到可以用 &lt;label for=“ID”&gt; 來做整個項目的呈現，並把 &lt;input id=“ID”&gt; 隱藏。<br />
+然而這樣的做法似乎是因應需要以 &lt;form&gt; 將資料傳出的狀況，而我的程式是在選項有所變動後，直接做出反應，所以最後我只有留下必要的標籤。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;radio&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;none&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;radioCircle&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;radioText&quot;</span>&gt;</span>none<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>CSS 的部分是在 &lt;button&gt; 含有 .checked 時，會改變 .radioCircle 的樣式。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.window</span> <span class="selector-class">.ringtones</span> <span class="selector-class">.radio</span> <span class="selector-tag">button</span> <span class="selector-class">.radioCircle</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">18px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">18px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">#FFF</span> <span class="number">2px</span> solid;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">2px</span> <span class="number">6px</span> <span class="number">2px</span> <span class="number">2px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.window</span> <span class="selector-class">.ringtones</span> <span class="selector-class">.radio</span> <span class="selector-tag">button</span><span class="selector-class">.checked</span> <span class="selector-class">.radioCircle</span> &#123;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">radial-gradient</span>(<span class="number">#FF4384</span> <span class="number">5px</span>, transparent <span class="number">4px</span>);</span><br><span class="line">    <span class="attribute">border-color</span>: <span class="number">#FF4384</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而 JavaSript 的部分則是偵測 change 事件來做出反應；包含改變樣式和改變音效兩個部分。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ringtonesWorkRadios = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;.ringtones .work .radio button&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; ringtonesWorkRadios.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (ringtonesWorkRadios[i].<span class="property">className</span> == workRing) &#123;</span><br><span class="line">        ringtonesWorkRadios[i].<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;checked&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    ringtonesWorkRadios[i].<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; ringtonesWorkRadios.<span class="property">length</span>; j++) &#123;</span><br><span class="line">            ringtonesWorkRadios[j].<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;checked&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        workRing = ringtonesWorkRadios[i].<span class="property">className</span>;</span><br><span class="line">        ringtonesWorkRadios[i].<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;checked&#x27;</span>);</span><br><span class="line">        <span class="keyword">switch</span> (workRing) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;none&#x27;</span>:</span><br><span class="line">                workAudio.<span class="property">src</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;default&#x27;</span>:</span><br><span class="line">                workAudio.<span class="property">src</span> = <span class="string">&#x27;music/alarm.mp3&#x27;</span>;</span><br><span class="line">                workAudio.<span class="title function_">play</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="attr">default</span>:</span><br><span class="line">                workAudio.<span class="property">src</span> = <span class="string">&#x27;music/&#x27;</span> + workRing + <span class="string">&#x27;.mp3&#x27;</span>;</span><br><span class="line">                workAudio.<span class="title function_">play</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="10.png" alt="RINGTONES" /></p>
+<h2 id="小結"><a class="markdownIt-Anchor" href="#小結"></a> 小結</h2>
+<p>以上，可能文章和功能多有遺漏，但是因為活動還在持續進行，必須往第二關邁進。<br />
+如果有機會，希望能把功能做完，或者利用框架等比較厲害的技術，將網頁做得更完整也更簡潔。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/TechBlog/tags/HTML/" rel="tag"># HTML</a>
+              <a href="/TechBlog/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/TechBlog/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TechBlog/2019/05/22/20190522-hex-javascript/" rel="prev" title="六角學院 JavaScript 入門篇 課程筆記">
+      <i class="fa fa-chevron-left"></i> 六角學院 JavaScript 入門篇 課程筆記
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TechBlog/2019/07/22/20190722-f2e-2-w2-FreeCell/" rel="next" title="F2E 2nd 第二關「新接龍」 挑戰筆記">
+      F2E 2nd 第二關「新接龍」 挑戰筆記 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E5%93%81"><span class="nav-number">1.</span> <span class="nav-text"> 作品</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E8%A8%88%E7%A8%BF"><span class="nav-number">1.1.</span> <span class="nav-text"> 設計稿</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%B3%87%E6%BA%90"><span class="nav-number">1.1.1.</span> <span class="nav-text"> 使用資源</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E9%AB%94"><span class="nav-number">1.1.1.1.</span> <span class="nav-text"> 字體</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#icon"><span class="nav-number">1.1.1.2.</span> <span class="nav-text"> Icon</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E8%A9%A6%E5%95%BC%E8%81%B2"><span class="nav-number">2.</span> <span class="nav-text"> 初試啼聲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#html-%E7%B5%90%E6%A7%8B"><span class="nav-number">2.1.</span> <span class="nav-text"> HTML 結構</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css-%E6%92%B0%E5%AF%AB"><span class="nav-number">2.2.</span> <span class="nav-text"> CSS 撰寫</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#css-reset"><span class="nav-number">2.2.1.</span> <span class="nav-text"> CSS Reset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%A7%E5%8D%80%E5%A1%8A%E6%8E%92%E7%89%88"><span class="nav-number">2.2.2.</span> <span class="nav-text"> 大區塊排版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#header%E6%8E%92%E7%89%88"><span class="nav-number">2.2.3.</span> <span class="nav-text"> &lt;header&gt;排版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#svg-%E8%99%95%E7%90%86"><span class="nav-number">2.2.4.</span> <span class="nav-text"> SVG 處理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#timer-%E6%8E%92%E7%89%88"><span class="nav-number">2.2.5.</span> <span class="nav-text"> .timer 排版</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E8%B3%87%E8%A8%8A"><span class="nav-number">2.2.5.1.</span> <span class="nav-text"> 主要資訊</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%92%AD%E6%94%BE%E5%A4%A7%E5%9C%93"><span class="nav-number">2.2.5.2.</span> <span class="nav-text"> 播放大圓</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%92%B0%E5%AF%AB%E4%B8%BB%E7%95%AB%E9%9D%A2%E5%8A%9F%E8%83%BD"><span class="nav-number">2.3.</span> <span class="nav-text"> 撰寫主畫面功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B"><span class="nav-number">2.3.1.</span> <span class="nav-text"> 資料結構</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E-%E5%88%AA%E9%99%A4%E5%BE%85%E8%BE%A6%E4%BA%8B%E9%A0%85"><span class="nav-number">2.3.2.</span> <span class="nav-text"> 新增 &#x2F; 刪除待辦事項</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E5%B9%85%E8%AA%BF%E6%95%B4"><span class="nav-number">3.</span> <span class="nav-text"> 大幅調整</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%8F%9B%E5%9C%96%E6%AA%94"><span class="nav-number">3.1.</span> <span class="nav-text"> 更換圖檔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%AE%8A%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B"><span class="nav-number">3.2.</span> <span class="nav-text"> 改變資料結構</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#addeventlistener"><span class="nav-number">3.3.</span> <span class="nav-text"> addEventListener()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%95%AA%E8%8C%84%E9%90%98%E5%8A%9F%E8%83%BD"><span class="nav-number">3.4.</span> <span class="nav-text"> 番茄鐘功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E8%88%87%E7%B5%B1%E8%A8%88%E5%BE%85%E8%BE%A6%E4%BA%8B%E9%A0%85"><span class="nav-number">3.5.</span> <span class="nav-text"> 管理與統計待辦事項</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%B8%E6%93%87%E9%9F%B3%E6%95%88"><span class="nav-number">3.6.</span> <span class="nav-text"> 選擇音效</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%B5%90"><span class="nav-number">4.</span> <span class="nav-text"> 小結</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v8.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://clhuang224.github.io/TechBlog/2019/07/08/20190708-f2e-2-w1-Pomodoro/";
+    this.page.identifier = "2019/07/08/20190708-f2e-2-w1-Pomodoro/";
+    this.page.title = "F2E 2nd 第一關「蕃茄鐘」 挑戰筆記";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lynns-techblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

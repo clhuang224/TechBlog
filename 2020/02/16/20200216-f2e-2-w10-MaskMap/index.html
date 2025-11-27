@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前言 這次的挑戰題目是因應最近的 COVID-19 病毒而生；因著對時事及醫療的一股熱情，看到這個題目的時候覺得非做不可。 這個學期兩次在短時間內飆出網站的 Prototype ，體會到不先考慮太多，直接開發也是一種方式；看到口罩地圖的資訊之後就直接開始著手進行，途中不考慮要怎麼寫文章，或是怎麼規劃得更好看之類的問題。 但是這樣的方式還是有其缺點。 一開始覺得這個網頁就只有簡單的一個畫面，所以沒">
+<meta property="og:type" content="article">
+<meta property="og:title" content="F2E 2nd 第十關「 口罩地圖」 挑戰筆記">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="前言 這次的挑戰題目是因應最近的 COVID-19 病毒而生；因著對時事及醫療的一股熱情，看到這個題目的時候覺得非做不可。 這個學期兩次在短時間內飆出網站的 Prototype ，體會到不先考慮太多，直接開發也是一種方式；看到口罩地圖的資訊之後就直接開始著手進行，途中不考慮要怎麼寫文章，或是怎麼規劃得更好看之類的問題。 但是這樣的方式還是有其缺點。 一開始覺得這個網頁就只有簡單的一個畫面，所以沒">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/01.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/02.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/03.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/04.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/05.png">
+<meta property="article:published_time" content="2020-02-16T15:42:37.000Z">
+<meta property="article:modified_time" content="2025-05-03T07:28:08.816Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="Leaflet">
+<meta property="article:tag" content="Loaders.css">
+<meta property="article:tag" content="Open Street Map">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://clhuang224.github.io/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/01.png">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>F2E 2nd 第十關「 口罩地圖」 挑戰筆記 | Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          F2E 2nd 第十關「 口罩地圖」 挑戰筆記
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-02-16 23:42:37" itemprop="dateCreated datePublished" datetime="2020-02-16T23:42:37+08:00">2020-02-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E9%96%8B%E7%99%BC%E6%97%A5%E8%A8%98/" itemprop="url" rel="index"><span itemprop="name">開發日記</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/16/20200216-f2e-2-w10-MaskMap/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>這次的挑戰題目是因應最近的 COVID-19 病毒而生；因著對時事及醫療的一股熱情，看到這個題目的時候覺得非做不可。<br />
+這個學期兩次在短時間內飆出網站的 Prototype ，體會到不先考慮太多，直接開發也是一種方式；看到口罩地圖的資訊之後就直接開始著手進行，途中不考慮要怎麼寫文章，或是怎麼規劃得更好看之類的問題。</p>
+<p>但是這樣的方式還是有其缺點。<br />
+一開始覺得這個網頁就只有簡單的一個畫面，所以沒有用 Webpack 專案，等接近完成的時候，才覺得如果使用 Vue CLI 建立專案的話，可以更方便擴充 jQuery 動畫，或者其他相關服務（例如疫情查詢等）。<br />
+除了覺得畫面簡單，也是因為我在 GitHub 上是將精神時光屋的專案放在同一個 Repository 裡，然後直接將 master 分支設定為 GitHub Page ；為了不想改變這個規律，所以沒有用 Webpack ；看來以後還是克服一下這種完美主義比較好 XD</p>
+<p>之前幾次寫精神時光屋的文章都十分冗長，這次應該仍然會長度破表，請讀者海涵 &lt;(_ _)&gt;</p>
+<h2 id="作品"><a class="markdownIt-Anchor" href="#作品"></a> 作品</h2>
+<p><a target="_blank" href="https://clhuang224.github.io/F2E_2nd/#W10">Lynn 的 F2E 2nd 作品列表 / 第十關：口罩地圖</a></p>
+<span id="more"></span>
+<h2 id="資源"><a class="markdownIt-Anchor" href="#資源"></a> 資源</h2>
+<h3 id="設計稿"><a class="markdownIt-Anchor" href="#設計稿"></a> 設計稿</h3>
+<p>這次挑戰我沒有採用 UI 組的設計稿，因為這次的主題比較特別，我希望能用自己的方式做出整個作品。<br />
+之前曾經試過使用 XD 來製作 Prototype ，但已深深覺得身為設計外行在設計上所耗費的時間還是拿來切版比較有效率……XD<br />
+這次想說使用 Photoshop 排一個大概好了（？），結果還是花了我一下午，最後決定直接動手 (／‵Д′)／~ ╧╧<br />
+（不過在製作途中還是用 Photoshop 畫了所需的 icon 。）</p>
+<p>這是被我始亂終棄的設計稿： <a target="_blank" rel="noopener" href="https://github.com/clhuang224/F2E_2nd/blob/master/W10_MaskMap/MaskMap.psd">MaskMap.psd</a></p>
+<h3 id="資料"><a class="markdownIt-Anchor" href="#資料"></a> 資料</h3>
+<p>這次使用的口罩剩餘數量資料是 <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json">kiang 所提供的 藥局+衛生所即時庫存 geojson</a> ；詳情可以參考<a target="_blank" rel="noopener" href="https://g0v.hackmd.io/gGrOI4_aTsmpoMfLP1OU4A">口罩供需資訊平台</a>。<br />
+地圖資料則是使用 <a target="_blank" rel="noopener" href="https://www.openstreetmap.org/">Open Street Map</a> 。</p>
+<h3 id="框架"><a class="markdownIt-Anchor" href="#框架"></a> 框架</h3>
+<p>除了網站本身使用 <a target="_blank" rel="noopener" href="https://vuejs.org/">Vue.js</a> 以外，地圖的部分使用 <a target="_blank" rel="noopener" href="https://leafletjs.com/">Leaflet</a> 。</p>
+<h2 id="介面及功能"><a class="markdownIt-Anchor" href="#介面及功能"></a> 介面及功能</h2>
+<p>網站的介面很簡單，左邊是搜尋的列表，右邊是地圖。<br />
+使用者可以用定位或雙擊地圖來設定自己的位置，左方的列表就會依據距離顯示藥局的資訊；包含藥局名稱、地址、電話、營業時間及備註。<br />
+使用者也可以用文字搜尋藥局名稱和地址，也有成人或兒童口罩及距離的篩選機制。</p>
+<p>從下圖中可以看到，地圖上的標誌會隨著口罩的有無而有所不同，共分為全藍、藍灰、灰藍及全灰四種；另外還有代表使用者位置的紅色標誌。<br />
+使用者也可以點擊標誌，在地圖上查看藥局資訊。<br />
+隨著縮放地圖的大小，距離較近的標誌會縮成白色圈圈；點擊後會放大地圖。</p>
+<p><img src="01.png" alt="電腦介面" /></p>
+<p>使用平板或手機操作時，左側的列表會預設為隱藏。</p>
+<p><img src="02.png" alt="手機介面" /></p>
+<p>資料讀取中時有小精靈畫面。</p>
+<p><img src="03.png" alt="讀取畫面" /></p>
+<p>另外依口罩供需資訊平台的建議有使用須知。</p>
+<p><img src="04.png" alt="使用須知" /></p>
+<h2 id="排版"><a class="markdownIt-Anchor" href="#排版"></a> 排版</h2>
+<p>整個網站使用 flexbox 排版，部分細節使用絕對定位；以下用擬人化的方式表達。</p>
+<p><img src="05.png" alt="整體排版" /></p>
+<h3 id="wrap"><a class="markdownIt-Anchor" href="#wrap"></a> .wrap</h3>
+<p>.wrap 是和 Vue 實體綁定的元素，最大寬度為 1920px ，垂直置中。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.wrap</span> &#123;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">1920px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="sidebar"><a class="markdownIt-Anchor" href="#sidebar"></a> .sideBar</h4>
+<p>.sidebar 是一個垂直位置比 .map 高的側欄，邊緣有一些陰影增加了它的神祕感（？）。<br />
+在電腦版時 .sidebar 是固定 500px 的寬度顯示在畫面中。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.sidebar</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0px</span> <span class="number">0px</span> <span class="number">7px</span> <span class="number">#333333</span>;</span><br><span class="line">    <span class="attribute">z-index</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用寬度 768px 以下的裝置時， .sidebar 會往左邊飄到出界，並出現一個可以讓它回來的按鈕。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;sidebar&quot;</span> <span class="attr">:class</span>=<span class="string">&quot;&#123;hide: menuHide === true&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;toggle-button&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;menuHide = !menuHide&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span>(max-width: <span class="number">768px</span>) &#123;</span><br><span class="line">    <span class="selector-class">.sidebar</span> &#123;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">transition</span>: ease-out <span class="number">0.5s</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.sidebar</span> <span class="selector-class">.toggle-button</span> &#123;</span><br><span class="line">        <span class="attribute">display</span>: block;</span><br><span class="line">        <span class="attribute">transition</span>: ease-out <span class="number">0.5s</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.sidebar</span><span class="selector-class">.hide</span> &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-<span class="number">100%</span>);</span><br><span class="line">        <span class="attribute">box-shadow</span>: none;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.sidebar</span><span class="selector-class">.hide</span> <span class="selector-class">.toggle-button</span> &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">100%</span>);</span><br><span class="line">        <span class="attribute">box-shadow</span>: <span class="number">#333</span> <span class="number">0</span> <span class="number">0</span> <span class="number">7px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>.sidebar 裡面有 .top 和 .list 兩個元素。</p>
+<h5 id="top"><a class="markdownIt-Anchor" href="#top"></a> .top</h5>
+<p>.top 是個藍色區塊，包含標題、搜尋框格和篩選搜尋結果的選項。<br />
+當使用者點擊 .search-input 或 .search-label 時， .search-list 就會出現，讓使用者看到搜尋建議選項。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;top&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>口罩存量查詢<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;search&quot;</span> <span class="attr">:class</span>=<span class="string">&quot;&#123;searching: searching === true&#125;&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;search-input&quot;</span> <span class="attr">class</span>=<span class="string">&quot;search-input&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;搜尋藥局&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;searchInput&quot;</span></span></span><br><span class="line"><span class="tag">            @<span class="attr">click</span>=<span class="string">&quot;searching = true;&quot;</span> <span class="attr">autocomplete</span>=<span class="string">&quot;off&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">&quot;search-label&quot;</span> <span class="attr">for</span>=<span class="string">&quot;search-input&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;search-list&quot;</span> <span class="attr">v-if</span>=<span class="string">&quot;searching === true&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;search-item&quot;</span> <span class="attr">v-for</span>=<span class="string">&quot;(item, index, key) of searchingList&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;key&quot;</span></span></span><br><span class="line"><span class="tag">                @<span class="attr">click</span>=<span class="string">&quot;changePosition(item.geometry.coordinates[1],item.geometry.coordinates[0],item)&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">v-if</span>=<span class="string">&quot;index &lt; 10&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;name&quot;</span>&gt;</span>&#123;&#123;item.properties.name&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;address&quot;</span>&gt;</span>&#123;&#123;item.properties.address&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;filter&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;checkboxes&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;mask&quot;</span> <span class="attr">id</span>=<span class="string">&quot;adult&quot;</span> <span class="attr">class</span>=<span class="string">&quot;checkbox&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">:class</span>=<span class="string">&quot;&#123;active: checkboxes[0] === true&#125;&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;checkboxes[0]&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;adult&quot;</span>&gt;</span>成人口罩<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;mask&quot;</span> <span class="attr">id</span>=<span class="string">&quot;child&quot;</span> <span class="attr">class</span>=<span class="string">&quot;checkbox&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">:class</span>=<span class="string">&quot;&#123;active: checkboxes[1] === true&#125;&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;checkboxes[1]&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;child&quot;</span>&gt;</span>兒童口罩<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">&quot;distance&quot;</span> <span class="attr">class</span>=<span class="string">&quot;distance&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;distance&quot;</span> <span class="attr">v-if</span>=<span class="string">&quot;userMarker !== null&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">class</span>=<span class="string">&quot;option&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1000&quot;</span>&gt;</span>1公里<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">class</span>=<span class="string">&quot;option&quot;</span> <span class="attr">value</span>=<span class="string">&quot;5000&quot;</span>&gt;</span>5公里<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">class</span>=<span class="string">&quot;option&quot;</span> <span class="attr">value</span>=<span class="string">&quot;10000&quot;</span>&gt;</span>10公里<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>.checkbox 因為長得不夠有特色，被 .checkbox::before 給取代了。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.top</span> <span class="selector-class">.checkboxes</span> <span class="selector-class">.checkbox</span> &#123;</span><br><span class="line">    <span class="attribute">appearance</span>: none;</span><br><span class="line">    -webkit-<span class="attribute">appearance</span>: none;</span><br><span class="line">    -moz-<span class="attribute">appearance</span>: none;</span><br><span class="line">    <span class="attribute">outline</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.top</span> <span class="selector-class">.checkboxes</span> <span class="selector-class">.checkbox</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">18px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">18px</span>;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">../img/checkbox-false.png</span>);</span><br><span class="line">    <span class="attribute">background-size</span>: <span class="number">18px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">3px</span> <span class="number">0</span> <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="list"><a class="markdownIt-Anchor" href="#list"></a> .list</h5>
+<p>.list 做為一個 &lt;ul&gt; 很沒特色，它只是如往常地讓 &lt;li&gt; 們有個地方待。<br />
+但還好，它用卷軸表現了自己的美。</p>
+<p>它說一般的卷軸都緊貼在邊緣，但它想到用陰影的方式畫出自己要的卷軸跟留白寬度。<br />
+兩側 的 padding 也因應卷軸的寬度有所不同，這樣底下的元素才不會因為卷軸的關係歪一邊。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">7px</span> <span class="number">0</span> <span class="number">25px</span>;</span><br><span class="line">    <span class="attribute">overflow-y</span>: scroll;</span><br><span class="line">    <span class="attribute">height</span>: <span class="built_in">calc</span>(<span class="number">100vh</span> - <span class="number">200px</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span>::-webkit-scrollbar &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">18px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span>::-webkit-scrollbar-thumb &#123;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="number">10px</span> <span class="number">#7be0e5</span>;</span><br><span class="line">    <span class="attribute">border</span>: solid <span class="number">3px</span> transparent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>.list 家的 .item 就和許多 &lt;li&gt; 一樣，會發展出自己的樣貌。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;item&quot;</span> <span class="attr">v-for</span>=<span class="string">&quot;(item,index,key) of sortedData&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;key&quot;</span></span></span><br><span class="line"><span class="tag">                    <span class="attr">v-if</span>=<span class="string">&quot;(item.distance &lt; distance || (userMarker === null &amp;&amp; index &lt; 10)) &amp;&amp; isVisable(item.properties.mask_adult,item.properties.mask_child) &quot;</span></span></span><br><span class="line"><span class="tag">                    @<span class="attr">dblclick</span>=<span class="string">&quot;changePosition(item.geometry.coordinates[1],item.geometry.coordinates[0],item)&quot;</span></span></span><br><span class="line"><span class="tag">                    @<span class="attr">click</span>=<span class="string">&quot;focusStore(item)&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;&#123;item.properties.name&#125;&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;distance&quot;</span> <span class="attr">v-if</span>=<span class="string">&quot;userMarker !== null&quot;</span>&gt;</span>&#123;&#123;item.distance | round&#125;&#125; 公尺<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mask&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;adult&quot;</span> <span class="attr">:class</span>=<span class="string">&quot;&#123;stock: item.properties.mask_adult &gt; 0&#125;&quot;</span>&gt;</span></span><br><span class="line">            成人口罩：<span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;item.properties.mask_adult&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span> <span class="attr">:class</span>=<span class="string">&quot;&#123;stock: item.properties.mask_child &gt; 0&#125;&quot;</span>&gt;</span></span><br><span class="line">            兒童口罩：<span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;item.properties.mask_child&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;data address&quot;</span>&gt;</span>&#123;&#123;item.properties.address&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;data phone&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">:href</span>=<span class="string">&quot;&#x27;tel:&#x27;+item.properties.phone&quot;</span>&gt;</span>&#123;&#123;item.properties.phone&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;schedule-container&quot;</span> <span class="attr">v-html</span>=<span class="string">&quot;item.properties.schedule&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;data note&quot;</span> <span class="attr">v-if</span>=<span class="string">&quot;item.properties.note !== &#x27;-&#x27;&quot;</span>&gt;</span>&#123;&#123;item.properties.note&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>它們有太多不同的包袱，要一一道來實在太過繁瑣，所以它們說，有興趣的話請自行閱讀，沒興趣記得要快轉。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.item</span> &#123;</span><br><span class="line">    <span class="attribute">border-bottom</span>: <span class="number">3px</span> solid <span class="number">#7be0e5</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5.6%</span> <span class="number">5.6%</span> <span class="number">6.7%</span> <span class="number">5.6%</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.item</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#f8f8f8</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.item</span> <span class="selector-class">.title</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">24px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">padding-bottom</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.distance</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">25px</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">25px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.data</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: auto;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.data</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">18px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">18px</span>;</span><br><span class="line">    <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">    <span class="attribute">background-position</span>: center center;</span><br><span class="line">    <span class="attribute">background-size</span>: contain;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0px</span> <span class="number">5px</span> <span class="number">0</span> <span class="number">15px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.address</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">../img/address.png</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.phone</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">../img/phone.png</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.time</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">../img/time.png</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.item</span> <span class="selector-class">.schedule-container</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">15px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.item</span> <span class="selector-class">.schedule</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">#7be0e5</span> solid <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">80%</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-collapse</span>: separate;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.item</span> <span class="selector-class">.schedule-container</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">18px</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">margin-right</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">18px</span>;</span><br><span class="line">    <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">    <span class="attribute">background-position</span>: center left;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">../img/time.png</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.item</span> <span class="selector-class">.schedule</span> <span class="selector-class">.th</span>, <span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.item</span> <span class="selector-class">.schedule</span> <span class="selector-class">.td</span> &#123;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">8px</span> <span class="number">0px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.item</span> <span class="selector-class">.schedule</span> <span class="selector-class">.td</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#7be0e5</span>;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.mask</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.mask</span> <span class="selector-class">.adult</span>, <span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.mask</span> <span class="selector-class">.child</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">45%</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#ccc</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.mask</span> <span class="selector-class">.stock</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#7be0e5</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.sidebar</span> <span class="selector-class">.list</span> <span class="selector-class">.item</span> <span class="selector-class">.note</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">../img/note.png</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="map"><a class="markdownIt-Anchor" href="#map"></a> .map</h4>
+<p>.map 有它自己的神， 地圖之神 Leaflet 自會決定它的長相。<br />
+它也有叛逆的地方，它要自己決定地圖小框框的寬度；還有神也沒說框框裡要怎麼安排，這些可以自己想。<br />
+不過 .map 有個小秘密，這些安排方式，其實是跟 .list 家的 .item 抄來的。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.map</span> <span class="selector-class">.leaflet-popup-content</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span> <span class="meta">!important</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: space-around;</span><br><span class="line">    <span class="attribute">flex-wrap</span>: wrap;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="loading"><a class="markdownIt-Anchor" href="#loading"></a> .loading</h4>
+<p>.loading 說，你以為介紹完 .sidebar 和 .map 就可以收工了嗎？<br />
+你知道你第一眼見到的通常是 .loading 嗎？</p>
+<p>.loading 所站的高度比誰都高，所涵蓋的廣度也比誰都廣；讓你看不見 .map 也看不見 .sidebar ，除非 .loading 消失。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.loading</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">z-index</span>: <span class="number">5</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100vw</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#5cc</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">24px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>它有個赤子之心小精靈，告訴你，你的資料還在來的路上。</p>
+<blockquote>
+<p>對我該用正常的方式寫這一段。</p>
+</blockquote>
+<p>.loading 中所使用的小精靈動畫使用 <a target="_blank" rel="noopener" href="https://connoratherton.com/loaders">Loaders.css</a> 所提供的樣式。<br />
+這是基於 jQuery 的動畫，所以必須先引入 jQuery；接著下載 css 和 js 檔並引入後，就可以使用了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引用在 &lt;head&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;css/loaders.min.css&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;loading&quot;</span> <span class="attr">v-if</span>=<span class="string">&quot;loading === true&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;loader-inner pacman&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>資料讀取中<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 引用在 &lt;body&gt; 的最後 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://code.jquery.com/jquery-3.4.1.min.js&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">integrity</span>=<span class="string">&quot;sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=&quot;</span> <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;js/loaders.css.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="notice"><a class="markdownIt-Anchor" href="#notice"></a> .notice</h4>
+<p>.loading 消失後，你會看到站得第二高的 .notice 。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.notice</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>);</span><br><span class="line">    <span class="attribute">z-index</span>: <span class="number">3</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>它有著半透明的黑底，跟一片有藍色叉叉的方塊，方塊上面就是告訴你一些該知道的事。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.notice</span> <span class="selector-class">.box</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">90%</span>;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">800px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.9</span>);</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">22px</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: justify;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.notice</span> <span class="selector-class">.close-button</span>&#123;</span><br><span class="line">    <span class="attribute">border</span>: none;</span><br><span class="line">    <span class="attribute">background-color</span>: transparent;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#5cc</span>;</span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">36px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">40px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">40px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">outline</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>以下恢復一般的表達方式 XD</p>
+</blockquote>
+<h2 id="程式邏輯"><a class="markdownIt-Anchor" href="#程式邏輯"></a> 程式邏輯</h2>
+<p>網站使用 Vue.js 。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> vue = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">    <span class="attr">el</span>: <span class="string">&#x27;#vue&#x27;</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="data"><a class="markdownIt-Anchor" href="#data"></a> data</h3>
+<p>以下是網站的所有變數。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">data</span>: &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 是否在讀取資料</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="attr">loading</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * Leaflet 的地圖實體</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="attr">map</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 使用者的地圖標記實體</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="attr">userMarker</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * Leaflet.markercluster 的圖層實體</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="attr">storeMarkers</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 地圖中心的緯經度</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="attr">userPosition</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 縮放比例</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="attr">zoom</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 藥局資料陣列</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="attr">data</span>: [],</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@model</span> 搜尋框輸入內容</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="attr">searchInput</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@model</span> filter: 顯示有成人口罩／孩童口罩的藥局</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="attr">checkboxes</span>: [<span class="literal">false</span>, <span class="literal">false</span>],</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@model</span> filter: 顯示多少距離以內的藥局清單</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="attr">distance</span>: <span class="number">1000</span>,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 使用者是否正 focus 在搜尋框</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="attr">searching</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 使用者有沒有開啟定位</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="attr">geolocation</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 側欄是否隱藏</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="attr">menuHide</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 須知是否開啟</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="attr">noticeOpen</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+<h3 id="methods"><a class="markdownIt-Anchor" href="#methods"></a> methods</h3>
+<p>網站有幾個重要的 function ：</p>
+<ul>
+<li>openMap ：開啟地圖、取得使用者位置</li>
+<li>getData ：取得藥局資料、將藥局跟使用者的距離放入資料陣列中</li>
+<li>addMarkers ：將藥局資料標記在地圖中</li>
+<li>changePosition ：改變使用者位置及標誌</li>
+</ul>
+<p>及輔助的 function ：</p>
+<ul>
+<li>createScheduleString ：依據資料產生營業時間表格字串</li>
+<li>createPopup ：依據資料產生地圖小框框字串</li>
+<li>getIcon ：回傳指定類型的地圖標記</li>
+<li>computeDistance ：根據兩點的經緯度算出距離（公尺）</li>
+</ul>
+<p>還有改善操作順暢度的 function ：</p>
+<ul>
+<li>focusStore ：點擊列表中的藥局時，對應資料的地圖小框框會開啟</li>
+<li>isVisable ：依據 checkbox 點選狀況回傳該筆資料是否顯示在列表中</li>
+</ul>
+<p>以下介紹比較重要的幾個 function 。</p>
+<h4 id="openmap"><a class="markdownIt-Anchor" href="#openmap"></a> openMap()</h4>
+<p>在 openMap() 中，先宣告 Leaflet 的實體。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">openMap</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> that = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="comment">// 設定地圖</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">map</span> = L.<span class="title function_">map</span>(<span class="string">&#x27;map&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">center</span>: [<span class="number">23.6334772</span>, <span class="number">120.852944</span>],</span><br><span class="line">        <span class="attr">zoom</span>: <span class="number">7</span>,</span><br><span class="line">        <span class="attr">maxBounds</span>: L.<span class="title function_">latLngBounds</span>(L.<span class="title function_">latLng</span>(<span class="number">28</span>, <span class="number">115</span>), L.<span class="title function_">latLng</span>(<span class="number">20</span>, <span class="number">127</span>)),</span><br><span class="line">        <span class="attr">minZoom</span>: <span class="number">7</span>,</span><br><span class="line">        <span class="attr">zoomControl</span>: <span class="literal">false</span></span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<p>放入 Open Street Map 的 tileLayer 。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">L.<span class="title function_">tileLayer</span>(<span class="string">&#x27;https://&#123;s&#125;.tile.openstreetmap.org/&#123;z&#125;/&#123;x&#125;/&#123;y&#125;.png&#x27;</span>,</span><br><span class="line">    &#123; <span class="attr">attribution</span>: <span class="string">&#x27;Map data &amp;copy; &lt;a target=&quot;_blank&quot; href=&quot;https://www.openstreetmap.org/&quot;&gt;OpenStreetMap&lt;/a&gt; contributors, &lt;a target=&quot;_blank&quot; href=&quot;https://creativecommons.org/licenses/by-sa/2.0/&quot;&gt;CC-BY-SA&lt;/a&gt;&#x27;</span> &#125;).<span class="title function_">addTo</span>(<span class="variable language_">this</span>.<span class="property">map</span>);</span><br><span class="line">L.<span class="property">control</span>.<span class="title function_">zoom</span>(&#123;</span><br><span class="line">    <span class="attr">position</span>: <span class="string">&#x27;topright&#x27;</span></span><br><span class="line">&#125;).<span class="title function_">addTo</span>(<span class="variable language_">this</span>.<span class="property">map</span>);</span><br></pre></td></tr></table></figure>
+<p>要求使用者的位置資訊。<br />
+有定位的話以定位位置為地圖中心，無則以整個台灣為起始畫面。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定位</span></span><br><span class="line"><span class="keyword">if</span> (navigator.<span class="property">geolocation</span>) &#123;</span><br><span class="line">    navigator.<span class="property">geolocation</span>.<span class="title function_">getCurrentPosition</span>(</span><br><span class="line">        <span class="comment">// 有使用者位置資訊就以定位為中心</span></span><br><span class="line">        <span class="keyword">function</span> (<span class="params">position</span>) &#123;</span><br><span class="line">            that.<span class="property">geolocation</span> = <span class="literal">true</span>;</span><br><span class="line">            that.<span class="property">userPosition</span> = [position.<span class="property">coords</span>.<span class="property">latitude</span>, position.<span class="property">coords</span>.<span class="property">longitude</span>];</span><br><span class="line">            that.<span class="property">zoom</span> = <span class="number">19</span>;</span><br><span class="line">            that.<span class="property">map</span>.<span class="title function_">setView</span>(<span class="keyword">new</span> L.<span class="title class_">LatLng</span>(that.<span class="property">userPosition</span>[<span class="number">0</span>], that.<span class="property">userPosition</span>[<span class="number">1</span>]), that.<span class="property">zoom</span>);</span><br><span class="line">            that.<span class="property">userMarker</span> = L.<span class="title function_">marker</span>([that.<span class="property">userPosition</span>[<span class="number">0</span>], that.<span class="property">userPosition</span>[<span class="number">1</span>]], &#123; <span class="attr">icon</span>: that.<span class="title function_">getIcon</span>(<span class="string">&#x27;red&#x27;</span>) &#125;);</span><br><span class="line">            that.<span class="property">map</span>.<span class="title function_">addLayer</span>(that.<span class="property">userMarker</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>綁定在地圖上點擊的事件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">// 電腦使用雙擊移動使用者位置</span></span><br><span class="line">    that.<span class="property">map</span>.<span class="title function_">on</span>(<span class="string">&#x27;dblclick&#x27;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">        that.<span class="title function_">changePosition</span>(event.<span class="property">latlng</span>.<span class="property">lat</span>, event.<span class="property">latlng</span>.<span class="property">lng</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 手機使用單擊移動使用者位置</span></span><br><span class="line">    that.<span class="property">map</span>.<span class="title function_">on</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">innerWidth</span> &lt;= <span class="number">480</span>) &#123;</span><br><span class="line">            that.<span class="title function_">changePosition</span>(event.<span class="property">latlng</span>.<span class="property">lat</span>, event.<span class="property">latlng</span>.<span class="property">lng</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h4 id="getdata"><a class="markdownIt-Anchor" href="#getdata"></a> getData()</h4>
+<p>getData() 會以 XMLHttpRequest 取得口罩地圖的資料，並依據資料產生營業時間表格字串放入陣列中。<br />
+接著呼叫 addMarkers() 將藥局標記在地圖中。<br />
+最後將 loading 賦值為 false ，使 .loading （資料讀取中小精靈）隱藏。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">getData</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> that = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">    xhr.<span class="title function_">open</span>(<span class="string">&#x27;get&#x27;</span>, <span class="string">&#x27;https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json&#x27;</span>);</span><br><span class="line">    xhr.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        that.<span class="property">data</span> = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(xhr.<span class="property">responseText</span>).<span class="property">features</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; that.<span class="property">data</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">            that.<span class="property">data</span>[i].<span class="property">properties</span>.<span class="property">schedule</span> = that.<span class="title function_">createScheduleString</span>(that.<span class="property">data</span>[i]);</span><br><span class="line">            that.<span class="property">data</span>[i].<span class="property">focus</span> = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        that.<span class="title function_">addMarkers</span>();</span><br><span class="line">        that.<span class="property">loading</span> = <span class="literal">false</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    xhr.<span class="title function_">send</span>();</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h4 id="addmarkers"><a class="markdownIt-Anchor" href="#addmarkers"></a> addMarkers()</h4>
+<p>addMarkers 會以迴圈讀取每筆藥局資料。<br />
+依據資料選擇適當的標記圖示，產生標記並放入 storeMarkers 中。<br />
+最後再將 storeMarkers 加入地圖中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">addMarkers</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 宣告 marker cluster</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">storeMarkers</span> = <span class="keyword">new</span> L.<span class="title function_">markerClusterGroup</span>().<span class="title function_">addTo</span>(<span class="variable language_">this</span>.<span class="property">map</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">data</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">        <span class="comment">// 處理 popup 字串</span></span><br><span class="line">        <span class="keyword">let</span> popupString = <span class="variable language_">this</span>.<span class="title function_">createPopup</span>(<span class="variable language_">this</span>.<span class="property">data</span>[i]);</span><br><span class="line">        <span class="comment">// 產生 marker</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">properties</span>.<span class="property">mask_adult</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">properties</span>.<span class="property">mask_child</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">marker</span> = L.<span class="title function_">marker</span>(</span><br><span class="line">                    [<span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">geometry</span>.<span class="property">coordinates</span>[<span class="number">1</span>], <span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">geometry</span>.<span class="property">coordinates</span>[<span class="number">0</span>]],</span><br><span class="line">                    &#123; <span class="attr">icon</span>: <span class="variable language_">this</span>.<span class="title function_">getIcon</span>(<span class="string">&#x27;blue&#x27;</span>) &#125;).<span class="title function_">bindPopup</span>(popupString);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">marker</span> = L.<span class="title function_">marker</span>(</span><br><span class="line">                    [<span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">geometry</span>.<span class="property">coordinates</span>[<span class="number">1</span>], <span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">geometry</span>.<span class="property">coordinates</span>[<span class="number">0</span>]],</span><br><span class="line">                    &#123; <span class="attr">icon</span>: <span class="variable language_">this</span>.<span class="title function_">getIcon</span>(<span class="string">&#x27;blue-grey&#x27;</span>) &#125;).<span class="title function_">bindPopup</span>(popupString);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">properties</span>.<span class="property">mask_child</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">marker</span> = L.<span class="title function_">marker</span>(</span><br><span class="line">                    [<span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">geometry</span>.<span class="property">coordinates</span>[<span class="number">1</span>], <span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">geometry</span>.<span class="property">coordinates</span>[<span class="number">0</span>]],</span><br><span class="line">                    &#123; <span class="attr">icon</span>: <span class="variable language_">this</span>.<span class="title function_">getIcon</span>(<span class="string">&#x27;grey-blue&#x27;</span>) &#125;).<span class="title function_">bindPopup</span>(popupString);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">marker</span> = L.<span class="title function_">marker</span>(</span><br><span class="line">                    [<span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">geometry</span>.<span class="property">coordinates</span>[<span class="number">1</span>], <span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">geometry</span>.<span class="property">coordinates</span>[<span class="number">0</span>]],</span><br><span class="line">                    &#123; <span class="attr">icon</span>: <span class="variable language_">this</span>.<span class="title function_">getIcon</span>(<span class="string">&#x27;grey&#x27;</span>) &#125;).<span class="title function_">bindPopup</span>(popupString);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 監聽 marker 點擊事件</span></span><br><span class="line">        <span class="keyword">let</span> that = <span class="variable language_">this</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">marker</span>.<span class="title function_">on</span>(<span class="string">&#x27;dblclick&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">innerWidth</span> &gt; <span class="number">480</span>)</span><br><span class="line">                that.<span class="title function_">changePosition</span>(</span><br><span class="line">                    that.<span class="property">data</span>[i].<span class="property">geometry</span>.<span class="property">coordinates</span>[<span class="number">1</span>],</span><br><span class="line">                    that.<span class="property">data</span>[i].<span class="property">geometry</span>.<span class="property">coordinates</span>[<span class="number">0</span>],</span><br><span class="line">                    that.<span class="property">data</span>[i]);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">// 放入 marker cluster</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">storeMarkers</span>.<span class="title function_">addLayer</span>(<span class="variable language_">this</span>.<span class="property">data</span>[i].<span class="property">marker</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 放入 map</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">map</span>.<span class="title function_">addLayer</span>(<span class="variable language_">this</span>.<span class="property">storeMarkers</span>);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h4 id="changeposition"><a class="markdownIt-Anchor" href="#changeposition"></a> changePosition()</h4>
+<p>changePosition 會將使用者標記移到某個緯經度。<br />
+如果目的地是藥局的話，還會將小框框與新的使用者標記綁在一起。<br />
+這是因為新的使用者標記會蓋在原本的藥局標記上，使框框無法被點擊開啟；所以採用比較土法煉鋼的方式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">changePosition</span>(<span class="params">lat, lng, item</span>) &#123;</span><br><span class="line">    <span class="comment">// 移動到緯經度</span></span><br><span class="line">    <span class="keyword">if</span> (!item) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">userPosition</span> = [lat, lng];</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">zoom</span> = <span class="number">19</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">map</span>.<span class="title function_">setView</span>(<span class="keyword">new</span> L.<span class="title class_">LatLng</span>(<span class="variable language_">this</span>.<span class="property">userPosition</span>[<span class="number">0</span>], <span class="variable language_">this</span>.<span class="property">userPosition</span>[<span class="number">1</span>]));</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">userMarker</span> !== <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">map</span>.<span class="title function_">removeLayer</span>(<span class="variable language_">this</span>.<span class="property">userMarker</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">userMarker</span> = L.<span class="title function_">marker</span>([<span class="variable language_">this</span>.<span class="property">userPosition</span>[<span class="number">0</span>], <span class="variable language_">this</span>.<span class="property">userPosition</span>[<span class="number">1</span>]], &#123; <span class="attr">icon</span>: <span class="variable language_">this</span>.<span class="title function_">getIcon</span>(<span class="string">&#x27;red&#x27;</span>) &#125;);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">map</span>.<span class="title function_">addLayer</span>(<span class="variable language_">this</span>.<span class="property">userMarker</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">searchInput</span> = <span class="variable language_">this</span>.<span class="property">userPosition</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 移動到定位位置或藥局</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (item.<span class="property">type</span> === <span class="string">&#x27;self&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (navigator.<span class="property">geolocation</span>) &#123;</span><br><span class="line">                <span class="keyword">let</span> that = <span class="variable language_">this</span>;</span><br><span class="line">                navigator.<span class="property">geolocation</span>.<span class="title function_">getCurrentPosition</span>(</span><br><span class="line">                    <span class="comment">// 有使用者定位</span></span><br><span class="line">                    <span class="keyword">function</span> (<span class="params">position</span>) &#123;</span><br><span class="line">                        that.<span class="property">userPosition</span> = [position.<span class="property">coords</span>.<span class="property">latitude</span>, position.<span class="property">coords</span>.<span class="property">longitude</span>];</span><br><span class="line">                        that.<span class="property">zoom</span> = <span class="number">19</span>;</span><br><span class="line">                        that.<span class="property">map</span>.<span class="title function_">setView</span>(<span class="keyword">new</span> L.<span class="title class_">LatLng</span>(that.<span class="property">userPosition</span>[<span class="number">0</span>], that.<span class="property">userPosition</span>[<span class="number">1</span>]), that.<span class="property">zoom</span>);</span><br><span class="line">                        that.<span class="property">searchInput</span> = item.<span class="property">properties</span>.<span class="property">name</span>;</span><br><span class="line">                        <span class="keyword">if</span> (that.<span class="property">userMarker</span> !== <span class="literal">null</span>) &#123;</span><br><span class="line">                            that.<span class="property">map</span>.<span class="title function_">removeLayer</span>(that.<span class="property">userMarker</span>);</span><br><span class="line">                            that.<span class="property">userMarker</span> = L.<span class="title function_">marker</span>([that.<span class="property">userPosition</span>[<span class="number">0</span>], that.<span class="property">userPosition</span>[<span class="number">1</span>]], &#123; <span class="attr">icon</span>: that.<span class="title function_">getIcon</span>(<span class="string">&#x27;red&#x27;</span>) &#125;);</span><br><span class="line">                            that.<span class="property">map</span>.<span class="title function_">addLayer</span>(that.<span class="property">userMarker</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    <span class="comment">// 無使用者定位</span></span><br><span class="line">                    <span class="keyword">function</span> (<span class="params">err</span>) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (err.<span class="property">code</span> === <span class="number">1</span>) &#123;</span><br><span class="line">                            <span class="title function_">alert</span>(<span class="string">&#x27;您未提供位置資訊的權限，請檢查您的瀏覽器設定。&#x27;</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                );</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">userPosition</span> = [item.<span class="property">geometry</span>.<span class="property">coordinates</span>[<span class="number">1</span>], item.<span class="property">geometry</span>.<span class="property">coordinates</span>[<span class="number">0</span>]];</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">zoom</span> = <span class="number">19</span>;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">map</span>.<span class="title function_">setView</span>(<span class="keyword">new</span> L.<span class="title class_">LatLng</span>(<span class="variable language_">this</span>.<span class="property">userPosition</span>[<span class="number">0</span>], <span class="variable language_">this</span>.<span class="property">userPosition</span>[<span class="number">1</span>]), <span class="variable language_">this</span>.<span class="property">zoom</span>);</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">searchInput</span> = item.<span class="property">properties</span>.<span class="property">name</span>;</span><br><span class="line">            <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">userMarker</span> !== <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">map</span>.<span class="title function_">removeLayer</span>(<span class="variable language_">this</span>.<span class="property">userMarker</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">userMarker</span> = L.<span class="title function_">marker</span>([<span class="variable language_">this</span>.<span class="property">userPosition</span>[<span class="number">0</span>], <span class="variable language_">this</span>.<span class="property">userPosition</span>[<span class="number">1</span>]], &#123; <span class="attr">icon</span>: <span class="variable language_">this</span>.<span class="title function_">getIcon</span>(<span class="string">&#x27;red&#x27;</span>) &#125;).<span class="title function_">bindPopup</span>(item.<span class="property">marker</span>.<span class="property">_popup</span>.<span class="property">_content</span>);</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">map</span>.<span class="title function_">addLayer</span>(<span class="variable language_">this</span>.<span class="property">userMarker</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h3 id="mounted"><a class="markdownIt-Anchor" href="#mounted"></a> mounted()</h3>
+<p>使用者進入網站後，網站會在 mounted 階段開啟地圖、取得藥局資料。<br />
+也就能讓網站開始運作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">openMap</span>();</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">getData</span>();</span><br><span class="line">    <span class="comment">// 點選搜尋框以外的地方時，搜尋選項會隱藏</span></span><br><span class="line">    <span class="keyword">let</span> that = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;body&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (event.<span class="property">target</span>.<span class="property">classList</span>.<span class="title function_">contains</span>(<span class="string">&#x27;search-input&#x27;</span>) !== <span class="literal">true</span>) &#123;</span><br><span class="line">            that.<span class="property">searching</span> = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>完！</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/TechBlog/tags/w3HexSchool/" rel="tag"># w3HexSchool</a>
+              <a href="/TechBlog/tags/Open-Street-Map/" rel="tag"># Open Street Map</a>
+              <a href="/TechBlog/tags/Leaflet/" rel="tag"># Leaflet</a>
+              <a href="/TechBlog/tags/Loaders-css/" rel="tag"># Loaders.css</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/02/06/20200206-android-intro/" rel="prev" title="【 Android 開發入門 01 】什麼是 Android">
+      <i class="fa fa-chevron-left"></i> 【 Android 開發入門 01 】什麼是 Android
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/02/20/20200220-android-createNewProject/" rel="next" title="【 Android 開發入門 02 】開啟專案、設定模擬器與裝置">
+      【 Android 開發入門 02 】開啟專案、設定模擬器與裝置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text"> 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E5%93%81"><span class="nav-number">2.</span> <span class="nav-text"> 作品</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B3%87%E6%BA%90"><span class="nav-number">3.</span> <span class="nav-text"> 資源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E8%A8%88%E7%A8%BF"><span class="nav-number">3.1.</span> <span class="nav-text"> 設計稿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B3%87%E6%96%99"><span class="nav-number">3.2.</span> <span class="nav-text"> 資料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6"><span class="nav-number">3.3.</span> <span class="nav-text"> 框架</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E9%9D%A2%E5%8F%8A%E5%8A%9F%E8%83%BD"><span class="nav-number">4.</span> <span class="nav-text"> 介面及功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E7%89%88"><span class="nav-number">5.</span> <span class="nav-text"> 排版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#wrap"><span class="nav-number">5.1.</span> <span class="nav-text"> .wrap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sidebar"><span class="nav-number">5.1.1.</span> <span class="nav-text"> .sideBar</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#top"><span class="nav-number">5.1.1.1.</span> <span class="nav-text"> .top</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#list"><span class="nav-number">5.1.1.2.</span> <span class="nav-text"> .list</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#map"><span class="nav-number">5.1.2.</span> <span class="nav-text"> .map</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#loading"><span class="nav-number">5.1.3.</span> <span class="nav-text"> .loading</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#notice"><span class="nav-number">5.1.4.</span> <span class="nav-text"> .notice</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BC%8F%E9%82%8F%E8%BC%AF"><span class="nav-number">6.</span> <span class="nav-text"> 程式邏輯</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#data"><span class="nav-number">6.1.</span> <span class="nav-text"> data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#methods"><span class="nav-number">6.2.</span> <span class="nav-text"> methods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#openmap"><span class="nav-number">6.2.1.</span> <span class="nav-text"> openMap()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getdata"><span class="nav-number">6.2.2.</span> <span class="nav-text"> getData()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#addmarkers"><span class="nav-number">6.2.3.</span> <span class="nav-text"> addMarkers()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#changeposition"><span class="nav-number">6.2.4.</span> <span class="nav-text"> changePosition()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mounted"><span class="nav-number">6.3.</span> <span class="nav-text"> mounted()</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v8.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://clhuang224.github.io/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/";
+    this.page.identifier = "2020/02/16/20200216-f2e-2-w10-MaskMap/";
+    this.page.title = "F2E 2nd 第十關「 口罩地圖」 挑戰筆記";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lynns-techblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

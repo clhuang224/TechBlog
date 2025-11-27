@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="不知道為什麼，實作多國語系這部分一直都很吸引我。 一直沒有機會去做做看，卻在這個寫文靈感極度枯竭的時候忽然想起來。 爬文之後發現用 Vue I18n 真的很方便，在此紀錄一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue I18n 實作多國語系">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2020/03/15/20200315-vue-i18n/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="不知道為什麼，實作多國語系這部分一直都很吸引我。 一直沒有機會去做做看，卻在這個寫文靈感極度枯竭的時候忽然想起來。 爬文之後發現用 Vue I18n 真的很方便，在此紀錄一下。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/03/15/20200315-vue-i18n/01.png">
+<meta property="article:published_time" content="2020-03-15T11:00:05.000Z">
+<meta property="article:modified_time" content="2025-05-03T07:28:08.826Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="I18n">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://clhuang224.github.io/TechBlog/2020/03/15/20200315-vue-i18n/01.png">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/2020/03/15/20200315-vue-i18n/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Vue I18n 實作多國語系 | Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/03/15/20200315-vue-i18n/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue I18n 實作多國語系
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-03-15 19:00:05" itemprop="dateCreated datePublished" datetime="2020-03-15T19:00:05+08:00">2020-03-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E6%8A%80%E8%A1%93%E7%9F%AD%E6%96%87/" itemprop="url" rel="index"><span itemprop="name">技術短文</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/03/15/20200315-vue-i18n/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/15/20200315-vue-i18n/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>不知道為什麼，實作多國語系這部分一直都很吸引我。<br />
+一直沒有機會去做做看，卻在這個寫文靈感極度枯竭的時候忽然想起來。<br />
+爬文之後發現用 Vue I18n 真的很方便，在此紀錄一下。</p>
+<span id="more"></span>
+<h2 id="官網"><a class="markdownIt-Anchor" href="#官網"></a> 官網</h2>
+<p><a target="_blank" rel="noopener" href="https://kazupon.github.io/vue-i18n/">Vue I18n</a></p>
+<h2 id="cdn-用法"><a class="markdownIt-Anchor" href="#cdn-用法"></a> CDN 用法</h2>
+<p>首先介紹 CDN 的用法。</p>
+<h3 id="基本設定"><a class="markdownIt-Anchor" href="#基本設定"></a> 基本設定</h3>
+<p>將 vue-i18n.js 引用在 &lt;body&gt; 的最後；也要引用 vue 。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/vue/dist/vue.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/vue-i18n/dist/vue-i18n.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>接著來設定各國語言的內容，設定值第一層的 key 是語系名稱， value 就是這個語系的內容。<br />
+可以依據語意來安排結構，像是「 header 的 title 」。<br />
+每個語系都有同樣結構的 key ，如果不相同的話，切換到該語系可能就會找不到詞彙。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> messages = &#123;</span><br><span class="line">    <span class="attr">en</span>: &#123;</span><br><span class="line">        <span class="attr">header</span>: &#123;</span><br><span class="line">            <span class="attr">title</span>: <span class="string">&quot;Website&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">main</span>: &#123;</span><br><span class="line">            <span class="attr">image</span>: &#123;</span><br><span class="line">                <span class="attr">text</span>: <span class="string">&quot;fake image&quot;</span>,</span><br><span class="line">                <span class="attr">font</span>: <span class="string">&quot;lobster&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">tw</span>: &#123;</span><br><span class="line">        <span class="attr">header</span>: &#123;</span><br><span class="line">            <span class="attr">title</span>: <span class="string">&quot;網站&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">main</span>: &#123;</span><br><span class="line">            <span class="attr">image</span>: &#123;</span><br><span class="line">                <span class="attr">text</span>: <span class="string">&quot;假圖&quot;</span>,</span><br><span class="line">                <span class="attr">font</span>: <span class="string">&quot;noto&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">jp</span>: &#123;</span><br><span class="line">        <span class="attr">header</span>: &#123;</span><br><span class="line">            <span class="attr">title</span>: <span class="string">&quot;サイト&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">main</span>: &#123;</span><br><span class="line">            <span class="attr">image</span>: &#123;</span><br><span class="line">                <span class="attr">text</span>: <span class="string">&quot;フェイク&quot;</span>,</span><br><span class="line">                <span class="attr">font</span>: <span class="string">&quot;noto&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>再來就將設定值作為 VueI18n 實體的參數。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果設定的物件不叫做 messages 就要這樣寫</span></span><br><span class="line"><span class="keyword">const</span> i18n = <span class="keyword">new</span> <span class="title class_">VueI18</span>n(&#123;</span><br><span class="line">        <span class="attr">locale</span>: <span class="string">&#x27;tw&#x27;</span>, <span class="comment">// 語系可以先指定或之後指定</span></span><br><span class="line">        <span class="attr">messages</span>: messages</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="comment">// 不然就可以簡化成這樣</span></span><br><span class="line"><span class="keyword">const</span> i18n = <span class="keyword">new</span> <span class="title class_">VueI18</span>n(&#123;</span><br><span class="line">        <span class="attr">locale</span>: <span class="string">&#x27;tw&#x27;</span>,</span><br><span class="line">        messages</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<p>然後將 VueI18n 實體 放入 Vue 實體中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">    <span class="attr">el</span>: <span class="string">&quot;#app&quot;</span>,</span><br><span class="line">    <span class="attr">i18n</span>: i18n</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 同上，也可以寫成這樣</span></span><br><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">    <span class="attr">el</span>: <span class="string">&quot;#app&quot;</span>,</span><br><span class="line">    i18n</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>這樣就設定完成了。</p>
+<h3 id="使用"><a class="markdownIt-Anchor" href="#使用"></a> 使用</h3>
+<h4 id="直接使用"><a class="markdownIt-Anchor" href="#直接使用"></a> 直接使用</h4>
+<p>在 HTML 中以 $t(“header.title”) 這樣的格式來取得內容。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;h1&quot;</span>&gt;</span>&#123;&#123; $t(&quot;header.title&quot;) &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在字串裡面的用法也一樣。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">&quot;img&quot;</span> <span class="attr">:src</span>=<span class="string">&quot;`https://fakeimg.pl/460x200/?text=$&#123;$t(&#x27;main.image.text&#x27;)&#125;&amp;font=$&#123;$t(&#x27;main.image.font&#x27;)&#125;`&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在 JavaScript 中則是例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.$t(<span class="string">&quot;header.title&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>想切換語系的話就直接更改 locale 。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">$i18n</span>.<span class="property">locale</span> = <span class="string">&#x27;jp&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="帶入參數"><a class="markdownIt-Anchor" href="#帶入參數"></a> 帶入參數</h4>
+<p>設定值的字串是可以帶參數的，例如句子中帶有稱呼的時候：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> messages = &#123;</span><br><span class="line">    <span class="attr">en</span>: &#123;</span><br><span class="line">        <span class="attr">main</span>: &#123;</span><br><span class="line">            <span class="attr">greeting</span>: <span class="string">&quot;&#123;name&#125;, Hi!&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">tw</span>: &#123;</span><br><span class="line">        <span class="attr">main</span>: &#123;</span><br><span class="line">            <span class="attr">greeting</span>: <span class="string">&quot;&#123;name&#125;，你好！&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">jp</span>: &#123;</span><br><span class="line">        <span class="attr">main</span>: &#123;</span><br><span class="line">            <span class="attr">greeting</span>: <span class="string">&quot;&#123;name&#125;さん、こんにちは&quot;</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>用物件的方式帶入參數。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">&quot;h2&quot;</span>&gt;</span>&#123;&#123;$t(&quot;main.greeting&quot;, &#123;name: &quot;Lynn&quot;&#125;)&#125;&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="帶入數量"><a class="markdownIt-Anchor" href="#帶入數量"></a> 帶入數量</h4>
+<p>有些語言的後綴可能會隨著數量不同而改變，這時就可以設定不同數量時的表示法。<br />
+參數的帶入方式同上，而不同數量的說法以 | 分開。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> messages = &#123;</span><br><span class="line">    <span class="attr">en</span>: &#123;</span><br><span class="line">        <span class="attr">main</span>: &#123;</span><br><span class="line">            <span class="attr">sheep</span>: <span class="string">&quot;no sheep | 1 sheep | &#123;value&#125; sheeps&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">tw</span>: &#123;</span><br><span class="line">        <span class="attr">main</span>: &#123;</span><br><span class="line">            <span class="attr">sheep</span>: <span class="string">&quot;沒有綿羊 | 1 隻綿羊 | &#123;value&#125; 隻綿羊&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">jp</span>: &#123;</span><br><span class="line">        <span class="attr">main</span>: &#123;</span><br><span class="line">            <span class="attr">sheep</span>: <span class="string">&quot;羊がいない | 羊 1 匹 | 羊 &#123;value&#125; 匹&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用方式則如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 要小心這邊用的是 $tc</span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;&#123; $tc(&quot;main.sheep&quot;, 0 , &#123; value: 0 &#125;) &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;&#123; $tc(&quot;main.sheep&quot;, 1 , &#123; value: 1 &#125;) &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;&#123; $tc(&quot;main.sheep&quot;, 2 , &#123; value: 2 &#125;) &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>另外如果遇到其它複數規則的語言，可以參考文件：<a target="_blank" rel="noopener" href="https://kazupon.github.io/vue-i18n/zh/guide/pluralization.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%8D%E6%95%B0">自定義複數</a></p>
+<h3 id="範例"><a class="markdownIt-Anchor" href="#範例"></a> 範例</h3>
+<p>這是用以上的內容寫的範例。</p>
+<p class="codepen" data-height="417" data-theme-id="default" data-default-tab="js,result" data-user="clhuang224" data-slug-hash="ExjLaqN" style="height: 417px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Vue I18n CDN">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/ExjLaqN">
+  Vue I18n CDN</a> by Lynn (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h2 id="vue-cli-用法"><a class="markdownIt-Anchor" href="#vue-cli-用法"></a> Vue Cli 用法</h2>
+<p>Vue Cli 3.x 以上的版本可以直接用指令讓 Cli 將 I18n 設定好。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue add i18n</span><br></pre></td></tr></table></figure>
+<p>或者可以自行安裝。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue<span class="literal">-i18n</span></span><br></pre></td></tr></table></figure>
+<p>用 Cli 加入模組的話，會有幾個要回答的問題。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 專案預設的地區</span></span><br><span class="line">? The locale of project localization. zh<span class="literal">-TW</span></span><br><span class="line"><span class="comment"># 設定當前地區的語言沒有詞彙時，要用什麼地區來代替</span></span><br><span class="line">? The fallback locale of project localization. zh<span class="literal">-TW</span></span><br><span class="line"><span class="comment"># 語系的檔案要放在什麼資料夾</span></span><br><span class="line">? The directory <span class="built_in">where</span> store localization messages of project. It`s stored under `src` directory. locales</span><br><span class="line"><span class="comment"># 能否在單一的元件設定語系內容</span></span><br><span class="line">? Enable locale messages <span class="keyword">in</span> Single file components ? Yes</span><br></pre></td></tr></table></figure>
+<p>設定好以後，專案中會產生或更動一些檔案：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">src</span><br><span class="line">├── .env</span><br><span class="line">├── i18n.js</span><br><span class="line">├── main.js</span><br><span class="line">├── locales</span><br><span class="line">|   └── zh-TW.json</span><br><span class="line">├── components</span><br><span class="line">|   └── HelloI18n.vue</span><br><span class="line">├── vue.config.js</span><br><span class="line">├── package.json</span><br><span class="line">└── package-lock.json</span><br></pre></td></tr></table></figure>
+<h3 id="env"><a class="markdownIt-Anchor" href="#env"></a> .env</h3>
+<p>.env 宣告了兩個環境變數給其他檔案使用，如果要更改預設地區跟 fallback 地區就可以來這邊改。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VUE_APP_I18N_LOCALE=zh-TW</span><br><span class="line">VUE_APP_I18N_FALLBACK_LOCALE=zh-TW</span><br></pre></td></tr></table></figure>
+<h3 id="i18njs"><a class="markdownIt-Anchor" href="#i18njs"></a> i18n.js</h3>
+<p>i18n.js 比較長一點，但就是在設定基本的內容，跟 Vue router 的設定檔案類似。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">VueI18</span>n <span class="keyword">from</span> <span class="string">&quot;vue-i18n&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 Vue I18n（這行必須被寫在 Vue 實體被宣告前）</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(<span class="title class_">VueI18</span>n);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 將 locales/__.json 中的內容取出來轉成 messages 的結構</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span> &#123;<span class="type">Object</span>&#125; VueI18n 實體的 messages 內容</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadLocaleMessages</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// Webpack 引入一堆檔案的方法</span></span><br><span class="line">  <span class="keyword">const</span> locales = <span class="built_in">require</span>.<span class="title function_">context</span>(</span><br><span class="line">    <span class="comment">// 開始比對的目錄</span></span><br><span class="line">    <span class="string">&quot;./locales&quot;</span>,</span><br><span class="line">    <span class="comment">// 是否比對子目錄</span></span><br><span class="line">    <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// 用正則表達式篩選檔案名稱，限定檔名為大小寫英數字、橫線底線逗號及空白的 JSON 檔</span></span><br><span class="line">    <span class="regexp">/[A-Za-z0-9-_,\s]+\.json$/i</span></span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">const</span> messages = &#123;&#125;;</span><br><span class="line">  <span class="comment">// 用每個檔名去比對並作為 key</span></span><br><span class="line">  locales.<span class="title function_">keys</span>().<span class="title function_">forEach</span>(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> matched = key.<span class="title function_">match</span>(<span class="regexp">/([A-Za-z0-9-_]+)\./i</span>);</span><br><span class="line">    <span class="keyword">if</span> (matched &amp;&amp; matched.<span class="property">length</span> &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> locale = matched[<span class="number">1</span>];</span><br><span class="line">      messages[locale] = <span class="title function_">locales</span>(key);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> messages;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定 locale 、 fallbackLocale 和 messages</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> <span class="title class_">VueI18</span>n(&#123;</span><br><span class="line">  <span class="attr">locale</span>: process.<span class="property">env</span>.<span class="property">VUE_APP_I18N_LOCALE</span> || <span class="string">&quot;en&quot;</span>,</span><br><span class="line">  <span class="attr">fallbackLocale</span>: process.<span class="property">env</span>.<span class="property">VUE_APP_I18N_FALLBACK_LOCALE</span> || <span class="string">&quot;en&quot;</span>,</span><br><span class="line">  <span class="attr">messages</span>: <span class="title function_">loadLocaleMessages</span>()</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>話說中間比對檔名的部分我有點不懂為什麼是這樣子的規則，所以做了一個小實驗。<br />
+首先在 src/locales 新增幾個檔案：</p>
+<ul>
+<li>jp .json</li>
+<li>tw .json</li>
+<li>tw,.json</li>
+<li>tw,copy.json</li>
+<li>tw,tw.json</li>
+<li>tw.json<br />
+再加上 console.log() 。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">locales.<span class="title function_">keys</span>().<span class="title function_">forEach</span>(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Filename: &quot;</span>, key);</span><br><span class="line">    <span class="keyword">const</span> matched = key.<span class="title function_">match</span>(<span class="regexp">/([A-Za-z0-9-_]+)\./i</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;matched: &quot;</span>, matched);</span><br><span class="line">    <span class="keyword">if</span> (matched &amp;&amp; matched.<span class="property">length</span> &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> locale = matched[<span class="number">1</span>];</span><br><span class="line">      messages[locale] = <span class="title function_">locales</span>(key);</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;messages: &quot;</span>, messages);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>最後跑出來結果是這樣：</p>
+<p><img src="01.png" alt="實驗結果" /></p>
+<p>可以觀察到的規則是：</p>
+<ul>
+<li>不接受空白鍵或逗號結尾的檔名</li>
+<li>有空白鍵或逗號隔開時，會選擇符號前的文字作為 key</li>
+<li>key 重複時不會被覆蓋</li>
+<li>所以基本上取名只要用大小寫英數字、橫線及底線就可以</li>
+</ul>
+<h3 id="mainjs"><a class="markdownIt-Anchor" href="#mainjs"></a> main.js</h3>
+<p>main.js 的部分就是把 VueI18n 放入 Vue 實體中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&quot;./App.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> i18n <span class="keyword">from</span> <span class="string">&quot;./i18n&quot;</span>; <span class="comment">// 多了這行</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Vue</span>.<span class="property">config</span>.<span class="property">productionTip</span> = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">  i18n, <span class="comment">// 和這行</span></span><br><span class="line">  <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> <span class="title function_">h</span>(<span class="title class_">App</span>)</span><br><span class="line">&#125;).$mount(<span class="string">&quot;#app&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="locales__json"><a class="markdownIt-Anchor" href="#locales__json"></a> locales/__.json</h3>
+<p>預設的語系檔案。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;hello i18n !!&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="componentshelloi18nvue"><a class="markdownIt-Anchor" href="#componentshelloi18nvue"></a> components/HelloI18n.vue</h3>
+<p>示範元件內使用 <i18n/> 標籤的檔案。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;p&gt;&#123;&#123; $t(&quot;hello&quot;) &#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &quot;HelloI18n&quot;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;i18n&gt;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;en&quot;: &#123;</span><br><span class="line">    &quot;hello&quot;: &quot;Hello i18n in SFC!&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/i18n&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="vueconfigjs"><a class="markdownIt-Anchor" href="#vueconfigjs"></a> vue.config.js</h3>
+<p>i18n 相關的專案設定。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">pluginOptions</span>: &#123;</span><br><span class="line">    <span class="attr">i18n</span>: &#123;</span><br><span class="line">      <span class="attr">locale</span>: <span class="string">&quot;zh-TW&quot;</span>,</span><br><span class="line">      <span class="attr">fallbackLocale</span>: <span class="string">&quot;zh-TW&quot;</span>,</span><br><span class="line">      <span class="attr">localeDir</span>: <span class="string">&quot;locales&quot;</span>,</span><br><span class="line">      <span class="attr">enableInSFC</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="結語"><a class="markdownIt-Anchor" href="#結語"></a> 結語</h2>
+<p>以上大概就是有關 Vue I18n 的內容，感謝閱讀到這裡：）</p>
+<h2 id="參考資料"><a class="markdownIt-Anchor" href="#參考資料"></a> 參考資料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://dotblogs.com.tw/wasichris/2018/05/12/012517">[Vue] 跟著 Vue 闖蕩前端世界 - 11 使用 vue-i18n 打造多國語系網站環境 | 搞搞就懂 - 點部落</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.minwt.com/webdesign-dev/js/20464.html">[教學] VUE+VUE i18n 讓HTML靜態網頁，也支援多國語言 | 梅問題．教學網</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8C%BA%E5%9F%9F%E8%AE%BE%E7%BD%AE">地區設定 - 維基百科，自由的百科全書</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.itread01.com/content/1546427551.html">前端Vue中多語言切換功能的實現 - IT閱讀</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.itread01.com/content/1548038172.html">webpack 之 require.context 用法 - IT閱讀</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Guide/Regular_Expressions">正規表達式 - JavaScript | MDN</a></li>
+</ul>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/TechBlog/tags/Vue/" rel="tag"># Vue</a>
+              <a href="/TechBlog/tags/I18n/" rel="tag"># I18n</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/03/07/20200307-css-grid/" rel="prev" title="CSS Grid">
+      <i class="fa fa-chevron-left"></i> CSS Grid
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/03/29/20200329-android-guessNumber/" rel="next" title="【 Android 開發入門 03 】猜數字遊戲">
+      【 Android 開發入門 03 】猜數字遊戲 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%98%E7%B6%B2"><span class="nav-number">1.</span> <span class="nav-text"> 官網</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cdn-%E7%94%A8%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text"> CDN 用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%A8%AD%E5%AE%9A"><span class="nav-number">2.1.</span> <span class="nav-text"> 基本設定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text"> 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8"><span class="nav-number">2.2.1.</span> <span class="nav-text"> 直接使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B6%E5%85%A5%E5%8F%83%E6%95%B8"><span class="nav-number">2.2.2.</span> <span class="nav-text"> 帶入參數</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B6%E5%85%A5%E6%95%B8%E9%87%8F"><span class="nav-number">2.2.3.</span> <span class="nav-text"> 帶入數量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B"><span class="nav-number">2.3.</span> <span class="nav-text"> 範例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-cli-%E7%94%A8%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text"> Vue Cli 用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#env"><span class="nav-number">3.1.</span> <span class="nav-text"> .env</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#i18njs"><span class="nav-number">3.2.</span> <span class="nav-text"> i18n.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mainjs"><span class="nav-number">3.3.</span> <span class="nav-text"> main.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#locales__json"><span class="nav-number">3.4.</span> <span class="nav-text"> locales&#x2F;__.json</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentshelloi18nvue"><span class="nav-number">3.5.</span> <span class="nav-text"> components&#x2F;HelloI18n.vue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vueconfigjs"><span class="nav-number">3.6.</span> <span class="nav-text"> vue.config.js</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">4.</span> <span class="nav-text"> 結語</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text"> 參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v8.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://clhuang224.github.io/TechBlog/2020/03/15/20200315-vue-i18n/";
+    this.page.identifier = "2020/03/15/20200315-vue-i18n/";
+    this.page.title = "Vue I18n 實作多國語系";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lynns-techblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

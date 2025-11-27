@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="作為一個新手，擁有一個任性的權利；那就是可以盲目地跟從步驟，只要有 run 出東西來就可以。 上一篇文章說到安裝 Android Studio ，接下來就可以開啟第一個專案了。 以下就來說說怎麼開啟新專案，並在模擬器和實體裝置上執行。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【 Android 開發入門 02 】開啟專案、設定模擬器與裝置">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="作為一個新手，擁有一個任性的權利；那就是可以盲目地跟從步驟，只要有 run 出東西來就可以。 上一篇文章說到安裝 Android Studio ，接下來就可以開啟第一個專案了。 以下就來說說怎麼開啟新專案，並在模擬器和實體裝置上執行。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/01.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/02.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/03.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/04.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/05.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/06.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/07.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/08.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/09.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/10.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/11.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/12.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/13.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/14.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/15.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/16.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/17.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/18.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/19.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/20.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/21.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/22.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/23.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/24.png">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/25.png">
+<meta property="article:published_time" content="2020-02-20T10:30:09.000Z">
+<meta property="article:modified_time" content="2025-05-03T07:28:08.819Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/01.png">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>【 Android 開發入門 02 】開啟專案、設定模擬器與裝置 | Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【 Android 開發入門 02 】開啟專案、設定模擬器與裝置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-02-20 18:30:09" itemprop="dateCreated datePublished" datetime="2020-02-20T18:30:09+08:00">2020-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/" itemprop="url" rel="index"><span itemprop="name">系列文章</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/02/20/20200220-android-createNewProject/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/20/20200220-android-createNewProject/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>作為一個新手，擁有一個任性的權利；那就是可以盲目地跟從步驟，只要有 run 出東西來就可以。<br />
+上一篇文章說到安裝 Android Studio ，接下來就可以開啟第一個專案了。<br />
+以下就來說說怎麼開啟新專案，並在模擬器和實體裝置上執行。</p>
+<span id="more"></span>
+<h2 id="新建專案"><a class="markdownIt-Anchor" href="#新建專案"></a> 新建專案</h2>
+<p>如果是第一次執行 Android Studio ，應該會看到以下畫面；要開啟新專案就選擇 Start a new Android Studio project 。</p>
+<p><img src="01.png" alt="開新專案" /></p>
+<p>接下來可以選擇專案類型，有好幾種範本可以選擇，暫時先看圖說故事就可以了。<br />
+因為還沒有要做什麼，我選擇 Empty Activity 。</p>
+<p><img src="02.png" alt="選擇專案類型" /></p>
+<p>接著設定專案基本資訊。</p>
+<p><img src="03.png" alt="設定專案基本資訊" /></p>
+<ul>
+<li>Name
+<ul>
+<li>專案名稱</li>
+<li>盡量取可讀性高，又不重複的名稱。</li>
+</ul>
+</li>
+<li>Package name
+<ul>
+<li>通常是倒過來的網域名稱加上專案名稱。</li>
+<li>凡是 Java 專案都會有 Package name ，只能使用英數字及底線，通常使用小寫。</li>
+</ul>
+</li>
+<li>Save location
+<ul>
+<li>儲存位置</li>
+</ul>
+</li>
+<li>Minimal API level
+<ul>
+<li>最低可以適用的 Android 版本</li>
+<li>選擇之後，下面會顯示有多少比例的裝置使用這個版本；100% 就不用擔心有裝置會不能使用你的程式。</li>
+</ul>
+</li>
+<li>The project will support instant apps
+<ul>
+<li>專案有要支援 instant app 才選。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://code.tutsplus.com/zh-hant/tutorials/what-are-android-instant-apps--cms-29283">什麼是安卓 Instant App ( 即時 App) ?</a></p>
+</blockquote>
+<p>設定好後就可以進入專案，第一次使用會下載一些東西，所以會比較久。</p>
+<p><img src="04.png" alt="等待建置" /></p>
+<p>專案建置完成看起來會是這個樣子。</p>
+<p><img src="05.png" alt="建置完成" /></p>
+<h2 id="模擬器-virtual-device"><a class="markdownIt-Anchor" href="#模擬器-virtual-device"></a> 模擬器 (Virtual Device)</h2>
+<h3 id="什麼是模擬器"><a class="markdownIt-Anchor" href="#什麼是模擬器"></a> 什麼是模擬器</h3>
+<p>不論是使用什麼作業系統來開發 Android ，都需要將寫好的專案打包到 Android 裝置上執行。<br />
+當我們手邊沒有 Android 的裝置時，就可以利用模擬器來執行程式。</p>
+<h3 id="新增模擬器"><a class="markdownIt-Anchor" href="#新增模擬器"></a> 新增模擬器</h3>
+<p>安裝 Android Studio 時，就已經預設安裝模擬器了（除非手動取消選項）。<br />
+首先點選「Tools &gt; AVD Manager」。</p>
+<p><img src="06.png" alt="選擇 AVD Manager" /></p>
+<p>選擇「Create Virtual Device」。</p>
+<p><img src="07.png" alt="選擇 Create Virtual Device" /></p>
+<p>再來選擇裝置規格；可以選擇預設的裝置、匯入或自訂裝置。</p>
+<blockquote>
+<p>一個有匯入檔案的 GitHub 專案： <a target="_blank" rel="noopener" href="https://github.com/mwolfson/AndroidAVDRepo">mwolfson / AndroidAVDRepo</a></p>
+</blockquote>
+<p><img src="08.png" alt="選擇裝置規格" /></p>
+<p>選擇模擬器的 Android 版本（安裝需要一點時間）。</p>
+<p><img src="09.png" alt="選擇 System Image" /></p>
+<p>最後設定一些細節。<br />
+例如畫面要直的還是橫的、用什麼方式模擬、使用多少記憶體……等。</p>
+<p><img src="10.png" alt="設定其他細節" /></p>
+<p>設定完成。</p>
+<p><img src="11.png" alt="設定完成" /></p>
+<h3 id="使用模擬器"><a class="markdownIt-Anchor" href="#使用模擬器"></a> 使用模擬器</h3>
+<p>選擇模擬器後，按下右邊的綠色箭頭執行。</p>
+<p><img src="12.png" alt="Run app" /></p>
+<p>模擬器的介面會跟裝置很接近，大部分的操作就跟裝置一樣；右邊的工具列可以開關機、調整音量及傾斜裝置等。<br />
+第一次使用畫面會是黑色的，它不是壞了，只是要按開機。</p>
+<p><img src="13.png" alt="模擬畫面" /></p>
+<p>就和一般 Android 的操作方式一樣，在應用程式的地方可以找到專案的名稱，點進去就會開啟專案的程式了。</p>
+<p><img src="14.png" alt="執行畫面" /></p>
+<h2 id="實體裝置"><a class="markdownIt-Anchor" href="#實體裝置"></a> 實體裝置</h2>
+<p>使用模擬器會佔據電腦的資源，而且有時候還是沒有比實體裝置來得真實。<br />
+手邊如果有想測試的裝置，直接在上面執行程式還是最方便的了。</p>
+<p>想使用實體裝置來測試專案程式的話，需要做一些前置工作。</p>
+<h3 id="啟用-google-usb-driver"><a class="markdownIt-Anchor" href="#啟用-google-usb-driver"></a> 啟用 Google USB Driver</h3>
+<p>首先要啟用 Google USB Driver ；點選「Tools &gt; SDK Manager 」。</p>
+<p><img src="15.png" alt="SDK Manager" /></p>
+<p>在 SDK Tools 的頁面勾選 Google USB Driver 。<br />
+如果之前沒有安裝過會詢問要不要安裝。</p>
+<p><img src="16.png" alt="Google USB Driver" /></p>
+<h3 id="開啟開發人員模式"><a class="markdownIt-Anchor" href="#開啟開發人員模式"></a> 開啟開發人員模式</h3>
+<p>接著要開啟裝置的開發人員模式。<br />
+進入裝置的設定，點選「系統」。</p>
+<p><img src="17.png" alt="設定" /></p>
+<p>接著點選「關於手機」。</p>
+<p><img src="18.png" alt="點選關於手機" /></p>
+<p>點選「軟體資訊」。</p>
+<p><img src="19.png" alt="點選軟體資訊" /></p>
+<p>接著在「版本號碼」的地方點擊七下，開啟開發人員模式。</p>
+<p><img src="20.png" alt="點擊版本號碼" /></p>
+<h3 id="啟用-usb-偵錯"><a class="markdownIt-Anchor" href="#啟用-usb-偵錯"></a> 啟用 USB 偵錯</h3>
+<p>開啟開發人員模式以後回到「系統」，會發現多了一個「開發人員選項」。</p>
+<p><img src="21.png" alt="開發人員選項" /></p>
+<p>點進去以後啟用「 USB 偵錯」。</p>
+<p><img src="22.png" alt="啟用 USB 偵錯" /></p>
+<h3 id="執行"><a class="markdownIt-Anchor" href="#執行"></a> 執行</h3>
+<p>完成以上步驟之後，只要將裝置接上電腦，就會出現確認訊息。<br />
+點選「允許」。</p>
+<p><img src="23.png" alt="允許 USB 偵錯" /></p>
+<p>在 Android Studio 上就可以看到新的選項，選擇自己的裝置。</p>
+<p><img src="24.png" alt="選擇裝置" /></p>
+<p>按下綠色箭頭以後，裝置就會直接啟動專案程式。</p>
+<p><img src="25.png" alt="裝置執行畫面" /></p>
+<h2 id="下集預告"><a class="markdownIt-Anchor" href="#下集預告"></a> 下集預告</h2>
+<p>下一篇文章預定藉由製作一個小程式（也許是 BMI 計算機），初步了解 Android 圖形介面與程式邏輯的互動關係。</p>
+<h2 id="參考資料"><a class="markdownIt-Anchor" href="#參考資料"></a> 參考資料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.flag.com.tw/books/product_s/FS761">Android App 程式設計教本之無痛起步- 使用 Android Studio 2.X 開發環境</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10200466">2019 iT 邦幫忙鐵人賽 [Andriod] Andriod Studio 從入門到進入狀況 系列 我的第一個Android程式 - Hello Android!</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10189220">Android Studio 筆記─設定模擬器AVD Manager</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/TechBlog/tags/Android/" rel="tag"># Android</a>
+              <a href="/TechBlog/tags/w3HexSchool/" rel="tag"># w3HexSchool</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/" rel="prev" title="F2E 2nd 第十關「 口罩地圖」 挑戰筆記">
+      <i class="fa fa-chevron-left"></i> F2E 2nd 第十關「 口罩地圖」 挑戰筆記
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/03/07/20200307-css-grid/" rel="next" title="CSS Grid">
+      CSS Grid <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E5%B0%88%E6%A1%88"><span class="nav-number">1.</span> <span class="nav-text"> 新建專案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%93%AC%E5%99%A8-virtual-device"><span class="nav-number">2.</span> <span class="nav-text"> 模擬器 (Virtual Device)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E6%A8%A1%E6%93%AC%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text"> 什麼是模擬器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E6%A8%A1%E6%93%AC%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text"> 新增模擬器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A8%A1%E6%93%AC%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text"> 使用模擬器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%A6%E9%AB%94%E8%A3%9D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text"> 實體裝置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%95%9F%E7%94%A8-google-usb-driver"><span class="nav-number">3.1.</span> <span class="nav-text"> 啟用 Google USB Driver</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%96%8B%E5%95%9F%E9%96%8B%E7%99%BC%E4%BA%BA%E5%93%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text"> 開啟開發人員模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%95%9F%E7%94%A8-usb-%E5%81%B5%E9%8C%AF"><span class="nav-number">3.3.</span> <span class="nav-text"> 啟用 USB 偵錯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%B7%E8%A1%8C"><span class="nav-number">3.4.</span> <span class="nav-text"> 執行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E9%9B%86%E9%A0%90%E5%91%8A"><span class="nav-number">4.</span> <span class="nav-text"> 下集預告</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text"> 參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v8.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/";
+    this.page.identifier = "2020/02/20/20200220-android-createNewProject/";
+    this.page.title = "【 Android 開發入門 02 】開啟專案、設定模擬器與裝置";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lynns-techblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

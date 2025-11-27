@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lynn&#39;s TechBlog">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="Lynn, F2E">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false
+  };
+</script>
+
+  <title>Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2025/06/14/20250614-ujm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/TechBlog/2025/06/14/20250614-ujm/" class="post-title-link" itemprop="url">使用者旅程地圖</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2025-06-14 00:00:00" itemprop="dateCreated datePublished" datetime="2025-06-14T00:00:00+08:00">2025-06-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-11-13 00:33:38" itemprop="dateModified" datetime="2025-11-13T00:33:38+08:00">2025-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/PM-%E7%AD%86%E8%A8%98/" itemprop="url" rel="index"><span itemprop="name">PM 筆記</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2025/06/14/20250614-ujm/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2025/06/14/20250614-ujm/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本文整理有關使用者旅程地圖的學習筆記。</p>
+<h2 id="什麼是使用者旅程地圖"><a class="markdownIt-Anchor" href="#什麼是使用者旅程地圖"></a> 什麼是使用者旅程地圖</h2>
+<ul>
+<li>User Journey Map（UJM），是把使用者的旅程視覺化的一種方式</li>
+<li>如果已知目標使用者為客戶（例如 B2C 的場景），可稱為 Customer Journey Map （CJM）</li>
+<li>利用圖表的方式，描述使用者在不同階段的行為、心智地圖及情緒反應，讓品牌站在使用者的角度，預測和分析使用者行為</li>
+<li>CJM 可以用來改善客戶體驗、提高營收、提高客戶忠誠度</li>
+<li>是擬定產品策略的重要環節</li>
+</ul>
+<h2 id="ujm-的三個使用方式"><a class="markdownIt-Anchor" href="#ujm-的三個使用方式"></a> UJM 的三個使用方式</h2>
+<ul>
+<li>發想新的產品</li>
+<li>迭代現有的產品</li>
+<li>與團隊成員溝通設計概念</li>
+</ul>
+<h2 id="ujm-所包含的元素"><a class="markdownIt-Anchor" href="#ujm-所包含的元素"></a> UJM 所包含的元素</h2>
+<ul>
+<li>The Lens：用戶的基本訊息
+<ul>
+<li>Users：角色</li>
+<li>Scenario：發生情境及場景，例如凌晨兩點拿著手機在路邊</li>
+<li>Goals and Expectations：目標與期待，例如想找最近的行動電源</li>
+</ul>
+</li>
+<li>The Experience：體驗
+<ul>
+<li>Journey Phases：旅程階段</li>
+<li>Actions：行為</li>
+<li>Mindsets：想法</li>
+<li>Emotions：情感</li>
+</ul>
+</li>
+<li>The Insights：觀點
+<ul>
+<li>Opportunities：痛點及潛在機會</li>
+<li>Internal ownership：對應痛點的設計或功能</li>
+</ul>
+</li>
+</ul>
+<h3 id="客戶是誰"><a class="markdownIt-Anchor" href="#客戶是誰"></a> 客戶是誰</h3>
+<ul>
+<li>基本資訊，例如：
+<ul>
+<li>外型</li>
+<li>喜好</li>
+<li>興趣</li>
+<li>年齡</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>可以用親和圖法（Affinity Diagram）發想並聚焦主要及次要目標客戶。</p>
+</blockquote>
+<h3 id="時間尺度"><a class="markdownIt-Anchor" href="#時間尺度"></a> 時間尺度</h3>
+<ul>
+<li>顧客旅程的長度</li>
+<li>跟商品類型相關，例如：
+<ul>
+<li>假訊息查詢系統
+<ul>
+<li>整體使用：數年</li>
+<li>每次查詢：一小時內</li>
+</ul>
+</li>
+<li>診所官網
+<ul>
+<li>整體使用：數年</li>
+<li>瀏覽醫療資訊分享：30 分鐘</li>
+<li>預約看診：10 分鐘</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="顧客旅程階段"><a class="markdownIt-Anchor" href="#顧客旅程階段"></a> 顧客旅程階段</h3>
+<p>將顧客行為和旅程連結，了解該給顧客什麼服務。</p>
+<h3 id="互動行為及感受"><a class="markdownIt-Anchor" href="#互動行為及感受"></a> 互動行為及感受</h3>
+<ul>
+<li>預測或觀察顧客會做出哪些行動</li>
+<li>可能的正面、負面體驗</li>
+<li>每次互動的動機</li>
+<li>促進他們進入下一階段的動力為何</li>
+<li>過程中的阻礙</li>
+</ul>
+<h3 id="互動渠道接觸點"><a class="markdownIt-Anchor" href="#互動渠道接觸點"></a> 互動渠道/接觸點</h3>
+<ul>
+<li>顧客與品牌互動的媒介，例如：
+<ul>
+<li>FB 、 IG 等網路社群</li>
+<li>簡訊、電話</li>
+<li>官網、電商平台</li>
+<li>實體門市</li>
+<li>活動、口耳相傳</li>
+</ul>
+</li>
+</ul>
+<h2 id="如何製作-cjm"><a class="markdownIt-Anchor" href="#如何製作-cjm"></a> 如何製作 CJM</h2>
+<h3 id="定義目標和範圍"><a class="markdownIt-Anchor" href="#定義目標和範圍"></a> 定義目標和範圍</h3>
+<ol>
+<li>競爭對手分析：製作競爭對手的顧客旅程圖，尋找勝出機會、提升品牌吸引力</li>
+<li>完整旅程描繪：認識品牌、購買到忠誠的顧客旅程地圖</li>
+<li>提高購買率：針對消費流程，包含瀏覽電商網站、加入購物車到結帳</li>
+<li>溝通策略：探索在 FB、IG、LINE、Email、簡訊等溝通渠道的互動行為及彼此之間的影響，通常可以透過自動化工具來設計旅程</li>
+</ol>
+<h3 id="收集顧客數據定義目標客戶"><a class="markdownIt-Anchor" href="#收集顧客數據定義目標客戶"></a> 收集顧客數據，定義目標客戶</h3>
+<ul>
+<li>根據前一步驟，建立人物誌（Persona），描繪客戶具體形象，包含：
+<ul>
+<li>性別、年齡、地區、興趣</li>
+<li>互動行為，例如如何進入網站、想達成什麼目標</li>
+</ul>
+</li>
+</ul>
+<h3 id="定義顧客旅程階段"><a class="markdownIt-Anchor" href="#定義顧客旅程階段"></a> 定義顧客旅程階段</h3>
+<p>例如：收到廣告傳單 -&gt; 用手機掃 qrcode 進入商品 landing page -&gt; 點選直接購買 -&gt; 填寫結帳資訊 -&gt; 送出訂單。</p>
+<h3 id="繪製接觸點"><a class="markdownIt-Anchor" href="#繪製接觸點"></a> 繪製接觸點</h3>
+<p>例如收到廣告傳單。</p>
+<h3 id="描述接觸點的顧客行為"><a class="markdownIt-Anchor" href="#描述接觸點的顧客行為"></a> 描述接觸點的顧客行為</h3>
+<p>例如掃傳單上的 QR code。</p>
+<h3 id="尋找顧客痛點"><a class="markdownIt-Anchor" href="#尋找顧客痛點"></a> 尋找顧客痛點</h3>
+<ul>
+<li>根據各階段的互動行為，思考可能的顧客體驗</li>
+<li>在各階段用線條圖畫出顧客的情緒起伏，找出影響顧客對品牌觀感的時間點</li>
+<li>辨識正面的階段、改善負面的階段</li>
+</ul>
+<h2 id="cjm-範例"><a class="markdownIt-Anchor" href="#cjm-範例"></a> CJM 範例</h2>
+<ul>
+<li>The Lens
+<ul>
+<li>Persona：許小芳，25 歲研究生，不太常用 3C，平常不喜歡帶太多東西在身上</li>
+<li>Scenario：凌晨兩點，走路回家的路上，發現手機快要沒電</li>
+<li>Goals and Expectations：找到可以充電的行動電源</li>
+</ul>
+</li>
+<li>The Experience / The insights</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>發現沒電</th>
+<th>開 APP</th>
+<th>出發</th>
+<th>租借</th>
+<th>取得</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Action</td>
+<td>滑開手機看電量</td>
+<td>點開 APP 看地圖</td>
+<td>走路移動到目的地</td>
+<td>掃 QRcode</td>
+<td>等待</td>
+</tr>
+<tr>
+<td>Mindset</td>
+<td>要在沒電之前找到行動電源</td>
+<td>找地點會稍微一點花時間</td>
+<td>有地圖不會迷路</td>
+<td>操作滿簡單的</td>
+<td>很快就拿到了</td>
+</tr>
+<tr>
+<td>Emotion</td>
+<td>😰</td>
+<td>🤔</td>
+<td>😏</td>
+<td>🙂</td>
+<td>😊</td>
+</tr>
+<tr>
+<td>Opportunity</td>
+<td></td>
+<td>缺少優先推薦的地點</td>
+<td>減少迷路的感覺</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Internel ownership</td>
+<td></td>
+<td>新增一鍵定位推薦點</td>
+<td>新增導航提示</td>
+<td>改良電池機台 UI 設計</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="參考資料"><a class="markdownIt-Anchor" href="#參考資料"></a> 參考資料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.nngroup.com/articles/journey-mapping-101/">Journey Mapping 101</a></li>
+<li><a target="_blank" rel="noopener" href="https://pagerank.ing/customer-journey-map-for-product-managers/">顧客旅程地圖入門｜產品經理也要略懂的顧客旅程地圖</a></li>
+<li><a target="_blank" rel="noopener" href="https://peterpowerfullife.com/blog/pm-basic-user-journey-map/">產品經理的硬實力 - User Journey Map(用戶體驗地圖)</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/04/14/20200414-udacity-ud851-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/TechBlog/2020/04/14/20200414-udacity-ud851-01/" class="post-title-link" itemprop="url">Udacity | Developing Android Apps | 01 Create Project Sunshine 課程筆記</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-04-14 00:02:40" itemprop="dateCreated datePublished" datetime="2020-04-14T00:02:40+08:00">2020-04-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E7%B7%9A%E4%B8%8A%E8%AA%B2%E7%A8%8B%E8%A7%80%E7%9C%8B%E7%AD%86%E8%A8%98/" itemprop="url" rel="index"><span itemprop="name">線上課程觀看筆記</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/04/14/20200414-udacity-ud851-01/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/04/14/20200414-udacity-ud851-01/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本文為 Udacity <a target="_blank" rel="noopener" href="https://www.udacity.com/course/new-android-fundamentals--ud851">Developing Android Apps</a> Lesson 1 的課程筆記。</p>
+<p>在開始正文之前，想先說說最近寫文章的狀況。</p>
+<p>在考慮參加六角學院的鐵人賽的時候，我就想過自己並不擅長將文章拆分成適合閱讀的片段；但是因為想督促自己學習 Android ，所以仍然決定參考 IT 邦的方式寫 Android 的文章，而原本看六角學院課程的超長筆記文就繼續照原本的方式更新（不算在鐵人賽的文章裡）。<br />
+但其實才一兩週就覺得滿辛苦的，因為看六角課程的文章不算在鐵人賽中，常常有明明看了不少東西、文章卻一點都擠不出來的感覺。<br />
+所以一直寫寫停停，甚至連原本寫筆記的步調都亂掉了。</p>
+<p>以前讀過心理學的「遊戲工作化」這個概念。<br />
+大略是說，原本因為興趣而持續在做的事情，被獎勵以後反而會失去興致。<br />
+大概就是我最近的心得吧（不過有部份的原因是我完美主義，所以難度太高）。</p>
+<p>寫 Code 和寫文章都要有砍掉重練的勇氣；我決定不管之前寫的 Android 短文，重新以 Udacity 上的課程為基準，單純記錄看課程的筆記。<br />
+跟之前六角整個課程寫一篇的方式不同的是改以章節拆分，至於六角的筆記要不要重新拆成比較短的文章，就再說了。</p>
+<p>以下才是筆記正文。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/TechBlog/2020/04/14/20200414-udacity-ud851-01/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/03/15/20200315-vue-i18n/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/TechBlog/2020/03/15/20200315-vue-i18n/" class="post-title-link" itemprop="url">Vue I18n 實作多國語系</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-03-15 19:00:05" itemprop="dateCreated datePublished" datetime="2020-03-15T19:00:05+08:00">2020-03-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E6%8A%80%E8%A1%93%E7%9F%AD%E6%96%87/" itemprop="url" rel="index"><span itemprop="name">技術短文</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/03/15/20200315-vue-i18n/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/15/20200315-vue-i18n/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>不知道為什麼，實作多國語系這部分一直都很吸引我。<br />
+一直沒有機會去做做看，卻在這個寫文靈感極度枯竭的時候忽然想起來。<br />
+爬文之後發現用 Vue I18n 真的很方便，在此紀錄一下。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/TechBlog/2020/03/15/20200315-vue-i18n/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/03/29/20200329-android-guessNumber/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/TechBlog/2020/03/29/20200329-android-guessNumber/" class="post-title-link" itemprop="url">【 Android 開發入門 03 】猜數字遊戲</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-03-29 23:27:06" itemprop="dateCreated datePublished" datetime="2020-03-29T23:27:06+08:00">2020-03-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/" itemprop="url" rel="index"><span itemprop="name">系列文章</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/03/29/20200329-android-guessNumber/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/29/20200329-android-guessNumber/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>最近發現 Udacity 的免費課程還滿有趣的，雖然入門的課程真的很入門，但是教學方式滿可愛的。<br />
+接下來的文章多多少少會參考 Udacity 的內容。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://classroom.udacity.com/courses/ud834">Android 基礎：用戶介面</a></li>
+<li><a target="_blank" rel="noopener" href="https://classroom.udacity.com/courses/ud851">Android 應用開發 Android 基礎知識</a></li>
+</ul>
+<p>今天我會透過製作猜數字遊戲，來概略介紹 Android 開發的流程。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/TechBlog/2020/03/29/20200329-android-guessNumber/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/03/07/20200307-css-grid/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/TechBlog/2020/03/07/20200307-css-grid/" class="post-title-link" itemprop="url">CSS Grid</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-03-07 22:53:33" itemprop="dateCreated datePublished" datetime="2020-03-07T22:53:33+08:00">2020-03-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E6%8A%80%E8%A1%93%E7%9F%AD%E6%96%87/" itemprop="url" rel="index"><span itemprop="name">技術短文</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/03/07/20200307-css-grid/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/07/20200307-css-grid/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在練習寫網頁的過程中，難免會有偷瞄別人的作品的時候。有時會看到「這次練習一下 Grid 排版」之類的註解，但一直只知道 Bootstrap 是以格線系統為主，而沒有實際去了解過相關的知識。<br />
+最近看到有人大推 CSS Grid ，不禁覺得很好奇，於是就來好好了解一番。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/TechBlog/2020/03/07/20200307-css-grid/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/TechBlog/2020/02/20/20200220-android-createNewProject/" class="post-title-link" itemprop="url">【 Android 開發入門 02 】開啟專案、設定模擬器與裝置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-02-20 18:30:09" itemprop="dateCreated datePublished" datetime="2020-02-20T18:30:09+08:00">2020-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/" itemprop="url" rel="index"><span itemprop="name">系列文章</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/02/20/20200220-android-createNewProject/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/20/20200220-android-createNewProject/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>作為一個新手，擁有一個任性的權利；那就是可以盲目地跟從步驟，只要有 run 出東西來就可以。<br />
+上一篇文章說到安裝 Android Studio ，接下來就可以開啟第一個專案了。<br />
+以下就來說說怎麼開啟新專案，並在模擬器和實體裝置上執行。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/TechBlog/2020/02/20/20200220-android-createNewProject/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/" class="post-title-link" itemprop="url">F2E 2nd 第十關「 口罩地圖」 挑戰筆記</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-02-16 23:42:37" itemprop="dateCreated datePublished" datetime="2020-02-16T23:42:37+08:00">2020-02-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E9%96%8B%E7%99%BC%E6%97%A5%E8%A8%98/" itemprop="url" rel="index"><span itemprop="name">開發日記</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/16/20200216-f2e-2-w10-MaskMap/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>這次的挑戰題目是因應最近的 COVID-19 病毒而生；因著對時事及醫療的一股熱情，看到這個題目的時候覺得非做不可。<br />
+這個學期兩次在短時間內飆出網站的 Prototype ，體會到不先考慮太多，直接開發也是一種方式；看到口罩地圖的資訊之後就直接開始著手進行，途中不考慮要怎麼寫文章，或是怎麼規劃得更好看之類的問題。</p>
+<p>但是這樣的方式還是有其缺點。<br />
+一開始覺得這個網頁就只有簡單的一個畫面，所以沒有用 Webpack 專案，等接近完成的時候，才覺得如果使用 Vue CLI 建立專案的話，可以更方便擴充 jQuery 動畫，或者其他相關服務（例如疫情查詢等）。<br />
+除了覺得畫面簡單，也是因為我在 GitHub 上是將精神時光屋的專案放在同一個 Repository 裡，然後直接將 master 分支設定為 GitHub Page ；為了不想改變這個規律，所以沒有用 Webpack ；看來以後還是克服一下這種完美主義比較好 XD</p>
+<p>之前幾次寫精神時光屋的文章都十分冗長，這次應該仍然會長度破表，請讀者海涵 &lt;(_ _)&gt;</p>
+<h2 id="作品"><a class="markdownIt-Anchor" href="#作品"></a> 作品</h2>
+<p><a target="_blank" href="https://clhuang224.github.io/F2E_2nd/#W10">Lynn 的 F2E 2nd 作品列表 / 第十關：口罩地圖</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/TechBlog/2020/02/16/20200216-f2e-2-w10-MaskMap/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/02/06/20200206-android-intro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/TechBlog/2020/02/06/20200206-android-intro/" class="post-title-link" itemprop="url">【 Android 開發入門 01 】什麼是 Android</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-02-06 21:59:12" itemprop="dateCreated datePublished" datetime="2020-02-06T21:59:12+08:00">2020-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/" itemprop="url" rel="index"><span itemprop="name">系列文章</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/02/06/20200206-android-intro/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/06/20200206-android-intro/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>現代人天天使用行動裝置，如果想要製作一般人都能輕鬆使用的應用程式工具，除了撰寫網頁，行動裝置應用程式也是一個很常見的途徑。本系列文將會介紹使用 Android Studio 整合開發環境及 Java 語言開發 Android 應用程式的相關知識。</p>
+<p>本篇我會先介紹 Android 的背景知識。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/TechBlog/2020/02/06/20200206-android-intro/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2019/11/04/20191104-hex-jsunderground-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/TechBlog/2019/11/04/20191104-hex-jsunderground-02/" class="post-title-link" itemprop="url">JS 新手地下城 F2 「時鐘」 挑戰筆記</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-11-04 00:28:37" itemprop="dateCreated datePublished" datetime="2019-11-04T00:28:37+08:00">2019-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E9%96%8B%E7%99%BC%E6%97%A5%E8%A8%98/" itemprop="url" rel="index"><span itemprop="name">開發日記</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2019/11/04/20191104-hex-jsunderground-02/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/04/20191104-hex-jsunderground-02/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>本文為挑戰六角學院 JS 新手地下城 F2 「時鐘」的筆記。</p>
+</blockquote>
+<h2 id="作品"><a class="markdownIt-Anchor" href="#作品"></a> 作品</h2>
+<p><a target="_blank" href="https://clhuang224.github.io/JavaScriptUnderground#02">Lynn 的 JS 新手地下城 作品列表 / 2F：時鐘</a></p>
+<h2 id="關卡重點"><a class="markdownIt-Anchor" href="#關卡重點"></a> 關卡重點</h2>
+<ul>
+<li>刻出鐘面</li>
+<li>刻出指針</li>
+<li>讓指針轉動</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/TechBlog/2019/11/04/20191104-hex-jsunderground-02/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/01/15/20200115-hex-sass/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/TechBlog/2020/01/15/20200115-hex-sass/" class="post-title-link" itemprop="url">六角學院 Sass 課程學習筆記（更新中）</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-01-15 15:16:16" itemprop="dateCreated datePublished" datetime="2020-01-15T15:16:16+08:00">2020-01-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E7%B7%9A%E4%B8%8A%E8%AA%B2%E7%A8%8B%E8%A7%80%E7%9C%8B%E7%AD%86%E8%A8%98/" itemprop="url" rel="index"><span itemprop="name">線上課程觀看筆記</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/01/15/20200115-hex-sass/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/15/20200115-hex-sass/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本文為觀看六角學院「 <a target="_blank" rel="noopener" href="https://courses.hexschool.com/courses/enrolled/670032">Sass 實戰全攻略 - 成為前 1% 的 CSS 頂尖好手</a>」的紀錄。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/TechBlog/2020/01/15/20200115-hex-sass/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/TechBlog/page/2/">2</a><a class="page-number" href="/TechBlog/page/3/">3</a><a class="extend next" rel="next" href="/TechBlog/page/2/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v8.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+
+</body>
+</html>

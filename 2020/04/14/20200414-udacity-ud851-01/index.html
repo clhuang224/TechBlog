@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文為 Udacity Developing Android Apps Lesson 1 的課程筆記。 在開始正文之前，想先說說最近寫文章的狀況。 在考慮參加六角學院的鐵人賽的時候，我就想過自己並不擅長將文章拆分成適合閱讀的片段；但是因為想督促自己學習 Android ，所以仍然決定參考 IT 邦的方式寫 Android 的文章，而原本看六角學院課程的超長筆記文就繼續照原本的方式更新（不算在鐵人賽">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Udacity | Developing Android Apps | 01 Create Project Sunshine 課程筆記">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2020/04/14/20200414-udacity-ud851-01/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="本文為 Udacity Developing Android Apps Lesson 1 的課程筆記。 在開始正文之前，想先說說最近寫文章的狀況。 在考慮參加六角學院的鐵人賽的時候，我就想過自己並不擅長將文章拆分成適合閱讀的片段；但是因為想督促自己學習 Android ，所以仍然決定參考 IT 邦的方式寫 Android 的文章，而原本看六角學院課程的超長筆記文就繼續照原本的方式更新（不算在鐵人賽">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2020/04/14/20200414-udacity-ud851-01/01.png">
+<meta property="article:published_time" content="2020-04-13T16:02:40.000Z">
+<meta property="article:modified_time" content="2025-05-03T07:28:08.827Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://clhuang224.github.io/TechBlog/2020/04/14/20200414-udacity-ud851-01/01.png">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/2020/04/14/20200414-udacity-ud851-01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Udacity | Developing Android Apps | 01 Create Project Sunshine 課程筆記 | Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/04/14/20200414-udacity-ud851-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Udacity | Developing Android Apps | 01 Create Project Sunshine 課程筆記
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-04-14 00:02:40" itemprop="dateCreated datePublished" datetime="2020-04-14T00:02:40+08:00">2020-04-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E7%B7%9A%E4%B8%8A%E8%AA%B2%E7%A8%8B%E8%A7%80%E7%9C%8B%E7%AD%86%E8%A8%98/" itemprop="url" rel="index"><span itemprop="name">線上課程觀看筆記</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/04/14/20200414-udacity-ud851-01/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/04/14/20200414-udacity-ud851-01/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文為 Udacity <a target="_blank" rel="noopener" href="https://www.udacity.com/course/new-android-fundamentals--ud851">Developing Android Apps</a> Lesson 1 的課程筆記。</p>
+<p>在開始正文之前，想先說說最近寫文章的狀況。</p>
+<p>在考慮參加六角學院的鐵人賽的時候，我就想過自己並不擅長將文章拆分成適合閱讀的片段；但是因為想督促自己學習 Android ，所以仍然決定參考 IT 邦的方式寫 Android 的文章，而原本看六角學院課程的超長筆記文就繼續照原本的方式更新（不算在鐵人賽的文章裡）。<br />
+但其實才一兩週就覺得滿辛苦的，因為看六角課程的文章不算在鐵人賽中，常常有明明看了不少東西、文章卻一點都擠不出來的感覺。<br />
+所以一直寫寫停停，甚至連原本寫筆記的步調都亂掉了。</p>
+<p>以前讀過心理學的「遊戲工作化」這個概念。<br />
+大略是說，原本因為興趣而持續在做的事情，被獎勵以後反而會失去興致。<br />
+大概就是我最近的心得吧（不過有部份的原因是我完美主義，所以難度太高）。</p>
+<p>寫 Code 和寫文章都要有砍掉重練的勇氣；我決定不管之前寫的 Android 短文，重新以 Udacity 上的課程為基準，單純記錄看課程的筆記。<br />
+跟之前六角整個課程寫一篇的方式不同的是改以章節拆分，至於六角的筆記要不要重新拆成比較短的文章，就再說了。</p>
+<p>以下才是筆記正文。</p>
+<span id="more"></span>
+<h2 id="關於-udacity"><a class="markdownIt-Anchor" href="#關於-udacity"></a> 關於 Udacity</h2>
+<p>Udacity 有很多不同類型的課程，有免費也有付費，方便的是網站有中國版本，所以可以看簡體中文。<br />
+雖然有些翻譯不是很符合台灣的風格，有時看不出來原文是什麼，但方便快速理解。<br />
+另外美國跟中國網站的介面跟課程切分不太相同，切換上會有點迷路，這是比較麻煩的地方。</p>
+<p>Udacity 除了 Developing Android Apps 以外，也有更進階與更基礎的 Android 課程。<br />
+基礎課程用很多非常初階的比喻，讓完全沒有程式基礎的人了解一些基本概念。</p>
+<h2 id="關於這堂課"><a class="markdownIt-Anchor" href="#關於這堂課"></a> 關於這堂課</h2>
+<p>Developing Android Apps 這堂課適合有程式基礎、但是不了解 Android 的人。<br />
+開發環境建議使用 Android Studio 。</p>
+<h3 id="先修條件"><a class="markdownIt-Anchor" href="#先修條件"></a> 先修條件</h3>
+<ul>
+<li>使用 Java 至少一年</li>
+<li>熟悉 networking 及 threading</li>
+<li>用過版本控制</li>
+<li>對 XML 有基本了解</li>
+</ul>
+<p>以上雖然我只勾第三點，但其實沒有這些條件也還好。<br />
+真的很在意的話， Udacity 有相關的課程。</p>
+<h3 id="教材"><a class="markdownIt-Anchor" href="#教材"></a> 教材</h3>
+<p>這門課有兩套教材，都放在 GitHub 上（請自行去 Udacity 的課程裡看）；每個小節都有題目跟答案。<br />
+題目中可以看 TODO 的部分，會提示步驟。<br />
+想要查詢所有的 TODO ，可以點開 Android Studio 的左下角的 TODO ；如果找不到，可以按兩下 Shift 來搜尋。<br />
+在 TODO 視窗中雙擊某個 TODO 就會跳到對應的 Code 處。</p>
+<blockquote>
+<p>TODO 可以用在構想或協作的時候，寫下還需要做哪些事，做完之後可以改成 COMPLETED 。<br />
+不論在 Java 或 XML 中， TODO 的用法就是在註解的最前面寫 TODO 就可以了。</p>
+</blockquote>
+<h2 id="章節目標"><a class="markdownIt-Anchor" href="#章節目標"></a> 章節目標</h2>
+<ul>
+<li>開啟並運行專案</li>
+<li>認識 Android Software Stack 、 Gradle 及 Android Debug Bridge</li>
+<li>認識 Activity</li>
+<li>佈局相關的知識</li>
+</ul>
+<h2 id="開啟及執行專案"><a class="markdownIt-Anchor" href="#開啟及執行專案"></a> 開啟及執行專案</h2>
+<p>我寫過怎麼開啟跟執行專案了，不想再寫一次了（誤</p>
+<blockquote>
+<p>任意門：<a href="https://clhuang224.github.io/TechBlog/2020/02/20/20200220-android-createNewProject/">【 Android 開發入門 02 】開啟專案、設定模擬器與裝置</a></p>
+</blockquote>
+<p>開好專案之後，可以到 File &gt; Project Structure 察看或調整專案設定，像是 Gradle 、 SDK 的版本等等。<br />
+通常版本不能降級（降級會出問題），只能升級。<br />
+其中 min SDK 指的是最低可以運行的 SDK 版本；而 target SDK 並非是指最高可運行的版本，而是實際上拿來測試的版本，但通常這個版本愈新愈好。</p>
+<p>在 Android Studio 中，模擬器稱為 Android Virtual Device (AVD) 。<br />
+在 Windows 和 Mac 中，模擬器是藉由 HXAM （一種特殊的 Kernel driver ）來虛擬硬體。<br />
+如果 HXAM 出問題可以看看排除方法：<a target="_blank" rel="noopener" href="https://software.intel.com/en-us/blogs/2014/03/14/troubleshooting-intel-haxm">Troubleshooting Intel® HAXM</a></p>
+<blockquote>
+<p>官方文件：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/studio/run/emulator">Run apps on the Android Emulator</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/studio/run/device">Run apps on a hardware device</a></li>
+</ul>
+</blockquote>
+<h2 id="android-software-stack"><a class="markdownIt-Anchor" href="#android-software-stack"></a> Android Software Stack</h2>
+<p>Android 是一個很複雜的 Stack ，每一層都處理不同的任務。</p>
+<ul>
+<li>Linux Kernel
+<ul>
+<li>處理一些低階的任務，例如硬體、驅動程式、電源管理等。</li>
+</ul>
+</li>
+<li>C/C++ Libraries 和 Android Runtime
+<ul>
+<li>C/C++ Libraries 例如 LibsC 、 SQLite</li>
+<li>App 在 Android Runtime 的實體中執行，這裡也包含 Android 核心的 Libraries</li>
+</ul>
+</li>
+<li>Application Framework
+<ul>
+<li>App 會在這裡使用下層的一些 Class 和服務</li>
+</ul>
+</li>
+<li>Application Layer
+<ul>
+<li>所有的 App 都裝在這裡</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>官方文件：<a target="_blank" rel="noopener" href="https://developer.android.com/guide/platform">Platform Architecture</a></p>
+</blockquote>
+<p>當我們按下執行的綠色箭頭時會發生什麼事呢？<br />
+首先 Gradle 會把原始碼編譯成可以 run 在 Runtime 的 byte code 。<br />
+Gradle 是 Android Studio 中管理相依套件的打包工具；它會將專案編譯成 Byte Code 、 Resource 和 Manifest ，並打包成特殊的壓縮格式： APK (Android Package Kit)。<br />
+專案被打包成 APK 後， Android Studio 會 Sign 它，並透過 ADB(Android Debug Bridge) 把 APK 送到裝置或 AVD 。<br />
+APK 送到後， Android Studio 會再次透過 ADB 安裝 APK 並執行 App 。</p>
+<p>話說 ADB 是什麼？<br />
+ADB 是包含在 Android SDK 裡的命令工具，安裝在 {SDK的資料夾}/platform-tools/ 中。<br />
+想要直接在 Android Studio 的 Terminal 中使用的話，只要把路徑加到環境變數就可以用 adb 相關的指令了。<br />
+幾個方便的指令如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出指令說明</span></span><br><span class="line">adb</span><br><span class="line"><span class="comment"># 列出現在相連的裝置和模擬器的狀態</span></span><br><span class="line">adb devices -l</span><br><span class="line"><span class="comment"># 安裝 APK</span></span><br><span class="line">adb install &#123;path_to_apk&#125;</span><br><span class="line"><span class="comment"># 透過 IP 連到裝置</span></span><br><span class="line">adb connect &#123;device_ip_address&#125;</span><br><span class="line"><span class="comment"># 透過 USB 連到裝置（比用 IP 的方式穩定）</span></span><br><span class="line">adb shell</span><br><span class="line"><span class="comment"># 複製檔案到裝置</span></span><br><span class="line">adb pull &#123;裝置路徑&#125; &#123;電腦路徑&#125;</span><br><span class="line"><span class="comment"># 複製檔案到電腦</span></span><br><span class="line">adb push &#123;電腦路徑&#125; &#123;裝置路徑&#125;</span><br><span class="line"><span class="comment"># 透過 USB 執行 App</span></span><br><span class="line">adb shell am start -n &#123;Packge Name&#125;/&#123;Packge Name&#125;.&#123;Activity Name&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>官方文件： <a target="_blank" rel="noopener" href="https://developer.android.com/studio/command-line/adb">Android Debug Bridge (adb)</a></p>
+</blockquote>
+<h2 id="activity"><a class="markdownIt-Anchor" href="#activity"></a> Activity</h2>
+<p>什麼是 Activity ？<br />
+「An activity is a single, focused thing that the user can do.」</p>
+<p>Android App 是一堆相連且基於 Android 框架的 Component 的集合。<br />
+這些 Component 有四種：</p>
+<ul>
+<li>Activity</li>
+<li>Service</li>
+<li>Broadcast Receiver</li>
+<li>Content Provider</li>
+</ul>
+<p>Android Manifest 中註冊了這些 Component ，所以 Android 可以認得它們。</p>
+<p>其中 Activity 負責大部分的互動功能，繼承 Activity 這個 Class ，每個 Activity 都負責繪製和處理某個畫面。<br />
+從使用者的角度來看， Launcher （行動裝置的桌面）啟動第一個 Activity ，加上後面一連串的 Activities ，就是所謂的 App 。<br />
+Android 系統會將這些 Activity 留存在 Stack 中，以維持 Activity 的前後關係；當使用者按返回鍵，當前的 Activity 會消失，回到 Stack 最上面一個 Activity ；如果 Stack 為空則回到 Launcher 。</p>
+<p>話說 Launcher 也有被註冊在 Menifest 中，這跟 Activity 如何啟動另一個 Activity 有關，不過這章沒有談到。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">package</span>=<span class="string">&quot;com.example.android.hello&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">application</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:allowBackup</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:icon</span>=<span class="string">&quot;@mipmap/ic_launcher&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:label</span>=<span class="string">&quot;@string/app_name&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:supportsRtl</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:theme</span>=<span class="string">&quot;@style/AppTheme&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activity</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:name</span>=<span class="string">&quot;.MainActivity&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:label</span>=<span class="string">&quot;@string/app_name&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.MAIN&quot;</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.LAUNCHER&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="佈局"><a class="markdownIt-Anchor" href="#佈局"></a> 佈局</h2>
+<p>Android 框架有一堆協助製作 UI 的工具。每個 Activity 都包含一個 Layout ，提供要顯示的內容和方法。<br />
+res 資料夾專門放專案所有的資源，其中也包含 Layout 的檔案。<br />
+將這些資源和 Activity 的檔案分開的好處是，可以在不改動程式碼的狀況下改變 App 的外觀，也能針對不同的裝置和情境調整語言、畫面和音效等。</p>
+<p>res 資料夾中的資源都是 XML 檔，其中的標籤指的是放在 UI 中的 View 類型。<br />
+有些 View 中可以有其它的 View ，因而被稱為 Layout 或 Container View 。</p>
+<p>專案開啟時就預設有一個 layout 檔案，也能在 mainActicity.java 的 onCreated 中看到使用了 activity_main.xml ，將 XML 中的內容轉換成層層的 View 物件放入記憶體中，使 Java 可以操作這些物件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MainActivity</span> <span class="keyword">extends</span> <span class="title class_">AppCompatActivity</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(Bundle savedInstanceState)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中 R 是系統在編譯時所產生的 Class ，能以一些常數指向資源。</p>
+<h2 id="view-的類型"><a class="markdownIt-Anchor" href="#view-的類型"></a> View 的類型</h2>
+<p>View 可以分為 UI Component 和 Container View 。</p>
+<p>常見的 UI Component 例如：</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TextView</td>
+<td>非互動的文字區塊</td>
+</tr>
+<tr>
+<td>EditText</td>
+<td>可以編輯的文字區塊</td>
+</tr>
+<tr>
+<td>ImageView</td>
+<td>圖片</td>
+</tr>
+<tr>
+<td>Button</td>
+<td>按鈕</td>
+</tr>
+<tr>
+<td>Chromometer</td>
+<td>簡單的計時器</td>
+</tr>
+</tbody>
+</table>
+<p>Container View 繼承 ViewGroup 類別，常見的類型例如：</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>排列 View 的方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LinearLayout</td>
+<td>單行或單列。</td>
+</tr>
+<tr>
+<td>RelativeLayout</td>
+<td>以某個 View 為相對位置。</td>
+</tr>
+<tr>
+<td>FrameLayout</td>
+<td>只包含一個 Child View。</td>
+</tr>
+<tr>
+<td>ScrollView</td>
+<td>可以讓使用者滾動的 FrameLayout 。</td>
+</tr>
+<tr>
+<td>ConstraintLayout</td>
+<td>排列方式很彈性，說來話長。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>相關文件</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/widget/package-summary">android.widget</a></li>
+<li><a target="_blank" rel="noopener" href="https://codelabs.developers.google.com/codelabs/constraint-layout">Use ConstraintLayout to design your Android views</a></li>
+</ul>
+</blockquote>
+<h3 id="xml-屬性"><a class="markdownIt-Anchor" href="#xml-屬性"></a> XML 屬性</h3>
+<p>在 XML 檔案中， View 有一些改變外觀或設定的屬性。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">FrameLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/tv_title&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">&quot;@string/title&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:padding</span>=<span class="string">&quot;16dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:textSize</span>=<span class="string">&quot;20sp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">FrameLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="文字"><a class="markdownIt-Anchor" href="#文字"></a> 文字</h3>
+<p>android:text 指定 TextView 的文字內容。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 可以直接用字串 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">  <span class="attr">android:text</span>=<span class="string">&quot;我是標題&quot;</span></span></span><br><span class="line"><span class="tag">  /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 但建議取用 Resource --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">  <span class="attr">android:text</span>=<span class="string">&quot;@string/title&quot;</span></span></span><br><span class="line"><span class="tag">  /&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="寬高"><a class="markdownIt-Anchor" href="#寬高"></a> 寬高</h3>
+<p>android:layout_width 及 android:layout_height 指定 View 的寬高。<br />
+常用的值為：</p>
+<ul>
+<li>wrap_content ：依內容的寬高而定</li>
+<li>match_parent ：依父層的寬高而定<br />
+也可以直接使用以 dp 、 in 、 mm 、 px 、 sp 為單位的值，但建議使用 dp 。</li>
+</ul>
+<h3 id="邊界"><a class="markdownIt-Anchor" href="#邊界"></a> 邊界</h3>
+<p>android:layout_margin 及 android:layout_padding 可以指定 View 的內外邊界。</p>
+<h2 id="實作簡單的佈局"><a class="markdownIt-Anchor" href="#實作簡單的佈局"></a> 實作簡單的佈局</h2>
+<p>課程中實作了兩個簡單的佈局，並帶到一些觀念：</p>
+<ul>
+<li>寫 XML 很痛苦的話，可以用 Layout Editor 拉部件，還可以預覽不同裝置尺寸的畫面。</li>
+<li>現在的裝置小至手錶大至電視螢幕，所以 RWD 很重要。</li>
+<li>最常用的 Layout 是 Frame 、 Linear 和 Contraint Layout 。</li>
+<li>一般來說，選擇能夠符合需求的 Layout 就好 ，而有必要的時候， ContraintLayout 可以更複雜地適應不同的裝置尺寸。</li>
+<li>沒有使用到的相依套件可以從 app/build.gradle 裡刪掉。</li>
+</ul>
+<p>這邊我簡化成一個滿漢不全席的菜名列表 App 。</p>
+<h3 id="dishjava"><a class="markdownIt-Anchor" href="#dishjava"></a> Dish.java</h3>
+<p>首先定義一個可以呼叫菜名陣列的類別（這部分可做可不做）。<br />
+在 app/java/{Package Name} 上按右鍵 &gt; New &gt; Java Class ，就可以依照設定開一個 Java 檔案；或完全自己寫也可以。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> tw.com.mydomain.myapplication;</span><br><span class="line"></span><br><span class="line"><span class="keyword">final</span> <span class="keyword">class</span> <span class="title class_">Dish</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> String[] getList() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">String</span>[] &#123;</span><br><span class="line">                <span class="string">&quot;鳳還巢&quot;</span>,</span><br><span class="line">                <span class="string">&quot;雙蝶湖飛&quot;</span>,</span><br><span class="line">                <span class="string">&quot;軟炸雞火&quot;</span>,</span><br><span class="line">                <span class="string">&quot;脆炸鳳尾餅&quot;</span>,</span><br><span class="line">                <span class="string">&quot;香炸飛龍鳥&quot;</span>,</span><br><span class="line">                <span class="string">&quot;芫爆香螺球&quot;</span>,</span><br><span class="line">                <span class="string">&quot;蒓菜鳳羽&quot;</span>,</span><br><span class="line">                <span class="string">&quot;紅油烏龍棒&quot;</span>,</span><br><span class="line">                <span class="string">&quot;龍井湖兵&quot;</span>,</span><br><span class="line">                <span class="string">&quot;玉鵬展翅&quot;</span>,</span><br><span class="line">                <span class="string">&quot;銀珠牡丹&quot;</span>,</span><br><span class="line">                <span class="string">&quot;雪梅笑春&quot;</span>,</span><br><span class="line">                <span class="string">&quot;花月鴨腰&quot;</span>,</span><br><span class="line">                <span class="string">&quot;鳳尾飄玉帶&quot;</span>,</span><br><span class="line">                <span class="string">&quot;金鳥入林&quot;</span>,</span><br><span class="line">                <span class="string">&quot;風花雪月&quot;</span>,</span><br><span class="line">                <span class="string">&quot;佛抄手&quot;</span>,</span><br><span class="line">                <span class="string">&quot;琥班藏珍&quot;</span></span><br><span class="line">                <span class="comment">// 因為只有一些菜名，所以只能叫滿漢不全席</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="activity_mainxml"><a class="markdownIt-Anchor" href="#activity_mainxml"></a> activity_main.xml</h3>
+<p>這是專案預設的 Layout 檔案；因為沒有要做什麼，所以直接改動它。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;utf-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 預設的 ConstraintLayout 改成 FrameLayout ，因為只需要占滿整個畫面 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">FrameLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:padding</span>=<span class="string">&quot;5dp&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">ScrollView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- 這個 TextView 的 id 指定為 tv_dish_list --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/tv_dish_list&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textSize</span>=<span class="string">&quot;28sp&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ScrollView</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">FrameLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="mainactivityjava"><a class="markdownIt-Anchor" href="#mainactivityjava"></a> MainActivity.java</h3>
+<p>Java 的部分就是在 activity_main.xml 被解析之後，取得 TextView 的物件，並用 append() 將文字加入 View 中。</p>
+<blockquote>
+<p>另外 setText() 是覆蓋原有的文字。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> tw.com.mydomain.myapplication;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> androidx.appcompat.app.AppCompatActivity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.widget.TextView; <span class="comment">// 通常 Android Studio 會自動幫忙引用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MainActivity</span> <span class="keyword">extends</span> <span class="title class_">AppCompatActivity</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 要先宣告或是在 onCreate 中宣告都可以</span></span><br><span class="line">    TextView dishListTextView;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">onCreate</span><span class="params">(Bundle savedInstanceState)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// findViewById 一定要在 setContentView 創建 View 物件後才能呼叫</span></span><br><span class="line">        dishListTextView = (TextView) findViewById(R.id.tv_dish_list);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Android Studio 會推薦簡潔的寫法</span></span><br><span class="line">        <span class="keyword">for</span> (String dish : Dish.getList()) dishListTextView.append(dish + <span class="string">&quot;\n\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="執行畫面"><a class="markdownIt-Anchor" href="#執行畫面"></a> 執行畫面</h3>
+<p>菜單列表就是這麼地樸實無華。</p>
+<p><img src="01.png" alt="執行畫面" /></p>
+<h2 id="結語"><a class="markdownIt-Anchor" href="#結語"></a> 結語</h2>
+<p>以上就是 Lesson 1 Create Project Sunshine 的內容。<br />
+比想像中的還要多，感謝閱讀到這邊。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/TechBlog/tags/Android/" rel="tag"># Android</a>
+              <a href="/TechBlog/tags/w3HexSchool/" rel="tag"># w3HexSchool</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/03/29/20200329-android-guessNumber/" rel="prev" title="【 Android 開發入門 03 】猜數字遊戲">
+      <i class="fa fa-chevron-left"></i> 【 Android 開發入門 03 】猜數字遊戲
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TechBlog/2025/06/14/20250614-ujm/" rel="next" title="使用者旅程地圖">
+      使用者旅程地圖 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%9C%E6%96%BC-udacity"><span class="nav-number">1.</span> <span class="nav-text"> 關於 Udacity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E9%80%99%E5%A0%82%E8%AA%B2"><span class="nav-number">2.</span> <span class="nav-text"> 關於這堂課</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E4%BF%AE%E6%A2%9D%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text"> 先修條件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%99%E6%9D%90"><span class="nav-number">2.2.</span> <span class="nav-text"> 教材</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%A0%E7%AF%80%E7%9B%AE%E6%A8%99"><span class="nav-number">3.</span> <span class="nav-text"> 章節目標</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%96%8B%E5%95%9F%E5%8F%8A%E5%9F%B7%E8%A1%8C%E5%B0%88%E6%A1%88"><span class="nav-number">4.</span> <span class="nav-text"> 開啟及執行專案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android-software-stack"><span class="nav-number">5.</span> <span class="nav-text"> Android Software Stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#activity"><span class="nav-number">6.</span> <span class="nav-text"> Activity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%88%E5%B1%80"><span class="nav-number">7.</span> <span class="nav-text"> 佈局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#view-%E7%9A%84%E9%A1%9E%E5%9E%8B"><span class="nav-number">8.</span> <span class="nav-text"> View 的類型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xml-%E5%B1%AC%E6%80%A7"><span class="nav-number">8.1.</span> <span class="nav-text"> XML 屬性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E5%AD%97"><span class="nav-number">8.2.</span> <span class="nav-text"> 文字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%AC%E9%AB%98"><span class="nav-number">8.3.</span> <span class="nav-text"> 寬高</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%8A%E7%95%8C"><span class="nav-number">8.4.</span> <span class="nav-text"> 邊界</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%A6%E4%BD%9C%E7%B0%A1%E5%96%AE%E7%9A%84%E4%BD%88%E5%B1%80"><span class="nav-number">9.</span> <span class="nav-text"> 實作簡單的佈局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dishjava"><span class="nav-number">9.1.</span> <span class="nav-text"> Dish.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activity_mainxml"><span class="nav-number">9.2.</span> <span class="nav-text"> activity_main.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mainactivityjava"><span class="nav-number">9.3.</span> <span class="nav-text"> MainActivity.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%B7%E8%A1%8C%E7%95%AB%E9%9D%A2"><span class="nav-number">9.4.</span> <span class="nav-text"> 執行畫面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">10.</span> <span class="nav-text"> 結語</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v8.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://clhuang224.github.io/TechBlog/2020/04/14/20200414-udacity-ud851-01/";
+    this.page.identifier = "2020/04/14/20200414-udacity-ud851-01/";
+    this.page.title = "Udacity | Developing Android Apps | 01 Create Project Sunshine 課程筆記";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lynns-techblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

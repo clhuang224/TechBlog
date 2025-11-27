@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文為挑戰六角學院 JS 新手地下城 F2 「時鐘」的筆記。   作品 Lynn 的 JS 新手地下城 作品列表 &#x2F; 2F：時鐘  關卡重點  刻出鐘面 刻出指針 讓指針轉動">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 新手地下城 F2 「時鐘」 挑戰筆記">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2019/11/04/20191104-hex-jsunderground-02/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="本文為挑戰六角學院 JS 新手地下城 F2 「時鐘」的筆記。   作品 Lynn 的 JS 新手地下城 作品列表 &#x2F; 2F：時鐘  關卡重點  刻出鐘面 刻出指針 讓指針轉動">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://clhuang224.github.io/TechBlog/2019/11/04/20191104-hex-jsunderground-02/01.png">
+<meta property="article:published_time" content="2019-11-03T16:28:37.000Z">
+<meta property="article:modified_time" content="2025-05-03T07:28:08.814Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="JS 新手地下城">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://clhuang224.github.io/TechBlog/2019/11/04/20191104-hex-jsunderground-02/01.png">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/2019/11/04/20191104-hex-jsunderground-02/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>JS 新手地下城 F2 「時鐘」 挑戰筆記 | Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2019/11/04/20191104-hex-jsunderground-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JS 新手地下城 F2 「時鐘」 挑戰筆記
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-11-04 00:28:37" itemprop="dateCreated datePublished" datetime="2019-11-04T00:28:37+08:00">2019-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E9%96%8B%E7%99%BC%E6%97%A5%E8%A8%98/" itemprop="url" rel="index"><span itemprop="name">開發日記</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2019/11/04/20191104-hex-jsunderground-02/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/04/20191104-hex-jsunderground-02/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>本文為挑戰六角學院 JS 新手地下城 F2 「時鐘」的筆記。</p>
+</blockquote>
+<h2 id="作品"><a class="markdownIt-Anchor" href="#作品"></a> 作品</h2>
+<p><a target="_blank" href="https://clhuang224.github.io/JavaScriptUnderground#02">Lynn 的 JS 新手地下城 作品列表 / 2F：時鐘</a></p>
+<h2 id="關卡重點"><a class="markdownIt-Anchor" href="#關卡重點"></a> 關卡重點</h2>
+<ul>
+<li>刻出鐘面</li>
+<li>刻出指針</li>
+<li>讓指針轉動</li>
+</ul>
+<span id="more"></span>
+<h2 id="問題解決流程"><a class="markdownIt-Anchor" href="#問題解決流程"></a> 問題解決流程</h2>
+<h3 id="整體結構"><a class="markdownIt-Anchor" href="#整體結構"></a> 整體結構</h3>
+<p>拆解的方式如下：</p>
+<ul>
+<li>背景
+<ul>
+<li>時鐘（圓角矩形）
+<ul>
+<li>鐘面（有邊線的圓）
+<ul>
+<li>很多點</li>
+<li>很多星</li>
+<li>很多線</li>
+<li>很多字</li>
+</ul>
+</li>
+<li>時針（白色矩形）
+<ul>
+<li>一條線</li>
+</ul>
+</li>
+<li>分針（橘色圓角矩形）
+<ul>
+<li>一條線</li>
+<li>一個圈</li>
+</ul>
+</li>
+<li>秒針
+<ul>
+<li>五條線</li>
+<li>兩個圈</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 背景 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">main</span> <span class="attr">class</span>=<span class="string">&quot;main&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 時鐘 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;clock&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 鐘面 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;plate&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 時針 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hour-hand&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;dark&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 秒針 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;second-hand&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;green-circle&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;black-circle&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;line1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;line&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;line2&quot;</span> <span class="attr">class</span>=<span class="string">&quot;line&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;line3&quot;</span> <span class="attr">class</span>=<span class="string">&quot;line&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;line4&quot;</span> <span class="attr">class</span>=<span class="string">&quot;line&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;line5&quot;</span> <span class="attr">class</span>=<span class="string">&quot;line&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 分針 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;minute-hand&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;line&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;circle&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="時鐘"><a class="markdownIt-Anchor" href="#時鐘"></a> 時鐘</h3>
+<p>.clock 的功能除了當個圓角矩形以外，也是鐘面和三個指針用來定位的父元素。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clock</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">350px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">350px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#3d5a45</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">72px</span>;</span><br><span class="line">    <span class="comment">/* 讓鐘面置中 */</span></span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="comment">/* 讓指針定位 */</span></span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="鐘面"><a class="markdownIt-Anchor" href="#鐘面"></a> 鐘面</h4>
+<p>底的部分是一個有邊線的圈圈：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.plate</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">310px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">310px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">3px</span> solid <span class="number">#212f0b</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#293B29</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>鐘面上的點點、星星、線及文字，因為是持續旋轉的關係，用 JavaScript 產生（雖然也可以用 CSS 暴力製作）。</p>
+<p>但在旋轉前要在 CSS 裡做好準備工作：</p>
+<ul>
+<li>先利用絕對定位將元素放在 0 度的位置</li>
+<li>設定正確的 transform-origin
+<ul>
+<li>用 transform: rotate() 旋轉時，預設會以元素的中心點當軸心，但我需要以時鐘的圓心來旋轉</li>
+</ul>
+</li>
+</ul>
+<p>點點和線的部分比較容易：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.plate</span> <span class="selector-class">.dot</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">31px</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">154px</span>;</span><br><span class="line">    <span class="attribute">transform-origin</span>: <span class="number">1px</span> <span class="number">124px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.plate</span> <span class="selector-class">.line</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">1px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">24px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#ff7600</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">154.5px</span>;</span><br><span class="line">    <span class="attribute">transform-origin</span>: <span class="number">0.5px</span> <span class="number">135px</span>;</span><br><span class="line">    <span class="attribute">font-family</span>: Helvetica, sans-serif;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>星星的部分，由於不規則，這一關的設計稿也只有提供各個部件的 SVG 或圖檔，所以無法直接抓規格。<br />
+我找到這篇文章：<a target="_blank" rel="noopener" href="https://www.oxxostudio.tw/articles/201503/css-clip-path.html">運用 clip-path 的純 CSS 形狀變換</a>，利用裡面提供的 <a target="_blank" rel="noopener" href="https://bennettfeely.com/clippy/">Clippy</a> 這個網站，拉出差不多的星星圖案。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.plate</span> <span class="selector-class">.star</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">8px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">8px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#ff7600</span>;</span><br><span class="line">    <span class="comment">/* 用 Clippy 拉出的圖形 */</span></span><br><span class="line">    <span class="attribute">clip-path</span>: <span class="built_in">polygon</span>(<span class="number">50%</span> <span class="number">0</span>, <span class="number">66%</span> <span class="number">33%</span>, <span class="number">100%</span> <span class="number">50%</span>, <span class="number">66%</span> <span class="number">66%</span>, <span class="number">50%</span> <span class="number">100%</span>, <span class="number">33%</span> <span class="number">66%</span>, <span class="number">0</span> <span class="number">50%</span>, <span class="number">33%</span> <span class="number">33%</span>);</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">28px</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">151px</span>;</span><br><span class="line">    <span class="attribute">transform-origin</span>: <span class="number">4px</span> <span class="number">127px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接著就可以用 JavaScript 一邊旋轉，一邊放入新的元素：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 找到鐘面元素</span></span><br><span class="line"><span class="keyword">let</span> plate = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.clock .plate&#x27;</span>);</span><br><span class="line"><span class="comment">// i 代表鐘面上有 72 個位置需要放東西</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">72</span>; i++) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 新增節點</span></span><br><span class="line">    <span class="keyword">let</span> node = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;div&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 旋轉 （一次要旋轉的量 * 第幾格）</span></span><br><span class="line">    <span class="keyword">let</span> degree = <span class="number">360</span> / <span class="number">72</span> * i;</span><br><span class="line">    node.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;degree&#125;</span>deg)`</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 線每六格產生一次</span></span><br><span class="line">    <span class="keyword">if</span> (i % <span class="number">6</span> == <span class="number">0</span>) &#123;</span><br><span class="line">        node.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;line&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 星星每三格產生一次（六的倍數時會產生線，不會走進這個 else if）</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (i % <span class="number">3</span> == <span class="number">0</span>) &#123;</span><br><span class="line">        node.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;star&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 剩下的部分都是點點</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        node.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;dot&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    plate.<span class="title function_">appendChild</span>(node);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再來還有文字的部分。<br />
+文字很明顯是跟線對齊，所以可以放在線的元素裡面；由於放線的時候，字會跟著線一起轉，所以要逆向轉回來。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 線每六格產生一次</span></span><br><span class="line">    <span class="keyword">if</span> (i % <span class="number">6</span> == <span class="number">0</span>) &#123;</span><br><span class="line">        node.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;line&#x27;</span>);</span><br><span class="line">        <span class="comment">// 數字會跟著線一起轉，所以要轉回來</span></span><br><span class="line">        node.<span class="property">innerHTML</span> = <span class="string">`</span></span><br><span class="line"><span class="string">        &lt;span class=&quot;pm&quot; style=&quot;transform:rotate(<span class="subst">$&#123;-degree&#125;</span>deg);&quot;&gt;<span class="subst">$&#123;i / <span class="number">6</span> + <span class="number">12</span>&#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string">        &lt;span class=&quot;am&quot; style=&quot;transform:rotate(<span class="subst">$&#123;-degree&#125;</span>deg);&quot;&gt;<span class="subst">$&#123;i / <span class="number">6</span>&#125;</span>&lt;/span&gt;`</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>再利用絕對定位，把文字放到線的上下位置。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.plate</span> <span class="selector-class">.line</span> <span class="selector-class">.pm</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">12px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">12px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#FFF</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">transform-origin</span>: <span class="number">6px</span> <span class="number">6px</span>;</span><br><span class="line">    <span class="attribute">left</span>: -<span class="number">5.5px</span>;</span><br><span class="line">    <span class="attribute">top</span>: -<span class="number">14px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.plate</span> <span class="selector-class">.line</span> <span class="selector-class">.am</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">12px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">12px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#FFF</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">transform-origin</span>: <span class="number">6px</span> <span class="number">6px</span>;</span><br><span class="line">    <span class="attribute">left</span>: -<span class="number">5.5px</span>;</span><br><span class="line">    <span class="attribute">bottom</span>: -<span class="number">14px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這樣鐘面的部分就完成了。</p>
+<h4 id="指針"><a class="markdownIt-Anchor" href="#指針"></a> 指針</h4>
+<p>指針的部分也是先個別作出外型，然後設定好位置和軸心。<br />
+時針和分針的部分比較容易，只是內部包含一些小裝飾；其中時針的深色部分原本應該是透明的效果，但我讓時針在最底層，用與背景同樣的顏色，就看不出差異。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.hour-hand</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">8px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">72px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#FFF</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">4px</span> <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">171px</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">107px</span>;</span><br><span class="line">    <span class="attribute">transform-origin</span>: <span class="number">4px</span> <span class="number">68px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 時針的深色部分 */</span></span><br><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.hour-hand</span> <span class="selector-class">.dark</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#293B29</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">24px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">3px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.minute-hand</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">8px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">96px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#ff7600</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">171px</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">83px</span>;</span><br><span class="line">    <span class="attribute">transform-origin</span>: <span class="number">4px</span> <span class="number">92px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">align-content</span>: flex-end;</span><br><span class="line">    <span class="attribute">flex-wrap</span>: wrap;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 分針的白線 */</span></span><br><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.minute-hand</span> <span class="selector-class">.line</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">1px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">32px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#FFF</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 分針的白圈 */</span></span><br><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.minute-hand</span> <span class="selector-class">.circle</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0px</span> <span class="number">2px</span> <span class="number">2px</span> <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#FFF</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>秒針的長相就有點複雜，其中圓的部分還好，可以從 SVG 看出尺寸；但是 path 的部分想看懂的話，可能要作到天荒地老。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">g</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.w3.org/2000/svg&quot;</span> <span class="attr">transform</span>=<span class="string">&quot;translate(646.618 400) rotate(180)&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">g</span> <span class="attr">class</span>=<span class="string">&quot;a&quot;</span> <span class="attr">transform</span>=<span class="string">&quot;translate(636 274)&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">circle</span> <span class="attr">class</span>=<span class="string">&quot;d&quot;</span> <span class="attr">cx</span>=<span class="string">&quot;4&quot;</span> <span class="attr">cy</span>=<span class="string">&quot;4&quot;</span> <span class="attr">r</span>=<span class="string">&quot;4&quot;</span>/&gt;</span><span class="tag">&lt;<span class="name">circle</span> <span class="attr">class</span>=<span class="string">&quot;e&quot;</span> <span class="attr">cx</span>=<span class="string">&quot;4&quot;</span> <span class="attr">cy</span>=<span class="string">&quot;4&quot;</span> <span class="attr">r</span>=<span class="string">&quot;3.5&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">g</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">g</span> <span class="attr">class</span>=<span class="string">&quot;b&quot;</span> <span class="attr">transform</span>=<span class="string">&quot;translate(638 276)&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">circle</span> <span class="attr">class</span>=<span class="string">&quot;d&quot;</span> <span class="attr">cx</span>=<span class="string">&quot;2&quot;</span> <span class="attr">cy</span>=<span class="string">&quot;2&quot;</span> <span class="attr">r</span>=<span class="string">&quot;2&quot;</span>/&gt;</span><span class="tag">&lt;<span class="name">circle</span> <span class="attr">class</span>=<span class="string">&quot;e&quot;</span> <span class="attr">cx</span>=<span class="string">&quot;2&quot;</span> <span class="attr">cy</span>=<span class="string">&quot;2&quot;</span> <span class="attr">r</span>=<span class="string">&quot;1.5&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">g</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span> <span class="attr">class</span>=<span class="string">&quot;c&quot;</span> <span class="attr">d</span>=<span class="string">&quot;M0,3.61V50l6,8L-6,75l6,7v40&quot;</span> <span class="attr">transform</span>=<span class="string">&quot;translate(640 278)&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">g</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>於是我決定隨興製作（？），線的部分只要有接起來，長得像就好了。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.second-hand</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">14px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">126px</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">168px</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">transform-origin</span>: <span class="number">7px</span> <span class="number">125px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.second-hand</span> <span class="selector-class">.green-circle</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">8px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">8px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#b1ff00</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">3px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.second-hand</span> <span class="selector-class">.green-circle</span> <span class="selector-class">.black-circle</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#293b29</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.second-hand</span> <span class="selector-class">.line</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">1px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#b1ff00</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">6px</span>;</span><br><span class="line">    <span class="attribute">transform-origin</span>: <span class="number">1px</span> <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 以下部分是憑感覺 */</span></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.second-hand</span> <span class="selector-id">#line1</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">41px</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">7px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">0px</span> <span class="number">0px</span> <span class="number">1px</span> <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.second-hand</span> <span class="selector-id">#line2</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">47px</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(-<span class="number">45deg</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.second-hand</span> <span class="selector-id">#line3</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">53px</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">6px</span>) <span class="built_in">rotate</span>(<span class="number">45deg</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.second-hand</span> <span class="selector-id">#line4</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">12px</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">66px</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-<span class="number">7px</span>) <span class="built_in">rotate</span>(-<span class="number">45deg</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.clock</span> <span class="selector-class">.second-hand</span> <span class="selector-id">#line5</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">53px</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">73px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">1px</span> <span class="number">1px</span> <span class="number">0px</span> <span class="number">0px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="時間"><a class="markdownIt-Anchor" href="#時間"></a> 時間</h3>
+<p>最後才是處理時間的部分，只要抓到現在的時間，再計算角度，讓指針隨著時間旋轉即可（ CSS 部分已經設定過軸心）。<br />
+其中要注意的是大單位要加上小單位的量才是指針的正確位置（例如 11:30 時的時針應該在 11 和 12 之間）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> hourHand = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.clock .hour-hand&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> minuteHand = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.clock .minute-hand&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> secondHand = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.clock .second-hand&#x27;</span>);</span><br><span class="line"><span class="built_in">setInterval</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> currentTime = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">    <span class="comment">// 指針指向的位置要加上小單位的量</span></span><br><span class="line">    <span class="keyword">let</span> second = currentTime.<span class="title function_">getSeconds</span>();</span><br><span class="line">    <span class="keyword">let</span> minute = currentTime.<span class="title function_">getMinutes</span>() + second / <span class="number">60</span>;</span><br><span class="line">    <span class="keyword">let</span> hour = currentTime.<span class="title function_">getHours</span>() + minute / <span class="number">60</span>;</span><br><span class="line">    hourHand.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;(hour % <span class="number">12</span>) / <span class="number">12</span> * <span class="number">360</span>&#125;</span>deg)`</span>;</span><br><span class="line">    minuteHand.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;minute / <span class="number">60</span> * <span class="number">360</span>&#125;</span>deg)`</span>;</span><br><span class="line">    secondHand.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">`rotate(<span class="subst">$&#123;second / <span class="number">60</span> * <span class="number">360</span>&#125;</span>deg)`</span>;</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+<p>完成。</p>
+<p><img src="01.png" alt="完成圖" /></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/TechBlog/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/TechBlog/tags/JS-%E6%96%B0%E6%89%8B%E5%9C%B0%E4%B8%8B%E5%9F%8E/" rel="tag"># JS 新手地下城</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TechBlog/2019/11/03/20191103-hex-jsunderground-01/" rel="prev" title="JS 新手地下城 F1 「九九乘法表」 挑戰筆記">
+      <i class="fa fa-chevron-left"></i> JS 新手地下城 F1 「九九乘法表」 挑戰筆記
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/01/15/20200115-hex-sass/" rel="next" title="六角學院 Sass 課程學習筆記（更新中）">
+      六角學院 Sass 課程學習筆記（更新中） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E5%93%81"><span class="nav-number">1.</span> <span class="nav-text"> 作品</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%9C%E5%8D%A1%E9%87%8D%E9%BB%9E"><span class="nav-number">2.</span> <span class="nav-text"> 關卡重點</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%95%8F%E9%A1%8C%E8%A7%A3%E6%B1%BA%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text"> 問題解決流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E9%AB%94%E7%B5%90%E6%A7%8B"><span class="nav-number">3.1.</span> <span class="nav-text"> 整體結構</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%82%E9%90%98"><span class="nav-number">3.2.</span> <span class="nav-text"> 時鐘</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%90%98%E9%9D%A2"><span class="nav-number">3.2.1.</span> <span class="nav-text"> 鐘面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E9%87%9D"><span class="nav-number">3.2.2.</span> <span class="nav-text"> 指針</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%82%E9%96%93"><span class="nav-number">3.3.</span> <span class="nav-text"> 時間</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v8.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://clhuang224.github.io/TechBlog/2019/11/04/20191104-hex-jsunderground-02/";
+    this.page.identifier = "2019/11/04/20191104-hex-jsunderground-02/";
+    this.page.title = "JS 新手地下城 F2 「時鐘」 挑戰筆記";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lynns-techblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

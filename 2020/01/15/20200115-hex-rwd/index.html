@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/TechBlog/images/avatar.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/TechBlog/images/avatar.png">
+  <link rel="mask-icon" href="/TechBlog/images/avatar.svg" color="#222">
+
+<link rel="stylesheet" href="/TechBlog/css/main.css">
+
+
+<link rel="stylesheet" href="/TechBlog/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"clhuang224.github.io","root":"/TechBlog/","scheme":"Pisces","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文為觀看六角學院「 一變應萬變的響應式網頁設計」的紀錄。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="六角學院 RWD 課程學習筆記（更新中）">
+<meta property="og:url" content="http://clhuang224.github.io/TechBlog/2020/01/15/20200115-hex-rwd/index.html">
+<meta property="og:site_name" content="Lynn&#39;s TechBlog">
+<meta property="og:description" content="本文為觀看六角學院「 一變應萬變的響應式網頁設計」的紀錄。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-01-15T07:47:48.000Z">
+<meta property="article:modified_time" content="2025-05-03T07:28:08.814Z">
+<meta property="article:author" content="Lynn">
+<meta property="article:tag" content="RWD">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://clhuang224.github.io/TechBlog/2020/01/15/20200115-hex-rwd/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>六角學院 RWD 課程學習筆記（更新中） | Lynn's TechBlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158382522-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158382522-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/TechBlog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lynn's TechBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/TechBlog/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/TechBlog/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/TechBlog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/TechBlog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/TechBlog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://clhuang224.github.io/TechBlog/2020/01/15/20200115-hex-rwd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/TechBlog/images/avatar.png">
+      <meta itemprop="name" content="Lynn">
+      <meta itemprop="description" content="Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lynn's TechBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          六角學院 RWD 課程學習筆記（更新中）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-01-15 15:47:48" itemprop="dateCreated datePublished" datetime="2020-01-15T15:47:48+08:00">2020-01-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-03 15:28:08" itemprop="dateModified" datetime="2025-05-03T15:28:08+08:00">2025-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/TechBlog/categories/%E7%B7%9A%E4%B8%8A%E8%AA%B2%E7%A8%8B%E8%A7%80%E7%9C%8B%E7%AD%86%E8%A8%98/" itemprop="url" rel="index"><span itemprop="name">線上課程觀看筆記</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/TechBlog/2020/01/15/20200115-hex-rwd/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/15/20200115-hex-rwd/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文為觀看六角學院「 <a target="_blank" rel="noopener" href="https://courses.hexschool.com/courses/enrolled/670051">一變應萬變的響應式網頁設計</a>」的紀錄。</p>
+<span id="more"></span>
+<h2 id="簡介"><a class="markdownIt-Anchor" href="#簡介"></a> 簡介</h2>
+<h3 id="什麼是-rwd"><a class="markdownIt-Anchor" href="#什麼是-rwd"></a> 什麼是 RWD</h3>
+<p>響應式網頁設計（Response Web Design），2010 年由 Ethan Marcotte 提出的概念。使用 CSS3 Media queries ，使網頁在不同的裝置上對應不同的解析度而有適當的呈現；讓使用者在操作上有較佳的體驗，減少使用者進行縮放、平移和捲動等操作。</p>
+<p>現今的行動裝置流量佔網際網路流量的一半以上，因此以行動裝置為優先的響應式網頁設計就變得很重要。</p>
+<h3 id="viewport"><a class="markdownIt-Anchor" href="#viewport"></a> Viewport</h3>
+<p>要使用響應式網頁設計，必須在 HTML 的 &lt;head&gt; 中加入 &lt;meta name=“viewport”&gt; 。<br />
+Emmet 的語法為 meta:vp 。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width,  initial-scale=1.0&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>裝置的尺寸和解析度不同，網頁呈現的大小就會不同；所以需要設定 width=device-width 。</p>
+<blockquote>
+<p>查詢裝置規格：<a target="_blank" rel="noopener" href="https://material.io/resources/devices/">Device Metrics - Material Design</a></p>
+</blockquote>
+<p>content 可以使用的屬性如下：</p>
+<ul>
+<li>width</li>
+<li>height</li>
+<li>initial-scale</li>
+<li>minimum-scale</li>
+<li>maximum-scale</li>
+<li>user-scalable</li>
+</ul>
+<blockquote>
+<p>相關說明： <a target="_blank" rel="noopener" href="https://www.w3.org/TR/css-device-adapt/#viewport-meta">CSS Device Adaptation Module Level 1</a></p>
+</blockquote>
+<h4 id="關於解析度"><a class="markdownIt-Anchor" href="#關於解析度"></a> 關於解析度</h4>
+<ul>
+<li>pt ：印刷點點的最小單位，大小是 1/27 英吋。</li>
+<li>pixel ：螢幕硬體的最小單位，也就是螢幕能呈現最細緻的點點。</li>
+<li>dpi ：每一英吋裡的 pt 數；值愈大，印刷的品質就愈精細。</li>
+<li>ppi ：每一英吋裡的 pixel 數，又稱為像素密度；值愈大，螢幕畫質就愈好。</li>
+<li>dp (density- independent pixel) ： 160 dpi 時一個 pixel 的大小</li>
+</ul>
+<p>以下雖然寫的是 dpi ，但實際上卻是指 ppi 。</p>
+<ul>
+<li>ldpi 低密度：120 dpi ，為 240 x 320 px ， 1 dp = 0.75 px</li>
+<li>mdpi 中密度：160 dpi ，為 320 x 480 px ， 1 dp = 1 px</li>
+<li>hdpi 高密度： 240 dpi ，為 480 x 800 px ， 1 dp = 1.5 px</li>
+<li>xhdpi 超高密度： 320 dpi ，為 720 x 1280 px ， 1 dp = 2 px</li>
+<li>xxhdpi 超超高密度： 480 dpi ，為 1080 x 1920 px ， 1 dp = 3 px</li>
+</ul>
+<h3 id="media-query"><a class="markdownIt-Anchor" href="#media-query"></a> Media query</h3>
+<p>在 CSS 中使用 @media 來設定各個螢幕尺寸的樣式。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 由大尺寸的螢幕往小尺寸撰寫 */</span></span><br><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span>(max-width:1024px)&#123;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>: blue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span>(max-width:768px)&#123;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>: green;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由於同樣權重的 CSS 樣式，會以後面的為優先，所以如果是由大尺寸的螢幕開始撰寫，要使用 max-width ；反之用 min-width 。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 由小尺寸的螢幕往大尺寸撰寫 */</span></span><br><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span>(min-width: <span class="number">375px</span>)&#123;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>: blue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span>(min-width: <span class="number">768px</span>)&#123;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">color</span>: green;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="常見版型佈局設定"><a class="markdownIt-Anchor" href="#常見版型佈局設定"></a> 常見版型佈局設定</h2>
+<h3 id="原則或語法"><a class="markdownIt-Anchor" href="#原則或語法"></a> 原則或語法</h3>
+<ul>
+<li>禁止橫向卷軸
+<ul>
+<li>設計版面時，盡量不要出現橫向卷軸。這樣使用者還要左右拉動，沒辦法順順的看整個內容。</li>
+</ul>
+</li>
+<li>max-width
+<ul>
+<li>運用 max-width 的方式，讓視窗大於 max-width 時能固定寬度，小於時又能保持彈性；這樣不會出現橫向卷軸，也可以少寫一個斷點。</li>
+</ul>
+</li>
+<li>%
+<ul>
+<li>% 以父元素的高度或寬度為基準，可以讓子元素保有彈性。</li>
+</ul>
+</li>
+</ul>
+<h3 id="三欄式流體設計"><a class="markdownIt-Anchor" href="#三欄式流體設計"></a> 三欄式流體設計</h3>
+<p>在不同 max-width 下，用 % 做出自適應的效果。</p>
+<p class="codepen" data-height="258" data-theme-id="default" data-default-tab="result" data-user="clhuang224" data-slug-hash="QWwVXNQ" style="height: 258px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="RWD 三欄式流體設計">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/QWwVXNQ">
+  RWD 三欄式流體設計</a> by C.L.Huang (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3 id="左側-float-固定-右側流體式設計"><a class="markdownIt-Anchor" href="#左側-float-固定-右側流體式設計"></a> 左側 Float 固定、右側流體式設計</h3>
+<p>左側欄位用固定寬度及浮動，右側則用 margin 推出空間。<br />
+在 768 px 的裝置下，則改為上下欄位，欄位中的選項改為橫向，並利用偽元素清除浮動。</p>
+<p class="codepen" data-height="327" data-theme-id="default" data-default-tab="css,result" data-user="clhuang224" data-slug-hash="XWJPLaw" style="height: 327px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="RWD 左側 Float 固定、右側流體式設計">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/XWJPLaw">
+  RWD 左側 Float 固定、右側流體式設計</a> by Lynn (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h3 id="網頁版型框架設定"><a class="markdownIt-Anchor" href="#網頁版型框架設定"></a> 網頁版型框架設定</h3>
+<p>隨寬度改變圖片、取消浮動。</p>
+<p class="codepen" data-height="265" data-theme-id="default" data-default-tab="result" data-user="clhuang224" data-slug-hash="jOEQwzZ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="RWD 網頁版型框架設定">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/jOEQwzZ">
+  RWD 網頁版型框架設定</a> by Lynn (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+<h2 id="ui-設計原則"><a class="markdownIt-Anchor" href="#ui-設計原則"></a> UI 設計原則</h2>
+<ul>
+<li>網頁版的內容放進手機板時可以酌量刪減</li>
+<li>多欄式佈局可以依據人的視野寬度來考量</li>
+<li>手指的點擊範圍大概是 44 px</li>
+<li>注意 touch 和 hover 的差異</li>
+</ul>
+<h2 id="斷點規劃"><a class="markdownIt-Anchor" href="#斷點規劃"></a> 斷點規劃</h2>
+<ul>
+<li>以熱門的斷點為優先</li>
+<li>可以先做幾個斷點，再參考 Google Analytics 來增加熱門裝置的斷點</li>
+<li>考慮 Mobile First 或 Desktop First</li>
+<li>常用斷點
+<ul>
+<li>iPad ： 768px</li>
+<li>iPad 以下： 767px</li>
+<li>iPhone 6 Plus ： 414px</li>
+<li>iPhone 6 ： 375px</li>
+<li>iPhone 5、SE ： 320px</li>
+</ul>
+</li>
+<li>查詢瀏覽器使用率：<a target="_blank" rel="noopener" href="https://gs.statcounter.com/">StatCounter Global Stats</a></li>
+<li>查詢裝置解析度：<a target="_blank" rel="noopener" href="https://material.io/resources/devices/">Device Metrics - Material Design</a></li>
+<li>可以用專門的 class 來處理背景滿版但內容置中的效果。</li>
+</ul>
+<p class="codepen" data-height="450" data-theme-id="default" data-default-tab="result" data-user="clhuang224" data-slug-hash="jOPzdvM" style="height: 450px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="RWD 背景滿版、內容置中效果">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/jOPzdvM">
+  RWD 背景滿版、內容置中效果</a> by Lynn (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<h2 id="響應式表格"><a class="markdownIt-Anchor" href="#響應式表格"></a> 響應式表格</h2>
+<p>當螢幕寬度比表格小時，內容容易擠成一團，或是要移動整個橫向卷軸。<br />
+可以用不同方式解決。</p>
+<ul>
+<li>隱藏部分資訊
+<ul>
+<li>手機版隱藏一些不必要的資訊</li>
+<li>&lt;td&gt; 的寬度總和超過 &lt;table&gt; 時不會超出，不滿時會分配剩下的寬度，所以不用特別調整手機版的寬度</li>
+</ul>
+</li>
+<li>獨立橫向卷軸
+<ul>
+<li>在 &lt;table&gt; 外包上一層元素，並用 overflow-x: auto</li>
+<li>&lt;table&gt; 可用固定寬度</li>
+</ul>
+</li>
+<li>直向排列
+<ul>
+<li>將 &lt;th&gt; 隱藏，並利用 data 屬性及偽元素產生新的標題區塊</li>
+</ul>
+</li>
+</ul>
+<p class="codepen" data-height="450" data-theme-id="default" data-default-tab="css,result" data-user="clhuang224" data-slug-hash="gOpeEra" style="height: 450px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="RWD 響應式表格">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/clhuang224/pen/gOpeEra">
+  RWD 響應式表格</a> by Lynn (<a target="_blank" rel="noopener" href="https://codepen.io/clhuang224">@clhuang224</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/TechBlog/tags/RWD/" rel="tag"># RWD</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/01/15/20200115-hex-sass/" rel="prev" title="六角學院 Sass 課程學習筆記（更新中）">
+      <i class="fa fa-chevron-left"></i> 六角學院 Sass 課程學習筆記（更新中）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/TechBlog/2020/01/16/20200116-hex-vscode/" rel="next" title="六角學院 Visual Studio Code 課程學習筆記">
+      六角學院 Visual Studio Code 課程學習筆記 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B0%A1%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text"> 簡介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-rwd"><span class="nav-number">1.1.</span> <span class="nav-text"> 什麼是 RWD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#viewport"><span class="nav-number">1.2.</span> <span class="nav-text"> Viewport</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E8%A7%A3%E6%9E%90%E5%BA%A6"><span class="nav-number">1.2.1.</span> <span class="nav-text"> 關於解析度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#media-query"><span class="nav-number">1.3.</span> <span class="nav-text"> Media query</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A6%8B%E7%89%88%E5%9E%8B%E4%BD%88%E5%B1%80%E8%A8%AD%E5%AE%9A"><span class="nav-number">2.</span> <span class="nav-text"> 常見版型佈局設定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%89%87%E6%88%96%E8%AA%9E%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text"> 原則或語法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E6%AC%84%E5%BC%8F%E6%B5%81%E9%AB%94%E8%A8%AD%E8%A8%88"><span class="nav-number">2.2.</span> <span class="nav-text"> 三欄式流體設計</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A6%E5%81%B4-float-%E5%9B%BA%E5%AE%9A-%E5%8F%B3%E5%81%B4%E6%B5%81%E9%AB%94%E5%BC%8F%E8%A8%AD%E8%A8%88"><span class="nav-number">2.3.</span> <span class="nav-text"> 左側 Float 固定、右側流體式設計</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B6%B2%E9%A0%81%E7%89%88%E5%9E%8B%E6%A1%86%E6%9E%B6%E8%A8%AD%E5%AE%9A"><span class="nav-number">2.4.</span> <span class="nav-text"> 網頁版型框架設定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ui-%E8%A8%AD%E8%A8%88%E5%8E%9F%E5%89%87"><span class="nav-number">3.</span> <span class="nav-text"> UI 設計原則</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B7%E9%BB%9E%E8%A6%8F%E5%8A%83"><span class="nav-number">4.</span> <span class="nav-text"> 斷點規劃</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9F%BF%E6%87%89%E5%BC%8F%E8%A1%A8%E6%A0%BC"><span class="nav-number">5.</span> <span class="nav-text"> 響應式表格</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lynn"
+      src="/TechBlog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Lynn</p>
+  <div class="site-description" itemprop="description">Lynn 的技術網誌，撰寫學習程式設計與網頁開發的大小事。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/TechBlog/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/TechBlog/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/TechBlog/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/clhuang224" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://codepen.io/clhuang224" title="CodePen → https:&#x2F;&#x2F;codepen.io&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-codepen"></i>CodePen</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://soundcloud.com/clhuang224" title="SoundCloud → https:&#x2F;&#x2F;soundcloud.com&#x2F;clhuang224" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i>SoundCloud</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:clhuang224@gmail.com" title="Email → mailto:clhuang224@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lynn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v8.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/TechBlog/lib/anime.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.min.js"></script>
+  <script src="/TechBlog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/TechBlog/js/utils.js"></script>
+
+<script src="/TechBlog/js/motion.js"></script>
+
+
+<script src="/TechBlog/js/schemes/pisces.js"></script>
+
+
+<script src="/TechBlog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lynns-techblog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://clhuang224.github.io/TechBlog/2020/01/15/20200115-hex-rwd/";
+    this.page.identifier = "2020/01/15/20200115-hex-rwd/";
+    this.page.title = "六角學院 RWD 課程學習筆記（更新中）";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lynns-techblog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
