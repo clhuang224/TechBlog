@@ -13,7 +13,7 @@ timezone: 'Asia/Taipei'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://clhuang224.github.io/TechBlog
+url: https://clhuang224.github.io/TechBlog
 root: /TechBlog/
 permalink: :year/:month/:day/:year:month:day-:title/
 permalink_defaults:
@@ -44,13 +44,17 @@ render_drafts: false
 post_asset_folder: true
 relative_link: false
 future: true
+syntax_highlighter: highlight.js
 highlight:
-  enable: true
   line_number: true
-  auto_detect: true # 如果未指定語言，則啟用自動檢測
+  auto_detect: false
   tab_replace: ''
   wrap: true
   hljs: false
+prismjs:
+  preprocess: true
+  line_number: true
+  tab_replace: ''
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -97,13 +101,7 @@ theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
-deploy:
-  type: git
-  repo: https://github.com/clhuang224/TechBlog.git
-  branch: gh-pages
-  name: clhuang224
-  email: clhuang224@gmail.com
-
+# Auto-deploy via GitHub Actions - see .github/workflows/deploy.yml
 
 markdown_it_plus:
     highlight: true
