@@ -317,7 +317,7 @@ View 底下沒有更小的 View 時，可以用 self-closing tag （Android Stud
 ### Resource
 
 看到上面的最後三點可能會覺得有點奇怪，取用資源是什麼意思呢？
-Android 的裝置有各種廠牌、尺寸，加上不同語言的狀況，如果每一種都做一版可能要做到天荒地老；所以開發 Android App 基本上推薦用 congifuration 的方式，也就是用類似變數的方式，統一管理不同情境的資源（類似 Vue I18n 的概念）。
+Android 的裝置有各種廠牌、尺寸，加上不同語言的狀況，如果每一種都做一版可能要做到天荒地老；所以開發 Android App 基本上推薦用 configuration 的方式，也就是用類似變數的方式，統一管理不同情境的資源（類似 Vue I18n 的概念）。
 
 res 資料夾就是拿來存放這些資源，佈局（例如上面的 activity_main.xml ）和一些數值都是屬於 Resource 。
 
