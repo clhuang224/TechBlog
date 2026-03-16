@@ -7,7 +7,7 @@ categories:
 date: 2026-03-16 23:00
 ---
 
-醞釀已久，今天終於開發了 PrePrompt 的第一個版本！
+醞釀已久，今天終於開發了 [PrePrompt](https://clhuang224.github.io/PrePrompt/) 的第一個版本！
 
 <!-- more -->
 
