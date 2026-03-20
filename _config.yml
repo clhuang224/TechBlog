@@ -13,8 +13,8 @@ timezone: 'Asia/Taipei'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://clhuang224.github.io/TechBlog
-root: /TechBlog/
+url: https://blog.lynns.me
+root: /
 permalink: :year/:month/:day/:year:month:day-:title/
 permalink_defaults:
 pretty_urls:
