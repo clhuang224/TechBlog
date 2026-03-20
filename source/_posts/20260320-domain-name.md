@@ -37,7 +37,7 @@ date: 2026-03-20 08:32
   - [PrePrompt](https://github.com/clhuang224/pre-prompt)：`pre-prompt.lynns.me`
   - [Queener](https://github.com/clhuang224/queener)：`queener.lynns.me`
   - [Calculator](https://github.com/clhuang224/calculator)：`calculator.lynns.me`
-  - [Pomodoro]([https://](https://github.com/clhuang224/Pomodoro_2020))：`pomodoro.lynns.me`
+  - [Pomodoro](https://github.com/clhuang224/Pomodoro_2020)：`pomodoro.lynns.me`
 - redirect
   - GitHub：`github.lynns.me`
   - LinkedIn：`linkedin.lynns.me`
