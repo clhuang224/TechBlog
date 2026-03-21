@@ -184,9 +184,10 @@ site_state: true
 # Key is the link label showing to end users.
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
-  GitHub: https://github.com/clhuang224 || github
-  CodePen: https://codepen.io/clhuang224 || codepen
-  SoundCloud: https://soundcloud.com/clhuang224 || soundcloud
+  GitHub: https://github.lynns.me || github
+  CodePen: https://codepen.lynns.me || codepen
+  SoundCloud: https://soundcloud.lynns.me || soundcloud
+  Crowdin: https://crowdin.lynns.me || language
   Email: mailto:clhuang224@gmail.com || envelope
   #Weibo: https://weibo.com/yourname || weibo
   #Google: https://plus.google.com/yourname || google
