@@ -5,7 +5,7 @@ tags:
 categories:
   - 開發日記
 date: 2026-03-20 08:32
-updated: 2026-03-20 17:29:20
+updated: 2026-03-22 01:26:20
 ---
 
 最近忽然想起剛念資工系的時候，看到有同學買自己的域名架站。
@@ -69,7 +69,7 @@ updated: 2026-03-20 17:29:20
 
 這是因為 DNS 的設定需要一段時間才會生效，有可能會到好幾個小時。
 
-想要確認 DNS 有沒有生效，可以在 terminal 裡面輸入 `nslookup blog.lynns.me`，如果看到的結果是 `clhuang224.github.io` 的話，就表示 DNS 已經生效了。
+想要確認 DNS 有沒有生效，可以在 terminal 裡面輸入 `nslookup blog.lynns.me`，如果看到的結果是 `clhuang224.github.io.` 的話，就表示 DNS 已經生效了。
 
 這邊是一個失敗的結果：
 
