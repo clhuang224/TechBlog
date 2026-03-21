@@ -5,10 +5,10 @@ tags:
 categories:
   - 開發日記
 date: 2026-03-16 23:00
-updated: 2026-03-20 17:30:08
+updated: 2026-03-21 20:51:08
 ---
 
-醞釀已久，今天終於開發了 [PrePrompt](https://clhuang224.github.io/PrePrompt/) 的第一個版本！
+醞釀已久，今天終於開發了 [PrePrompt](https://github.com/clhuang224/pre-prompt) 的第一個版本！
 
 <!-- more -->
 
