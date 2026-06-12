@@ -1,0 +1,6 @@
+overrides:
+  hexo-renderer-ejs>minimatch: 5.1.8
+  hexo-renderer-ejs>brace-expansion: 2.0.3
+  hexo-cli>picomatch: 2.3.2
+allowBuilds:
+  hexo-util: true
